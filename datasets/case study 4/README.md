@@ -1,0 +1,1 @@
+Folder containing data for Case Study 4 - Scotch Whisky Analysis
