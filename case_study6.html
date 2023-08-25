@@ -1,0 +1,1215 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Deep Dive into Network Analysis and Social Relationships &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="bibliography.html" />
+    <link rel="prev" title="Analyzing Bird Migration Patterns with GPS Data" href="case_study5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study1.html">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study2.html">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study3.html">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study4.html">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study5.html">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study6.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study6.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-marginal-probability">
+     Calculating Marginal Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-chance-homophily">
+     Calculating Chance Homophily
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Deep Dive into Network Analysis and Social Relationships</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-marginal-probability">
+     Calculating Marginal Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-chance-homophily">
+     Calculating Chance Homophily
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="deep-dive-into-network-analysis-and-social-relationships">
+<h1>Deep Dive into Network Analysis and Social Relationships<a class="headerlink" href="#deep-dive-into-network-analysis-and-social-relationships" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>This case study centers around the intricate study of complex systems prevalent in both scientific and societal domains. These systems are characterized by numerous independent components, which can be effectively portrayed as networks. Within these networks, nodes symbolize indivdual components, while edges signify the interactions connecting them.</p>
+<p>The utility of network analysis extends to a diverse range of applications, including the examination of pathogen diffusion, behavioral dynamics, and information dissemination within social networks. Moreover, the scope of network analysis expands to encompass biological scenarios, particularly at the molecular level. This entails the exploration of gene regulation networks, signal transduction networks, protein interaction networks, and other connected systems.</p>
+<p>Homophily represents a characteristic of networks in which nodes that are adjacent in a network tend to share a certain attribute more frequently than nodes that are not neighbors. This case study focuses on examining the presence of homophily in various attributes among individuals connected within social networks located in rural India.</p>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Analyze homophily within network structures of rural villages.</p></li>
+<li><p>Investigate the impact of various characteristics (such as religion, sex, caste) on social interactions.</p></li>
+<li><p>Utilize data analysis and network analysis techniques to quantify and compare observed homophily with chance homophily.</p></li>
+<li><p>Explore the impactions of homophily in the context of village communities.</p></li>
+</ul>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The goal is to calculate the chance homophily for a specific characteristic within the provided sample data.</p>
+<ul class="simple">
+<li><p>Creating a function that takes in a dictionary and calculates marginal probability which is the frequency of occurrence of a characteristic divided by the sum of frequencies of all characteristics.</p></li>
+<li><p>Creating a function that calculates the chance homophily by summing the squares of the marginal probabilities.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-marginal-probability">
+<h3>Calculating Marginal Probability<a class="headerlink" href="#calculating-marginal-probability" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>This function takes a dictionary named <code class="docutils literal notranslate"><span class="pre">chars</span></code> as input, where keys are personal IDs and values are characteristics. It calculates and returns a dictionary where characteristics are keys and their marginal probability as corresponding values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">marginal_prob</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculate the marginal probability of characteristics in a network.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        chars (dict): A dictionary consisting of IDs as keys and </span>
+<span class="sd">        characteristics as values</span>
+
+<span class="sd">    Returns </span>
+<span class="sd">        out_dict (dict): A dictionary where characteristics are keys </span>
+<span class="sd">        and their marginal probability as values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">out_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">char_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chars</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+
+        <span class="n">a_char</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">char_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">a_char</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">char_list</span><span class="p">)</span>
+        <span class="n">out_dict</span><span class="p">[</span><span class="n">a_char</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span>
+
+    <span class="k">return</span> <span class="n">out_dict</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-chance-homophily">
+<h3>Calculating Chance Homophily<a class="headerlink" href="#calculating-chance-homophily" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>This function takes a dictionary named <code class="docutils literal notranslate"><span class="pre">chars</span></code> as inpur and uses the <code class="docutils literal notranslate"><span class="pre">marginal_prob</span></code> function to calculate the marginal probabilities of characteristics. It calculates the chance homophily for the characteristics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chance_homophily</span><span class="p">(</span><span class="n">chars</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">    The function takes in a dictionary consisting of IDs as keys</span>
+<span class="sd">    and characteristics as values.</span>
+<span class="sd">    </span>
+<span class="sd">    It calculates the chance homophily for each characteristic</span>
+<span class="sd">    in a network.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        chars (dict): A dictionary consists of IDs as keys and </span>
+<span class="sd">        characteristics as values</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Calculated chance homophily for the given characteristics</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">marginal_prob_dict</span> <span class="o">=</span> <span class="n">marginal_prob</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+
+    <span class="n">output_val</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">marginal_prob_dict</span><span class="p">:</span>
+
+        <span class="n">output_val</span> <span class="o">+=</span> <span class="p">(</span><span class="n">marginal_prob_dict</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_val</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">favorite_food</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Person A&quot;</span><span class="p">:</span>  <span class="s2">&quot;burger&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Person B&quot;</span><span class="p">:</span> <span class="s2">&quot;chicken wings&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Person C&quot;</span><span class="p">:</span>   <span class="s2">&quot;milkshake&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Person D&quot;</span><span class="p">:</span> <span class="s2">&quot;burger&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Person E&quot;</span><span class="p">:</span> <span class="s2">&quot;milkshake&quot;</span>
+<span class="p">}</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">marginal_prob</span><span class="p">(</span><span class="n">favorite_food</span><span class="p">))</span>
+<span class="n">food_homophily</span> <span class="o">=</span> <span class="n">chance_homophily</span><span class="p">(</span><span class="n">favorite_food</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">food_homophily</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;burger&#39;: 0.4, &#39;chicken wings&#39;: 0.2, &#39;milkshake&#39;: 0.4}
+0.3600000000000001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s2">&quot;individual_characteristics.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 1</th>
+      <th>village</th>
+      <th>adjmatrix_key</th>
+      <th>pid</th>
+      <th>hhid</th>
+      <th>resp_id</th>
+      <th>resp_gend</th>
+      <th>resp_status</th>
+      <th>age</th>
+      <th>religion</th>
+      <th>...</th>
+      <th>privategovt</th>
+      <th>work_outside</th>
+      <th>work_outside_freq</th>
+      <th>shgparticipate</th>
+      <th>shg_no</th>
+      <th>savings</th>
+      <th>savings_no</th>
+      <th>electioncard</th>
+      <th>rationcard</th>
+      <th>rationcard_colour</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NaN</th>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>100201</td>
+      <td>1002</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Head of Household</td>
+      <td>38</td>
+      <td>HINDUISM</td>
+      <td>...</td>
+      <td>PRIVATE BUSINESS</td>
+      <td>Yes</td>
+      <td>0.0</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>GREEN</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>100202</td>
+      <td>1002</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Spouse of Head of Household</td>
+      <td>27</td>
+      <td>HINDUISM</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>GREEN</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>2</td>
+      <td>1</td>
+      <td>23</td>
+      <td>100601</td>
+      <td>1006</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Head of Household</td>
+      <td>29</td>
+      <td>HINDUISM</td>
+      <td>...</td>
+      <td>OTHER LAND</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>GREEN</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>3</td>
+      <td>1</td>
+      <td>24</td>
+      <td>100602</td>
+      <td>1006</td>
+      <td>2</td>
+      <td>2</td>
+      <td>Spouse of Head of Household</td>
+      <td>24</td>
+      <td>HINDUISM</td>
+      <td>...</td>
+      <td>PRIVATE BUSINESS</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Yes</td>
+      <td>1.0</td>
+      <td>Yes</td>
+      <td>1.0</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>NaN</th>
+      <td>4</td>
+      <td>1</td>
+      <td>27</td>
+      <td>100701</td>
+      <td>1007</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Head of Household</td>
+      <td>58</td>
+      <td>HINDUISM</td>
+      <td>...</td>
+      <td>OTHER LAND</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>No</td>
+      <td>NaN</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>GREEN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 49 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">individual_characteristics.csv</span></code> file contains several characteristics for each individual in the dataset such as age, caste and religion.</p>
+<ul class="simple">
+<li><p>Storing seperate datasets for individuals belonging to <code class="docutils literal notranslate"><span class="pre">Village</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">Village</span> <span class="pre">2</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating the dataset for village 1</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;village&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating the dataset for village 2</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;village&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>To help in data retrieval and analysis, dictionaries are created that map personal IDs to specific covariates for members of Village 1 and 2.</p>
+<ul class="simple">
+<li><p>Defining dictionaries where personal IDs are the keys and the corresponding covariates (sex, caste, religion) are the values.</p></li>
+</ul>
+<p>For village 1, these dictionaries are stored using the variable names <code class="docutils literal notranslate"><span class="pre">sex1</span></code>, <code class="docutils literal notranslate"><span class="pre">caste1</span></code> and <code class="docutils literal notranslate"><span class="pre">religion1</span></code>. For village 2, these dictionaries are stored using the variable names <code class="docutils literal notranslate"><span class="pre">sex2</span></code>, <code class="docutils literal notranslate"><span class="pre">caste2</span></code> and <code class="docutils literal notranslate"><span class="pre">religion2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sex1</span>      <span class="o">=</span> <span class="p">{}</span>
+<span class="n">caste1</span>    <span class="o">=</span> <span class="p">{}</span>
+<span class="n">religion1</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">df1_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df1</span><span class="p">)):</span>
+
+    <span class="n">particular_person</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">df1_ind</span><span class="p">,:]</span>
+
+    <span class="n">sex1</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;resp_gend&#39;</span><span class="p">]</span>
+    <span class="n">caste1</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;caste&#39;</span><span class="p">]</span>
+    <span class="n">religion1</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;religion&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">caste1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;GENERAL&#39;, &#39;OBC&#39;, &#39;SCHEDULED CASTE&#39;, &#39;SCHEDULED TRIBE&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sex2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">caste2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">religion2</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">df2_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df2</span><span class="p">)):</span>
+
+    <span class="n">particular_person</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">df2_ind</span><span class="p">,:]</span>
+
+    <span class="n">sex2</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;resp_gend&#39;</span><span class="p">]</span>
+    <span class="n">caste2</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;caste&#39;</span><span class="p">]</span>
+    <span class="n">religion2</span><span class="p">[</span><span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">particular_person</span><span class="p">[</span><span class="s1">&#39;religion&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4">
+<h3>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Calculating the chance homophily for different characteristics within Villages 1 and 2.</p>
+<ul class="simple">
+<li><p>Utilizing the <code class="docutils literal notranslate"><span class="pre">chance_homophily</span></code> function to calculate the chance homophily for the attributes of sex, caste and religion for both villages 1 and villages 2.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sex&#39;</span><span class="p">:</span> <span class="n">sex1</span><span class="p">,</span> <span class="s1">&#39;Caste&#39;</span><span class="p">:</span> <span class="n">caste1</span><span class="p">,</span> <span class="s1">&#39;Religion&#39;</span><span class="p">:</span> <span class="n">religion1</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">covariate</span> <span class="ow">in</span> <span class="n">dict1</span><span class="p">:</span>
+
+    <span class="n">chance</span> <span class="o">=</span> <span class="n">chance_homophily</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="n">covariate</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chance for </span><span class="si">{}</span><span class="s2"> in Village 1: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">chance</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chance for Sex in Village 1: 0.503
+Chance for Caste in Village 1: 0.674
+Chance for Religion in Village 1: 0.98
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sex&#39;</span><span class="p">:</span> <span class="n">sex2</span><span class="p">,</span> <span class="s1">&#39;Caste&#39;</span><span class="p">:</span> <span class="n">caste2</span><span class="p">,</span> <span class="s1">&#39;Religion&#39;</span><span class="p">:</span> <span class="n">religion2</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">covariate</span> <span class="ow">in</span> <span class="n">dict2</span><span class="p">:</span>
+
+    <span class="n">chance</span> <span class="o">=</span> <span class="n">chance_homophily</span><span class="p">(</span><span class="n">dict2</span><span class="p">[</span><span class="n">covariate</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chance for </span><span class="si">{}</span><span class="s2"> in Village 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">chance</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chance for Sex in Village 2: 0.501
+Chance for Caste in Village 2: 0.425
+Chance for Religion in Village 2: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-5">
+<h3>Task 5<a class="headerlink" href="#task-5" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Measuring the homophily of characteristics within given network.</p>
+<ul class="simple">
+<li><p>Creating a function named <code class="docutils literal notranslate"><span class="pre">homophily()</span></code> that takes three inputs: a network <code class="docutils literal notranslate"><span class="pre">G</span></code>, a dictionary of node characteristics <code class="docutils literal notranslate"><span class="pre">chars</span></code> and a list of node IDs <code class="docutils literal notranslate"><span class="pre">IDs</span></code></p></li>
+<li><p>The function keeps track of two counters: <code class="docutils literal notranslate"><span class="pre">num_ties</span></code>  to count the total number of ties between node pairs and <code class="docutils literal notranslate"><span class="pre">num_same_ties</span></code> to count the number of ties where nodes share the same characteristics</p></li>
+<li><p>Calculating the ratio of <code class="docutils literal notranslate"><span class="pre">num_same_ties</span></code> to <code class="docutils literal notranslate"><span class="pre">num_ties</span></code> to determine the homophily of characteristics in network <code class="docutils literal notranslate"><span class="pre">G</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">homophily</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">IDs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the homophily of characteristics in a network.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        G (networkx.Graph): The network graph</span>
+<span class="sd">        chars (dict): A dictionary of node characteristics for node IDs</span>
+<span class="sd">        IDs (dict): A dictionary of node IDs for each node in the network</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The homophily of the network</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Initializing counters for same and total ties</span>
+    <span class="n">num_same_ties</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">num_ties</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Iterating through all edges in the network</span>
+    <span class="k">for</span> <span class="n">node1</span><span class="p">,</span> <span class="n">node2</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+
+        <span class="c1"># Check if both nodes have corresponding characteristics</span>
+        <span class="k">if</span> <span class="n">IDs</span><span class="p">[</span><span class="n">node1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">chars</span> <span class="ow">and</span> <span class="n">IDs</span><span class="p">[</span><span class="n">node2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+
+            <span class="c1"># Check if an edge exits between the two nodes</span>
+            <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">):</span>
+                
+                <span class="c1"># Increment total ties count</span>
+                <span class="n">num_ties</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># Check if nodes share the same characteristics</span>
+                <span class="k">if</span> <span class="n">chars</span><span class="p">[</span><span class="n">IDs</span><span class="p">[</span><span class="n">node1</span><span class="p">]]</span> <span class="o">==</span> <span class="n">chars</span><span class="p">[</span><span class="n">IDs</span><span class="p">[</span><span class="n">node2</span><span class="p">]]:</span>
+
+                    <span class="c1"># Increment same ties count</span>
+                    <span class="n">num_same_ties</span> <span class="o">+=</span> <span class="mi">1</span>
+                    
+        <span class="c1"># Calculating and returning homophilyas the ratio of same ties to total ties</span>
+    <span class="k">if</span> <span class="n">num_ties</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">num_same_ties</span> <span class="o">/</span> <span class="n">num_ties</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-6">
+<h3>Task 6<a class="headerlink" href="#task-6" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Retrieving the personal IDs for villages 1 and 2.</p>
+<ul class="simple">
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">pd.read_csv</span></code> function to read and store the contents of <code class="docutils literal notranslate"><span class="pre">village1_id</span></code> as <code class="docutils literal notranslate"><span class="pre">pid1</span></code> and <code class="docutils literal notranslate"><span class="pre">village2_id</span></code> as <code class="docutils literal notranslate"><span class="pre">pid2</span></code>. These variables hold the personal IDs for villages 1 and 2.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading ids for village 1</span>
+<span class="n">village1_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s1">&#39;village1_id.csv&#39;</span><span class="p">)</span>
+<span class="n">pid1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">village1_file</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+<span class="c1"># loading ids for village 2</span>
+<span class="n">village2_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s1">&#39;village2_id.csv&#39;</span><span class="p">)</span>
+<span class="n">pid2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">village2_file</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-7">
+<h3>Task 7<a class="headerlink" href="#task-7" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Calculating the homophily of various network characteristics for Villages 1 and 2. The graph objects <code class="docutils literal notranslate"><span class="pre">G1</span></code> and <code class="docutils literal notranslate"><span class="pre">G2</span></code> represent the networks of these villages.</p>
+<ul class="simple">
+<li><p>Utilizing the <code class="docutils literal notranslate"><span class="pre">homophily()</span></code> function to calculate the observed homophily for the characteristics of sex, caste and religion in Villages 1 and 2, printing all six resulting values</p></li>
+<li><p>Employing the <code class="docutils literal notranslate"><span class="pre">chance_homophily()</span></code> function to calculate the chance homophily for the same characteristics</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Reading adjacency matrices: The code below first reads the adjacency matrices of shared characteristics for each village. These matrices represent the connections or relationships between villagers based on shared characteristics</p></li>
+<li><p>Converting to numpy arrays: Coverting the read CSV data into numpy arrays</p></li>
+<li><p>Creating Networkx Graphs: The numpy arrays obtained from the adjacency matrices are then converted into networkx graph objects using the <code class="docutils literal notranslate"><span class="pre">nx.to_networkx_graph()</span></code> function. The function takes the adjacency matrix as input and constructs a graph object where nodes represent villagers, and edges represent connections between villagers based on the shared characteristics indicated by the adjacency matrix</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph of village 1</span>
+<span class="n">village1_relations</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s1">&#39;village1_relations.csv&#39;</span><span class="p">)</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">village1_relations</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_networkx_graph</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span>
+
+<span class="c1"># Graph of village 2</span>
+<span class="n">village2_relations</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s1">&#39;village2_relations.csv&#39;</span><span class="p">)</span>
+<span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">village2_relations</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">G2</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_networkx_graph</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sex&#39;</span><span class="p">:</span> <span class="n">sex1</span><span class="p">,</span> <span class="s1">&#39;Caste&#39;</span><span class="p">:</span> <span class="n">caste1</span><span class="p">,</span> <span class="s1">&#39;Religion&#39;</span><span class="p">:</span> <span class="n">religion1</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">covariate_vil1</span> <span class="ow">in</span> <span class="n">dict1</span><span class="p">:</span>
+
+    <span class="n">chance</span> <span class="o">=</span> <span class="n">chance_homophily</span><span class="p">(</span><span class="n">dict1</span><span class="p">[</span><span class="n">covariate_vil1</span><span class="p">])</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">homophily</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="n">covariate_vil1</span><span class="p">],</span> <span class="n">pid1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chance for </span><span class="si">{}</span><span class="s2"> in Village 1: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate_vil1</span><span class="p">,</span><span class="n">chance</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Observed for </span><span class="si">{}</span><span class="s2"> in Village 1: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate_vil1</span><span class="p">,</span><span class="n">actual</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chance for Sex in Village 1: 0.5027299861680701
+Observed for Sex in Village 1: 0.6524390243902439
+
+Chance for Caste in Village 1: 0.6741488509791551
+Observed for Caste in Village 1: 0.7865853658536586
+
+Chance for Religion in Village 1: 0.9804896988521925
+Observed for Religion in Village 1: 0.991869918699187
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G2</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="mi">877</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sex&#39;</span><span class="p">:</span> <span class="n">sex2</span><span class="p">,</span> <span class="s1">&#39;Caste&#39;</span><span class="p">:</span> <span class="n">caste2</span><span class="p">,</span> <span class="s1">&#39;Religion&#39;</span><span class="p">:</span> <span class="n">religion2</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">covariate_vil2</span> <span class="ow">in</span> <span class="n">dict2</span><span class="p">:</span>
+
+    <span class="n">chance</span> <span class="o">=</span> <span class="n">chance_homophily</span><span class="p">(</span><span class="n">dict2</span><span class="p">[</span><span class="n">covariate_vil2</span><span class="p">])</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">homophily</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">dict2</span><span class="p">[</span><span class="n">covariate_vil2</span><span class="p">],</span> <span class="n">pid2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chance for </span><span class="si">{}</span><span class="s2"> in Village 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate_vil2</span><span class="p">,</span><span class="n">chance</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Observed for </span><span class="si">{}</span><span class="s2"> in Village 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariate_vil2</span><span class="p">,</span><span class="n">actual</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chance for Sex in Village 2: 0.5005945303210464
+Observed for Sex in Village 2: 0.5879556259904913
+
+Chance for Caste in Village 2: 0.425368244800893
+Observed for Caste in Village 2: 0.716323296354992
+
+Chance for Religion in Village 2: 1.0
+Observed for Religion in Village 2: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>A higher observed homophily value compared to the chance homophily value indicates that there is a stronger tendency for nodes with the same characteristics to be connected in the network than would be expected by random chance. In other words, it suggests that there is a significant level of similarity or homogeneity in terms of the studied characteristic among connected nodes.</p>
+<p>In the village setting, a higher observed homophily value implies that individuals within the village who share the same characteristics (such as religion or sex) are more likely to interact or be connected to each other.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Religion</span></code>: Observed homophily being higher suggests that individuals who share the same religious belief are more likely to have social interactions or connections within the village. This could reflect a strong sense of community or social bonds among people of the same religious group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Sex</span></code>: Higher observed homophily could indicate individuals of the same gender tend to interact more frequently or form connections within the village. This could be due to shared activities, interests, or social norms that contribute to gender-based interactions.</p></li>
+</ul>
+<p>These results suggest that social interactions within the village are not purely random but influenced by common characteristics. This information provides insights into social dynamics, community structures and potental factors shaping relationships within the village.</p>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="case_study5.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Analyzing Bird Migration Patterns with GPS Data</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bibliography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

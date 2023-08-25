@@ -1,0 +1,1846 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analyzing Bird Migration Patterns with GPS Data &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deep Dive into Network Analysis and Social Relationships" href="case_study6.html" />
+    <link rel="prev" title="Analysis of Scotch Whisky Production and Flavor Profiles" href="case_study4.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study1.html">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study2.html">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study3.html">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study4.html">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study6.html">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study5.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study5.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study5.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-data">
+   Visualizing Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examining-flight-speed">
+   Examining Flight Speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-datetime">
+   Using Datetime
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-daily-mean-speed">
+   Calculating Daily Mean Speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cartopy-library">
+   Cartopy Library
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#folium">
+     Folium
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tracking-flight-patterns">
+   Tracking Flight Patterns
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analyzing Bird Migration Patterns with GPS Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-data">
+   Visualizing Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examining-flight-speed">
+   Examining Flight Speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-datetime">
+   Using Datetime
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-daily-mean-speed">
+   Calculating Daily Mean Speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cartopy-library">
+   Cartopy Library
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#folium">
+     Folium
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tracking-flight-patterns">
+   Tracking Flight Patterns
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="analyzing-bird-migration-patterns-with-gps-data">
+<h1>Analyzing Bird Migration Patterns with GPS Data<a class="headerlink" href="#analyzing-bird-migration-patterns-with-gps-data" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>Bird migration is a remarkable natural phenomenon that has long captivated the attention of researchers and enthusiasts alike. Birds migrate for various reasons, including better feeding opportunities, escaping harsh weather conditions, and finding suitable breeding grounds. Some bird species undertake astonishingly long journeys during migration, covering thousands of miles across continents. The <code class="docutils literal notranslate"><span class="pre">Arctic</span> <span class="pre">Tern</span></code> holds the distinction of being one of the longest migrating species, traveling from its Arctic breeding grounds to the Antarctica and back each year.</p>
+<p>For many bird species, migration is not just a seasonal activity but a way of lie. Their survival, breeding success and overall ecology are closely intertwined with their migratory behavior.</p>
+<p>This case study capitalizes on the wealth of GPS data to delve into the captivating realm of bird migration. By manipulating, examining and visualizing the collected GPS data, the goal is to shed light on the intricate patterns that govern the migratory journey of birds.</p>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h2>
+<p>The data for this case study comes from the LifeWatch INBO project. It uses a small data set that consists of migration data for three gulls named Eric, Nico and Sanne.</p>
+</section>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The goal is to analyze and visualize the flight patterns of different bird species during their migration journeys. Using GPS tracking data collected from individual birds, the project aims to uncover insights into their flight behaviors, altitudes, and speeds.</p>
+<p><strong>1. Data Exploration</strong></p>
+<ul class="simple">
+<li><p>Explore the dataset to understand it’s structure, variables and available information.</p></li>
+</ul>
+<p><strong>2. Data Preprocessing</strong></p>
+<ul class="simple">
+<li><p>Cleaning the data by handling missing values</p></li>
+<li><p>Organizing data into meaningful categories for analysis</p></li>
+</ul>
+<p><strong>3. Flight Pattern Analysis</strong></p>
+<ul class="simple">
+<li><p>Calculating daily mean speed and altitude for each bird</p></li>
+</ul>
+<p><strong>4. Data Visualization</strong></p>
+<ul class="simple">
+<li><p>Map the flight routes of the birds using the Folium library to illustrate their migration</p></li>
+<li><p>Generate plots to visualize daily mean speed and altitude</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s2">&quot;bird_tracking.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_loc</span><span class="p">,</span><span class="n">index_col</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>altitude</th>
+      <th>date_time</th>
+      <th>device_info_serial</th>
+      <th>direction</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>speed_2d</th>
+      <th>bird_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>71</td>
+      <td>2013-08-15 00:18:08+00</td>
+      <td>851</td>
+      <td>-150.469753</td>
+      <td>49.419860</td>
+      <td>2.120733</td>
+      <td>0.150000</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>68</td>
+      <td>2013-08-15 00:48:07+00</td>
+      <td>851</td>
+      <td>-136.151141</td>
+      <td>49.419880</td>
+      <td>2.120746</td>
+      <td>2.438360</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>68</td>
+      <td>2013-08-15 01:17:58+00</td>
+      <td>851</td>
+      <td>160.797477</td>
+      <td>49.420310</td>
+      <td>2.120885</td>
+      <td>0.596657</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>73</td>
+      <td>2013-08-15 01:47:51+00</td>
+      <td>851</td>
+      <td>32.769360</td>
+      <td>49.420359</td>
+      <td>2.120859</td>
+      <td>0.310161</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>69</td>
+      <td>2013-08-15 02:17:42+00</td>
+      <td>851</td>
+      <td>45.191230</td>
+      <td>49.420331</td>
+      <td>2.120887</td>
+      <td>0.193132</td>
+      <td>Eric</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The dataset comprises a total of 61920 rows and 8 columns, encompassing variables such as <code class="docutils literal notranslate"><span class="pre">direction</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">speed_2d</span></code> among others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(61920, 8)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-data">
+<h2>Visualizing Data<a class="headerlink" href="#visualizing-data" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>In this task, the focus is on generating a standard two-dimensional plot that visualizes the flight trajectory of a single bird. The plot will depict the coordinates of latitude and longitude corresponding to the bird’s movement.</p>
+<p>Latitude and Longitude are inherently spherical coordinates, the representation of which in a two-dimensional plot introduces distortions due to the Earth’s curved surface. This becomes particularly evident when visualizing flight paths that span a considerable spatial range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind_Eric</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;bird_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Eric&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">long_Eric</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">longitude</span><span class="p">[</span><span class="n">ind_Eric</span><span class="p">]</span>
+
+<span class="n">lat_Eric</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">latitude</span><span class="p">[</span><span class="n">ind_Eric</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Examining the coordinates for the bird <code class="docutils literal notranslate"><span class="pre">Eric</span></code>, the indices associated with the bird are extracted from the dataset. These indices are stored in the variable named <code class="docutils literal notranslate"><span class="pre">ind_Eric</span></code>.</p>
+<p>The longitudinal and latitudinal data corresponding to Eric’s flight trajectory are seperately stored in <code class="docutils literal notranslate"><span class="pre">long_Eric</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_Eric</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">long_Eric</span><span class="p">,</span><span class="n">lat_Eric</span><span class="p">,</span><span class="s1">&#39;r--&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_14_0.png" src="_images/case_study5_14_0.png" />
+</div>
+</div>
+<p>Subsequently, the upcoming task involves plotting the flight trajectories of all three birds in a consolidated plot.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">.unique</span></code> method to extract the distinct bird names, the code iterates through these names to acquire their corresponding indices This process enables the retrieval of longitudinal and latitudinal data for all birds, which is then plotted together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birdnames</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data_df</span><span class="o">.</span><span class="n">bird_name</span><span class="p">)</span>
+
+<span class="n">birdnames</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Eric&#39;, &#39;Nico&#39;, &#39;Sanne&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">bird_name</span> <span class="ow">in</span> <span class="n">birdnames</span><span class="p">:</span>
+    
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">bird_name</span> <span class="o">==</span> <span class="n">bird_name</span>
+    <span class="n">long</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">longitude</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">latitude</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">long</span><span class="p">,</span><span class="n">lat</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">bird_name</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;lower right&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_17_0.png" src="_images/case_study5_17_0.png" />
+</div>
+</div>
+<p>The flight patterns of these three birds exhibit a notable degree of similarity.</p>
+<p>However, it can be observed that Nico and Sanne tend to explore more southerly regions compared to Eric’s flight trajectory.</p>
+</section>
+<section id="examining-flight-speed">
+<h2>Examining Flight Speed<a class="headerlink" href="#examining-flight-speed" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The dataset includes estimations of two-dimensional speeds for the birds. These speeds indicate their flying velocities on a 2D plane, which serves as a local approximation of the curved surface of the Earth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_Eric</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;speed_2d&quot;</span><span class="p">][</span><span class="n">ind_Eric</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">speed_2d</span></code> data, which represents the two dimensional speed, is stored for Eric in <code class="docutils literal notranslate"><span class="pre">speed_Eric</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_Eric</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0.150000
+1    2.438360
+2    0.596657
+3    0.310161
+4    0.193132
+5    2.904772
+6    3.080584
+7    2.199659
+8    2.640076
+9    4.592211
+Name: speed_2d, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">isnan</span></code> function from NumPy can be employed to determine whether an array contains any non-zero numbers.</p>
+<p>By combining it with the <code class="docutils literal notranslate"><span class="pre">any</span></code> method, you can inquire if any of the values in the array are <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. If the answer is <code class="docutils literal notranslate"><span class="pre">True</span></code>, it signifies the presence of at least one <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">speed_Eric</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">isnan</span></code> function produces an array containing <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> values, this allows for summation, where <code class="docutils literal notranslate"><span class="pre">True</span></code> is treated as <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> as <code class="docutils literal notranslate"><span class="pre">0</span></code> during the computation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">speed_Eric</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 85 entries in Eric’s speed that are not numeric.</p>
+<p>To visualize the speed data for Eric, only the points with numeric observations are considered. This is achieved using the following steps:</p>
+<ul class="simple">
+<li><p>Assigning the result of <code class="docutils literal notranslate"><span class="pre">isnan</span></code> to Eric’s speed variable <code class="docutils literal notranslate"><span class="pre">ind_speedEric</span></code>.</p></li>
+<li><p>Applying bitwise complement to <code class="docutils literal notranslate"><span class="pre">ind_speedEric</span></code>. This operation changes each instance of <code class="docutils literal notranslate"><span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> and vice-versa.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind_speedEric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">speed_Eric</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="o">~</span><span class="n">ind_speedEric</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True, ...,  True,  True,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">ind_speedEric</span></code> holds the output of the <code class="docutils literal notranslate"><span class="pre">isnan</span></code> function. In this context, <code class="docutils literal notranslate"><span class="pre">True</span></code> signifies that a specific value is <code class="docutils literal notranslate"><span class="pre">nan</span></code> while <code class="docutils literal notranslate"><span class="pre">False</span></code> indicates that it is not.</p>
+<p>Consequently, the bitwise complement of <code class="docutils literal notranslate"><span class="pre">ind_speedEric</span></code>, denoted by <code class="docutils literal notranslate"><span class="pre">~ind_speedEric</span></code>, consists of values where <code class="docutils literal notranslate"><span class="pre">True</span></code> signifies that a particular value is <code class="docutils literal notranslate"><span class="pre">non</span> <span class="pre">nan</span></code>, while <code class="docutils literal notranslate"><span class="pre">False</span></code> indicates that is is a <code class="docutils literal notranslate"><span class="pre">nan</span></code> value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">speed_Eric</span><span class="p">[</span><span class="o">~</span><span class="n">ind_speedEric</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># plotting the numeric values for Eric&#39;s speed</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">speed_Eric</span><span class="p">[</span><span class="o">~</span><span class="n">ind_speedEric</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;2D speed (m/s)&quot;</span><span class="p">);</span>
+
+<span class="c1"># plotting the median speed</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">speed_median</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Median&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Eric 2d Speed&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_33_0.png" src="_images/case_study5_33_0.png" />
+</div>
+</div>
+</section>
+<section id="using-datetime">
+<h2>Using Datetime<a class="headerlink" href="#using-datetime" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Timestamped events frequently arise in various contexts. The possibilitiy of performing arithmetical operations involving dates and timestamps allows for calculations of time intervals between distinct observations.</p>
+<p>Python offers the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module which is useful in dealing with a wide range of date and time-related tasks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    2013-08-15 00:18:08+00
+1    2013-08-15 00:48:07+00
+2    2013-08-15 01:17:58+00
+3    2013-08-15 01:47:51+00
+4    2013-08-15 02:17:42+00
+5    2013-08-15 02:47:38+00
+6    2013-08-15 03:02:33+00
+7    2013-08-15 03:17:27+00
+8    2013-08-15 03:32:35+00
+9    2013-08-15 03:47:48+00
+Name: date_time, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>The date attribute of the dataset is represented in the format of <code class="docutils literal notranslate"><span class="pre">year,</span> <span class="pre">month,</span> <span class="pre">day</span></code>.</p>
+<p>All entries within the <code class="docutils literal notranslate"><span class="pre">date_time</span></code> column are stored as strings. In order to perform operations on these entries, they must be converted into <code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The first code block uses the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module to call the <code class="docutils literal notranslate"><span class="pre">.today()</span></code> method. This method returns a <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object that represents the current date and time.</p></li>
+<li><p>In the second code block, the variable <code class="docutils literal notranslate"><span class="pre">time1</span></code> is assigned the value of the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object returned by the <code class="docutils literal notranslate"><span class="pre">.today()</span></code> method. The function <code class="docutils literal notranslate"><span class="pre">type()</span></code> is then used to determine the type of <code class="docutils literal notranslate"><span class="pre">time1</span></code> object.</p></li>
+<li><p>In the third block of code, the variable <code class="docutils literal notranslate"><span class="pre">time2</span></code> is assigned the value of another <code class="docutils literal notranslate"><span class="pre">.today()</span></code> method. Finally, the time difference between <code class="docutils literal notranslate"><span class="pre">time2</span></code> and <code class="docutils literal notranslate"><span class="pre">time1</span></code> is calculated using subtraction. The result is a <code class="docutils literal notranslate"><span class="pre">timedelta</span></code> object that represents the diffence betweem two <code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects in terms of days, seconds and microseconds.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># block 1</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.datetime(2023, 8, 24, 14, 33, 16, 831251)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># block 2</span>
+<span class="n">time1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">time1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;datetime.datetime&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># block 3</span>
+<span class="n">time2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+
+<span class="c1">## printing the &#39;timedelta&#39; object</span>
+<span class="c1">## as string, showing the time difference</span>
+<span class="c1">## in terms of days, hours, minutes, and seconds</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time2</span> <span class="o">-</span> <span class="n">time1</span><span class="p">)</span>
+
+<span class="c1">## evaluating the `timedelta` object </span>
+<span class="n">time2</span> <span class="o">-</span> <span class="n">time1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:31.670776
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.timedelta(seconds=31, microseconds=670776)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To calculate the time duration between any two observatopms om pir dataset, it is necessary to initially convert the timestamps from the <code class="docutils literal notranslate"><span class="pre">str</span></code> type to <code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># value of datetime attribute for </span>
+<span class="c1"># the first entry in dataset</span>
+<span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2013-08-15 00:18:08+00&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The notation <code class="docutils literal notranslate"><span class="pre">+00</span></code> corresponds to Coordinated Universal Time (UTC) which denotes a time zone offset in hours.</p>
+<p>Within the provided dataset, all the offsets are set to 0, implying that they will not be taken into consideration in subsequent operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2013-08-15 00:18:08&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">strptime</span></code> function serves the purpose of converting a string into a <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object.</p>
+<p>It requires two arguments: the first being the input string to be converted, and the second a string that defines the formatting of the input string. This allows the function to correctly interpret the string’s components and create the appropriate <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">date_str</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">date_time</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Here is date time string: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date_str</span><span class="p">))</span>
+
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here is date time string: 2013-08-15 00:18:08
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.datetime(2013, 8, 15, 0, 18, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is a datetime object with the following attributes:</p>
+<ul class="simple">
+<li><p>Year: 2013</p></li>
+<li><p>Month: 8 (August)</p></li>
+<li><p>Date: 15</p></li>
+<li><p>Hour: 0</p></li>
+<li><p>Minute: 18</p></li>
+<li><p>Second: 8</p></li>
+</ul>
+<p>Using the following script helps in iterating through each individual row within the dataset and generate the corresponding <code class="docutils literal notranslate"><span class="pre">datetime</span></code> object from the <code class="docutils literal notranslate"><span class="pre">date_time</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timestamps</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_df</span><span class="p">)):</span>
+    <span class="n">str_date</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;date_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">timestamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">str_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extracting the first ten elements </span>
+<span class="c1"># from the list</span>
+
+<span class="n">timestamps</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[datetime.datetime(2013, 8, 15, 0, 18, 8),
+ datetime.datetime(2013, 8, 15, 0, 48, 7),
+ datetime.datetime(2013, 8, 15, 1, 17, 58),
+ datetime.datetime(2013, 8, 15, 1, 47, 51),
+ datetime.datetime(2013, 8, 15, 2, 17, 42),
+ datetime.datetime(2013, 8, 15, 2, 47, 38),
+ datetime.datetime(2013, 8, 15, 3, 2, 33),
+ datetime.datetime(2013, 8, 15, 3, 17, 27),
+ datetime.datetime(2013, 8, 15, 3, 32, 35),
+ datetime.datetime(2013, 8, 15, 3, 47, 48)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># difference between the timestamp of 12th observation</span>
+<span class="c1"># and the timestamp of the first observation</span>
+
+<span class="n">timestamps</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">-</span> <span class="n">timestamps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.timedelta(seconds=14432)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following step is creating a pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> object and populating it with the elements from the <code class="docutils literal notranslate"><span class="pre">timestamps</span></code> list. This helps in incluing the Series as an additional column within the existing dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;timestamps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">data_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>altitude</th>
+      <th>date_time</th>
+      <th>device_info_serial</th>
+      <th>direction</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>speed_2d</th>
+      <th>bird_name</th>
+      <th>timestamps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>71</td>
+      <td>2013-08-15 00:18:08+00</td>
+      <td>851</td>
+      <td>-150.469753</td>
+      <td>49.419860</td>
+      <td>2.120733</td>
+      <td>0.150000</td>
+      <td>Eric</td>
+      <td>2013-08-15 00:18:08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>68</td>
+      <td>2013-08-15 00:48:07+00</td>
+      <td>851</td>
+      <td>-136.151141</td>
+      <td>49.419880</td>
+      <td>2.120746</td>
+      <td>2.438360</td>
+      <td>Eric</td>
+      <td>2013-08-15 00:48:07</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>68</td>
+      <td>2013-08-15 01:17:58+00</td>
+      <td>851</td>
+      <td>160.797477</td>
+      <td>49.420310</td>
+      <td>2.120885</td>
+      <td>0.596657</td>
+      <td>Eric</td>
+      <td>2013-08-15 01:17:58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>73</td>
+      <td>2013-08-15 01:47:51+00</td>
+      <td>851</td>
+      <td>32.769360</td>
+      <td>49.420359</td>
+      <td>2.120859</td>
+      <td>0.310161</td>
+      <td>Eric</td>
+      <td>2013-08-15 01:47:51</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>69</td>
+      <td>2013-08-15 02:17:42+00</td>
+      <td>851</td>
+      <td>45.191230</td>
+      <td>49.420331</td>
+      <td>2.120887</td>
+      <td>0.193132</td>
+      <td>Eric</td>
+      <td>2013-08-15 02:17:42</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>It is possible to generate a list with the intention of tracking the elapsed time since the beginning of data collection. This involves extracting the timestamps specific to Erc and saving them in the <code class="docutils literal notranslate"><span class="pre">times</span></code> list.</p>
+<p>Each element in the list is used to compute the time difference between a given timestamp and initial time, which corresponds to the first element in the <code class="docutils literal notranslate"><span class="pre">times</span></code> list. A list comprehension gets the work done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extracting timestamps data for Eric</span>
+<span class="n">times_Eric</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;timestamps&#39;</span><span class="p">][</span><span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Eric&quot;</span><span class="p">]</span>
+
+<span class="c1"># calculating the time difference between</span>
+<span class="c1"># times_Eric[:] and times_Eric[0]</span>
+<span class="n">elapsed_time_Eric</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span> <span class="o">-</span> <span class="n">times_Eric</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">times_Eric</span><span class="p">]</span>
+
+<span class="c1"># printing the timedelta between</span>
+<span class="c1"># final observation timestamp and initial timestamp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elapsed_time_Eric</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>258 days 23:33:21
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">elapsed_time_Eric</span><span class="p">)</span> <span class="o">/</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Elapsed time (days)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_58_0.png" src="_images/case_study5_58_0.png" />
+</div>
+</div>
+<p>Upon examining the plot, a relatively straight line is seen. If the time interval between any two successive observations were consistently identical for all observations, a perfectly straight line would be observed. However, the plot showcases a few noticeable jumps, indicating the presence of observations that exhibit larger time intervals compared to other obsevations in the dataset.</p>
+</section>
+<section id="calculating-daily-mean-speed">
+<h2>Calculating Daily Mean Speed<a class="headerlink" href="#calculating-daily-mean-speed" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The subsequent objective is to generate a plot in which the y-axis represents the mean daily speed, and the x-axis represents time measured in days.</p>
+<p>Since the dataset contains timestamps that are unevenly spaced, the initial point on the left corresponds to our observation number 0. All time measurements are relative to this 0th observation.</p>
+<p>Analyzing the initial few points will likely correspond to day 0. The aim is to accumulate the indices for all observations falling within day 0. Once the timestamps transistion to day 1, the mean velocity over the collected observations for that day will be calculated. This process continues as indices for each new day is gathered.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elapsed_days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">elapsed_time_Eric</span><span class="p">)</span> <span class="o">/</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">elapsed_days</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.0, 0.02082175925925926, 0.04155092592592593, ...,
+       258.9399652777778, 258.9607175925926, 258.9814930555556],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variable to check if we have hit the next day</span>
+<span class="n">next_day</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># list to keep track of indices of data points</span>
+<span class="n">inds</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># list storing the daily mean speed of Eric</span>
+<span class="n">daily_mean_speed</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">the_index</span><span class="p">,</span><span class="n">the_time</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elapsed_days</span><span class="p">):</span>
+    
+    <span class="c1"># collecting indices if we haven&#39;t </span>
+    <span class="c1"># reached the next day</span>
+    <span class="k">if</span> <span class="n">the_time</span> <span class="o">&lt;</span> <span class="n">next_day</span><span class="p">:</span>
+        
+        <span class="n">inds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">the_index</span><span class="p">)</span>
+
+    <span class="c1"># next day reached</span>
+    <span class="k">else</span><span class="p">:</span>
+        
+        <span class="c1"># extracting speed for a particular day</span>
+        <span class="n">speed_data</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;speed_2d&#39;</span><span class="p">][</span><span class="n">inds</span><span class="p">]</span>
+        
+        <span class="c1"># computing the mean and appending it to </span>
+        <span class="c1"># the list daily_mean_speed</span>
+        <span class="n">daily_mean_speed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">speed_data</span><span class="p">))</span>
+        
+        <span class="c1"># next day is increased by 1</span>
+        <span class="n">next_day</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># list of indices is emptied</span>
+        <span class="n">inds</span> <span class="o">=</span> <span class="p">[]</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Converting <code class="docutils literal notranslate"><span class="pre">daily_mean_speed</span></code> list into a NumPy array named <code class="docutils literal notranslate"><span class="pre">speed_array</span></code></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">isnan</span></code> function to create a Boolean array <code class="docutils literal notranslate"><span class="pre">speed_ind</span></code>, where <code class="docutils literal notranslate"><span class="pre">True</span></code> represenst the positions in <code class="docutils literal notranslate"><span class="pre">speed_array</span></code> that have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values</p></li>
+<li><p>Using the boolean indexing with <code class="docutils literal notranslate"><span class="pre">~speed_ind</span></code>, the <code class="docutils literal notranslate"><span class="pre">speed_array</span></code> is filtered to exclude the positions with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values</p></li>
+<li><p>Median of the cleaned <code class="docutils literal notranslate"><span class="pre">speed_array</span></code> is calculated using <code class="docutils literal notranslate"><span class="pre">np.median()</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">daily_mean_speed</span><span class="p">)</span>
+<span class="n">speed_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">speed_array</span><span class="p">)</span>
+<span class="n">speed_array</span> <span class="o">=</span> <span class="n">speed_array</span><span class="p">[</span><span class="o">~</span><span class="n">speed_ind</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">speed_array</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Median: 2.071156405887064
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">daily_mean_speed</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Day&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mean speed (m/s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Eric Mean Daily Speed&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_65_0.png" src="_images/case_study5_65_0.png" />
+</div>
+</div>
+<p>The plot shows that Eric’s average speed remains consistently at 3 m/s or lower for the majority of the time. There are noticeable spikes in average speed occurring around day 95 and day 230. During these specific time intervals, Eric’s average speed increases significantly, reaching upto 9 m/s. These spikes coincide with Eric’s migration periods, indicating his accelerated movement during these phases.</p>
+</section>
+<section id="cartopy-library">
+<h2>Cartopy Library<a class="headerlink" href="#cartopy-library" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Cartopy is a Python library designed to help cartographic tasks by offering a comprehensive set of tools for map creation and visualization. It simplifies the process of generating maps and working with geospatial data within Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birdnames</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Eric&#39;, &#39;Nico&#39;, &#39;Sanne&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The objective is to extract the rows from the data frame that correspond to a particular bird’s longitudinal and latitude.</p>
+<p>To achieve this plot, a specific coordinate reference system (CRS) transformation known as <code class="docutils literal notranslate"><span class="pre">Mercator</span></code> is used. An axis is established using the <code class="docutils literal notranslate"><span class="pre">plt.axes</span></code> function, and an extend is defined for it.</p>
+<p>Looking at the flight trajectories superimposed on top of a map gives much more insights into the migratory patterns of these birds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Mercator</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span> <span class="n">proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">((</span><span class="o">-</span><span class="mf">25.0</span><span class="p">,</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">52.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">))</span>
+
+<span class="c1"># adding features to map</span>
+
+<span class="c1"># adding `land` feature to the map</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="c1"># adding &#39;ocean&#39; feature to the map</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">)</span>
+<span class="c1"># adding &#39;coastline&#39; feature to the map</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="c1"># adding &#39;border&#39; feature to the map</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">birdnames</span><span class="p">:</span>
+    <span class="n">bird_index</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
+    <span class="n">bird_long</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">][</span><span class="n">bird_index</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">10000</span><span class="p">]</span>
+    <span class="n">bird_lat</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">][</span><span class="n">bird_index</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">10000</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bird_long</span><span class="p">,</span><span class="n">bird_lat</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">())</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">);</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_72_0.png" src="_images/case_study5_72_0.png" />
+</div>
+</div>
+<section id="folium">
+<h3>Folium<a class="headerlink" href="#folium" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p><code class="docutils literal notranslate"><span class="pre">Folium</span></code> is a robust Python library that enables the creation of dynamic and interactive maps directly within the project notebook. With Folium, dynamic geographic data, such as bird migration paths and points of interest can be overlaid onto interactive maps. The inclusion of Folium adds a layer of geographical insight and engagement, facilitating a more comprehensive understanding of the intricate migration behaviors of avian species.</p>
+<ul class="simple">
+<li><p>Importing <code class="docutils literal notranslate"><span class="pre">folium</span></code> library</p></li>
+<li><p>Calculating the center point of the provided coordinates. This point is used as the initial focus of the map</p></li>
+<li><p>Creating a new map <code class="docutils literal notranslate"><span class="pre">mymap</span></code> using the <code class="docutils literal notranslate"><span class="pre">folium.Map</span></code> function. The map’s location is set to the calculated center point and the initial zoom level is adjusted using the argument <code class="docutils literal notranslate"><span class="pre">zoom_start</span></code></p></li>
+<li><p>For each set of coordinates, a marker is added to the map using <code class="docutils literal notranslate"><span class="pre">folium.Marker</span></code> function</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latitude</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">51</span><span class="p">]</span>
+<span class="n">longitude</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">9.9</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">]</span>
+
+<span class="n">center_latitude</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+<span class="n">center_longitude</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span>
+
+<span class="c1"># calculating the map center</span>
+<span class="n">map_center</span> <span class="o">=</span> <span class="p">[</span><span class="n">center_latitude</span><span class="p">,</span> <span class="n">center_longitude</span><span class="p">]</span>
+
+<span class="c1"># creating the map</span>
+<span class="c1"># location is set to `map_center`</span>
+<span class="c1"># initial zoom level is set to 5</span>
+<span class="n">mymap</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span> <span class="o">=</span> <span class="n">map_center</span><span class="p">,</span> <span class="n">zoom_start</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">lat</span><span class="p">,</span> <span class="n">long</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">):</span>
+    <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span><span class="n">location</span> <span class="o">=</span> <span class="p">[</span><span class="n">lat</span><span class="p">,</span><span class="n">long</span><span class="p">],</span> <span class="n">popup</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Latitude: </span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2"> | Longitude: </span><span class="si">{</span><span class="n">long</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">mymap</span><span class="p">)</span>
+
+<span class="c1"># saving the map to HTML file</span>
+<span class="n">mymap</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;coordinates_map.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="coordinates_map_ss.png" src="_images/coordinates_map_ss.png" /></p>
+<p>Using the Folium map visualization, we can see the cities pivotal to the bird migration routes. The birds start off from Belgium, tracing a path along the coastal regions of Spain and Portugal. They navigate over to Africa and continue along the coastal fringes of Morocco.</p>
+</section>
+</section>
+<section id="tracking-flight-patterns">
+<h2>Tracking Flight Patterns<a class="headerlink" href="#tracking-flight-patterns" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The focus in this case study is analyzing flight patterns exhibited by each of the three birds within the dataset. The intention is to organize the flight patterns by both bird and date, subsequently generating plots that illustrate the average altitude for these grouped patterns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birddata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_loc</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">birddata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>altitude</th>
+      <th>date_time</th>
+      <th>device_info_serial</th>
+      <th>direction</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>speed_2d</th>
+      <th>bird_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>71</td>
+      <td>2013-08-15 00:18:08+00</td>
+      <td>851</td>
+      <td>-150.469753</td>
+      <td>49.419860</td>
+      <td>2.120733</td>
+      <td>0.150000</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>68</td>
+      <td>2013-08-15 00:48:07+00</td>
+      <td>851</td>
+      <td>-136.151141</td>
+      <td>49.419880</td>
+      <td>2.120746</td>
+      <td>2.438360</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>68</td>
+      <td>2013-08-15 01:17:58+00</td>
+      <td>851</td>
+      <td>160.797477</td>
+      <td>49.420310</td>
+      <td>2.120885</td>
+      <td>0.596657</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>73</td>
+      <td>2013-08-15 01:47:51+00</td>
+      <td>851</td>
+      <td>32.769360</td>
+      <td>49.420359</td>
+      <td>2.120859</td>
+      <td>0.310161</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>69</td>
+      <td>2013-08-15 02:17:42+00</td>
+      <td>851</td>
+      <td>45.191230</td>
+      <td>49.420331</td>
+      <td>2.120887</td>
+      <td>0.193132</td>
+      <td>Eric</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Calculating the mean <code class="docutils literal notranslate"><span class="pre">speed_2d</span></code> for each bird</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dictionary to store the mean speed for each bird</span>
+<span class="n">mean_speeds</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Dictionary to store the mean altitude for each bird</span>
+<span class="n">mean_altitudes</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">birdnames</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">birddata</span><span class="p">[</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">bird_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;speed_2d&#39;</span><span class="p">])</span>
+    <span class="n">bird_altitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;altitude&#39;</span><span class="p">])</span>
+    <span class="n">mean_speeds</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">bird_speed</span>
+    <span class="n">mean_altitudes</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">bird_altitude</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean speed of birds: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_speeds</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean altitude of birds: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_altitudes</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean speed of birds: {&#39;Eric&#39;: 2.3005445907278466, &#39;Nico&#39;: 2.9087263541396617, &#39;Sanne&#39;: 2.4504341163584806}
+Mean altitude of birds: {&#39;Eric&#39;: 60.249406415761555, &#39;Nico&#39;: 67.90047819705507, &#39;Sanne&#39;: 29.159921919634357}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The goal of this task is to aggregate flight times by date and compute the average altitude within each day.</p>
+<ul class="simple">
+<li><p>Converting the <code class="docutils literal notranslate"><span class="pre">date_time</span></code> column to the <code class="docutils literal notranslate"><span class="pre">pd.datetime</span></code> format</p></li>
+<li><p>Storing the resulting date values in a new column named <code class="docutils literal notranslate"><span class="pre">date</span></code> within the <code class="docutils literal notranslate"><span class="pre">birddata</span></code> dataframe</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert birddata.date_time to the `pd.datetime` format.</span>
+<span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">])</span>
+
+<span class="n">date_time_values</span> <span class="o">=</span> <span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span>
+<span class="n">date_time_values</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   2013-08-15 00:18:08+00:00
+1   2013-08-15 00:48:07+00:00
+2   2013-08-15 01:17:58+00:00
+3   2013-08-15 01:47:51+00:00
+4   2013-08-15 02:17:42+00:00
+Name: date_time, dtype: datetime64[ns, UTC]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating the list to contain </span>
+<span class="c1"># &#39;pd.datetime&#39; format values</span>
+<span class="n">date_value</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">date_time_values</span><span class="p">)):</span>
+    <span class="n">date_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date_time_values</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+
+<span class="c1"># creating a new column of day of observation</span>
+<span class="n">birddata</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code block below iterates through each unique date in <code class="docutils literal notranslate"><span class="pre">date_set</span></code>, extracting the corresponding altitude values for that date using boolean indexing, calculating the meean altitude for the day and storing it in <code class="docutils literal notranslate"><span class="pre">mean_altitude_perday</span></code> dictionary.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">altitude_value</span></code> list is cleared after each iteration to prepare for next date.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_altitude_perday</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">date_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">altitude_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">date_set</span><span class="p">:</span>
+
+    <span class="n">altitude_values</span> <span class="o">=</span> <span class="n">birddata</span><span class="o">.</span><span class="n">altitude</span><span class="p">[</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">date</span><span class="p">]</span>
+    <span class="n">mean_altitude_perday</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">altitude_values</span><span class="p">)</span>
+
+    <span class="n">altitude_values</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Calculating the mean altitude for each bird and date combination.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_data</span> <span class="o">=</span> <span class="n">birddata</span><span class="p">[</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Eric&#39;</span><span class="p">]</span>
+<span class="n">sanne_data</span> <span class="o">=</span> <span class="n">birddata</span><span class="p">[</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Sanne&#39;</span><span class="p">]</span>
+<span class="n">nico_data</span> <span class="o">=</span> <span class="n">birddata</span><span class="p">[</span><span class="n">birddata</span><span class="p">[</span><span class="s1">&#39;bird_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nico&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following lines of code take the individual datasets <code class="docutils literal notranslate"><span class="pre">eric_data</span></code>, <code class="docutils literal notranslate"><span class="pre">sanne_data</span></code>, and <code class="docutils literal notranslate"><span class="pre">nico_data</span></code> and group their entries by date, resulting in three separate DataFrames <code class="docutils literal notranslate"><span class="pre">eric_date_grouped</span></code>, <code class="docutils literal notranslate"><span class="pre">sanne_date_grouped</span></code>, and <code class="docutils literal notranslate"><span class="pre">nico_date_grouped</span></code> where the data entries are organized by the dates they correspond to.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_date_grouped</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">eric_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">]))</span>
+<span class="n">sanne_date_grouped</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sanne_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">]))</span>
+<span class="n">nico_date_grouped</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nico_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dictionary comprehensions are used to calculate the mean altitude of bird migrations for each dataset on a per-date basis. The date is used as the key in the dictionaries, and the calculated mean altitude is associated with each date. This helps in analyzing altitude trends during bird migrations over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_mean_altitude</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">eric_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">eric_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;altitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eric_date_grouped</span><span class="p">))}</span>
+
+<span class="n">sanne_mean_altitude</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sanne_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">sanne_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;altitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sanne_date_grouped</span><span class="p">))}</span>
+
+<span class="n">nico_mean_altitude</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">nico_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">nico_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;altitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nico_date_grouped</span><span class="p">))}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4">
+<h3>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The aim of this task is to compute the average speed for each bird and day. After calculating the average speeds, a visualization will be created showing the average speeds and altitude for each bird.</p>
+<ul class="simple">
+<li><p>Calculating the mean speed for each bird and date combination</p></li>
+<li><p>Plotting the daily mean speed and altitude</p></li>
+</ul>
+<p>The mean speed for each bird on a daily basis is calculated by dictionary comprehension. The date is used as the key in the dictionaries, and the calculated mean speeds is associated with each date. This helps in analyzing speed trends during migrations over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_mean_speed</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">eric_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">eric_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;speed_2d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eric_date_grouped</span><span class="p">))}</span>
+
+<span class="n">sanne_mean_speed</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sanne_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">sanne_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;speed_2d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sanne_date_grouped</span><span class="p">))}</span>
+
+<span class="n">nico_mean_speed</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">nico_date_grouped</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]):</span> <span class="n">nico_date_grouped</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;speed_2d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nico_date_grouped</span><span class="p">))}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_daily_speed</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">eric_mean_speed</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">sanne_daily_speed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sanne_mean_speed</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">nico_daily_speed</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nico_mean_speed</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">eric_daily_speed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eric&quot;</span><span class="p">)</span>
+<span class="n">sanne_daily_speed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sanne&quot;</span><span class="p">)</span>
+<span class="n">nico_daily_speed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Nico&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Daily Mean Speed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$days$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$speed (length/time)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_99_0.png" src="_images/case_study5_99_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eric_daily_alt</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">eric_mean_altitude</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">sanne_daily_alt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sanne_mean_altitude</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">nico_daily_alt</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nico_mean_altitude</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">eric_daily_alt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eric&quot;</span><span class="p">)</span>
+<span class="n">sanne_daily_alt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sanne&quot;</span><span class="p">)</span>
+<span class="n">nico_daily_alt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Nico&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Daily Mean Altitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$days$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$height (length)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study5_100_0.png" src="_images/case_study5_100_0.png" />
+</div>
+</div>
+<p>The depicted graphs of daily mean speed and altitude offers insights into the flight behavior of the birds. The visualizations highlight significant trends that correspond to specific phases of the birds’ migration journey. The periods of elevated altitde and increased speed directly correlate with their period of migrationm indicating their movement between different geographical regions.</p>
+<ul class="simple">
+<li><p>Nico flies at higher altitudes more frequently than other birds and achieves the highest altitude during migration.</p></li>
+<li><p>Nico also consistently maintains a higher daily mean speed compared to the other birds</p></li>
+</ul>
+<p>These observations are consisted with the data analysed where Nico had both higher mean speed and higher mean altitude.</p>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="case_study4.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Analysis of Scotch Whisky Production and Flavor Profiles</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="case_study6.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deep Dive into Network Analysis and Social Relationships</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

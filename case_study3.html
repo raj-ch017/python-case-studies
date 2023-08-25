@@ -1,0 +1,2254 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Predictive Insights through Classification Analysis &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analysis of Scotch Whisky Production and Flavor Profiles" href="case_study4.html" />
+    <link rel="prev" title="Linguistic Analysis of Books: A Study of Language Variability" href="case_study2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study1.html">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study2.html">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study4.html">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study5.html">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study6.html">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study3.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-distance-between-two-points">
+   Finding Distance Between Two Points
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#majority-vote">
+   Majority Vote
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-nearest-neighbors">
+   Finding Nearest Neighbors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-a-set-of-sample-values-for-the-purpose-of-function-testing">
+     Generating a set of sample values for the purpose of function testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#producing-a-graphical-representation-of-the-generated-values-for-visual-inspection">
+     Producing a graphical representation of the generated values for visual inspection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing">
+     Testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-synthetic-data">
+   Generating Synthetic Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-grid">
+   Prediction Grid
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-prediction-grid">
+   Plotting Prediction Grid
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scikitlearn">
+   SciKitLearn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-of-wines">
+   Classification of Wines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions">
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-8">
+     Task 8
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-9">
+     Task 9
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Predictive Insights through Classification Analysis</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-distance-between-two-points">
+   Finding Distance Between Two Points
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#majority-vote">
+   Majority Vote
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-nearest-neighbors">
+   Finding Nearest Neighbors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-a-set-of-sample-values-for-the-purpose-of-function-testing">
+     Generating a set of sample values for the purpose of function testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#producing-a-graphical-representation-of-the-generated-values-for-visual-inspection">
+     Producing a graphical representation of the generated values for visual inspection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing">
+     Testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-synthetic-data">
+   Generating Synthetic Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-grid">
+   Prediction Grid
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-prediction-grid">
+   Plotting Prediction Grid
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scikitlearn">
+   SciKitLearn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-of-wines">
+   Classification of Wines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions">
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-8">
+     Task 8
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-9">
+     Task 9
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="predictive-insights-through-classification-analysis">
+<h1>Predictive Insights through Classification Analysis<a class="headerlink" href="#predictive-insights-through-classification-analysis" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>Statistical Learning encompasses a set of mathematical and computational methodologies for data analysis, particularly within the scope of supervised learning. The central aim of supervised learning is to forecast or approximate outputs based on one or multiple inputs.</p>
+<p>These inputs are commonly denoted as predictors, independent variables, or features, while the resultant outputs are designated as response variables or dependent variables.</p>
+<p>In situations hwere the response variable is a numerical metric quantifying a certain attribute, it falls under the category of a <code class="docutils literal notranslate"><span class="pre">regression</span></code> problem. When the response variable classifies data into distinct groups, it falls under <code class="docutils literal notranslate"><span class="pre">classification</span></code> problem.</p>
+<p>The aim of this case study is to set up a classifier such that when its presented with a new observation whose category is not known, it will attempt to assign that observation a category, based on the observations for which it does know the true category.</p>
+<p>This specific method is known as the <code class="docutils literal notranslate"><span class="pre">k-Nearest</span> <span class="pre">Neighbors</span></code> classifier.</p>
+<p>Given a positive integer k, and a new data point, it first identifies those k points in the data that are nearest to the point and classifies the new data point as belonging to the most common class among those k neighbors.</p>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p><strong>Task 1 - Writing Functions</strong>
+- Calculating Euclidean distance between two points
+- Calculating the mode of a sequence of votes
+- Identifying nearest k neighbors for a given point
+- Predicting class labels</p>
+<p><strong>Task 2 - SciKitLearn</strong>
+- Comparing the homemade kNN classifier with the classifer provided by SciKitLearn</p>
+<p><strong>Task 3 - Classification of Wines</strong>
+- Applying the homemade kNN classifier to classify wines into <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> or <code class="docutils literal notranslate"><span class="pre">low_quality</span></code>
+based on supplementary information about wines</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-distance-between-two-points">
+<h2>Finding Distance Between Two Points<a class="headerlink" href="#finding-distance-between-two-points" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">distance</span></code> takes in two points, (x1,y1) and (x2,y2), and calculates the Euclidean distance between them. The x and y coordinates of the points are passed as arguments to the function.</p></li>
+<li><p>Inside the function, the two points are converted to numpy arrays for easier manipulation. The difference between the two points is then calculated by subtracting the first point from the second.</p></li>
+<li><p>The x and y components of the difference are then calculated and stored in separate variables. Using the Pythagorean theorem, the distance between the two points is calculated and stored in the dist variable.</p></li>
+<li><p>Finally, the function returns the calculated distance.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the Euclidean distance between two points &#39;point1&#39; and &#39;point2&#39;.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        point1 (tuple) - coordinates of point 1</span>
+<span class="sd">        point2 (tuple) - coordinates of point 2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dist (float) - Distance between the two points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Converting points to numpy arrays for easier computation</span>
+    <span class="n">point1_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point1</span><span class="p">)</span>
+    <span class="n">point2_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point2</span><span class="p">)</span>
+
+    <span class="c1"># Calculating difference between the two points</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">point2_array</span> <span class="o">-</span> <span class="n">point1_array</span>
+
+    <span class="c1"># Extracting the x and y differences</span>
+    <span class="n">delta_x</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">delta_y</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Calculating the Euclidean distance</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">delta_x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta_y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">point2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The distance between </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> units.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">,</span><span class="n">distance</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The distance between (0, 0) and (1, 1) is 1.4142135623730951 units.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="majority-vote">
+<h2>Majority Vote<a class="headerlink" href="#majority-vote" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The objective of the next task is to find the occurrence frequency of individual elements within an array or sequence of votes and ascertain the predominant element in the sequence. This can be accomplished by systematically iterating through the sequence and maintaining a record of the occurrence count of each element in a dictionary.</p>
+<p>Subsequently, the element with the highest frequency can be identified by locating the key associated with the maximum value within the dictionary. The function’s outcome will contain both the most prevalent element within the sequence and it’s corresponding frequency.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">majority_vote</span></code> function takes an input sequence of votes and returns the most common element(s) in the sequence.</p>
+<ul class="simple">
+<li><p>The function first initializes an empty dictionary, <code class="docutils literal notranslate"><span class="pre">vote_count</span></code>, to keep track of the count of each vote. It then iterates through the input sequence and checks if the current vote is already in the dictionary. If the vote is already present, its count is incremented by one. If it is not present, it is added to the dictionary with an initial count of one.</p></li>
+<li><p>After counting the votes, the function initializes an empty list, <code class="docutils literal notranslate"><span class="pre">winners</span></code>, to keep track of the most common element(s) in the sequence. The function then finds the maximum count of any vote in the sequence using the max function with the <code class="docutils literal notranslate"><span class="pre">values()</span></code> method of <code class="docutils literal notranslate"><span class="pre">vote_count</span></code>. It then iterates through the items in <code class="docutils literal notranslate"><span class="pre">vote_count</span></code> and adds the vote(s) with the maximum count to the winners list.</p></li>
+<li><p>Finally, the function randomly selects and returns one of the elements in the winners list using the <code class="docutils literal notranslate"><span class="pre">random.choice</span></code> method.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">majority_vote</span><span class="p">(</span><span class="n">input_sequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The function takes in a sequence and returns the element that occurs with highest frequency.</span>
+<span class="sd">    In case of multiple elements having the same frequency, an element is returned</span>
+<span class="sd">    randomly.</span>
+<span class="sd">    </span>
+<span class="sd">    Input:</span>
+<span class="sd">        input_sequence (list) - sequence of elements</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A randomly selected element from the most common </span>
+<span class="sd">        element(s) in the input sequence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">vote_count</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">vote</span> <span class="ow">in</span> <span class="n">input_sequence</span><span class="p">:</span>
+        
+        <span class="k">if</span> <span class="n">vote</span> <span class="ow">in</span> <span class="n">vote_count</span><span class="p">:</span>
+            
+            <span class="n">vote_count</span><span class="p">[</span><span class="n">vote</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="n">vote_count</span><span class="p">[</span><span class="n">vote</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">max_count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">vote_count</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    
+    <span class="k">for</span> <span class="n">a_vote</span><span class="p">,</span> <span class="n">a_count</span> <span class="ow">in</span> <span class="n">vote_count</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        
+        <span class="c1"># checking whether current vote has maximum votes</span>
+        <span class="k">if</span> <span class="n">a_count</span> <span class="o">==</span> <span class="n">max_count</span><span class="p">:</span>
+            <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_vote</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vote_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vote_list</span><span class="p">)</span>
+<span class="n">majority_vote</span><span class="p">(</span><span class="n">vote_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9, 8, 8, 5, 6, 9, 6, 5, 8, 9, 7, 5, 6, 8, 7, 7, 9, 7, 5, 8, 5, 6, 8, 5, 7]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<p>The element that exhibits the highest frequency within a sequence is denoted as the <code class="docutils literal notranslate"><span class="pre">mode</span></code> in statistical terminology.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Scipy</span></code> module provides a designated method named <code class="docutils literal notranslate"><span class="pre">mode</span></code>, which facilitates the extraction of the element with the maximum frequency from an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ss</span><span class="o">.</span><span class="n">mstats</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">vote_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModeResult(mode=array([5.]), count=array([6.]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the provided array <code class="docutils literal notranslate"><span class="pre">vote_list</span></code>, the value <code class="docutils literal notranslate"><span class="pre">5</span></code> recurs 6 times, establishing it as the mode.</p>
+<p>Both the values <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">8</span></code> appear an equal number of times. The method for mode calculation within the <code class="docutils literal notranslate"><span class="pre">Scipy</span></code> module prefers the smallest mode in such scenarios. Consequently, the value <code class="docutils literal notranslate"><span class="pre">5</span></code> is returned as the mode.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">majority_vote_short</span></code> accepts a sequence of votes as its input and utilizes the <code class="docutils literal notranslate"><span class="pre">mode</span></code> function from the <code class="docutils literal notranslate"><span class="pre">mstats</span></code> module within the <code class="docutils literal notranslate"><span class="pre">Scipy</span></code> library to determine the element that appears most frequently within the sequence. The output of the function corresponds to the identified mode value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">majority_vote_short</span><span class="p">(</span><span class="n">votes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the most common element in votes.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        votes (list) - A list of votes to calculate</span>
+<span class="sd">        the mode</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The most common element in the input sequence.</span>
+<span class="sd">        In case of multiple elements having same frequency, only one is returned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># mode() method returns both the element and it&#39;s count</span>
+    <span class="n">mode</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">mstats</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">votes</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">mode</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-nearest-neighbors">
+<h2>Finding Nearest Neighbors<a class="headerlink" href="#finding-nearest-neighbors" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">knn_classify</span></code> function serves as a classifier aimed at identifying the k nearest neighbors for a specific fixed point within a set of input points. The purpose of this classifier is to determine which points among the input set are the closest neighbors to the point that needs to be classified.</p>
+<p>The function calculates the distances between the fixed point and all other input points, storing these distances within a numpy array. It then employs the <code class="docutils literal notranslate"><span class="pre">argsort</span></code> method from <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to arrange these distances and generate an array of indices that indicate the sorting order.</p>
+<p>The final outcome of the function is a one-dimensional numpy array containing the indices of the k nearest neighbors to the fixed point. The array is arranged in ascending order of proximity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">knn_classify</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">input_points</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     Finding the k nearest neighbors for fixed_point and returning</span>
+<span class="sd">     their indices.</span>
+<span class="sd">     </span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        fixed_point (tuple) - Representing the fixed point as (x,y).</span>
+<span class="sd">        </span>
+<span class="sd">        input_points (np.ndarray) - A 2-dimensional numpy array representing </span>
+<span class="sd">        the input points with shape (n,2), where n is the number of points. </span>
+
+<span class="sd">        k (int) - Representing the number of neighbors to be considered.</span>
+<span class="sd">        Default value is 5.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A 1-dimensional numpy array containing the indices of the</span>
+<span class="sd">    k nearest neighbors to the fixed_point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">dist_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">input_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># looping over all points</span>
+    <span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dist_array</span><span class="p">)):</span>
+        
+        <span class="c1"># computing the distance between given point p and every other point</span>
+        <span class="n">dist_array</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">input_points</span><span class="p">[</span><span class="n">ele</span><span class="p">])</span>
+        
+    <span class="c1"># sorting distances and returning those k points</span>
+    <span class="c1"># that are nearest to point p</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">dist_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="p">]</span>            
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generating-a-set-of-sample-values-for-the-purpose-of-function-testing">
+<h3>Generating a set of sample values for the purpose of function testing<a class="headerlink" href="#generating-a-set-of-sample-values-for-the-purpose-of-function-testing" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">fixed_point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="producing-a-graphical-representation-of-the-generated-values-for-visual-inspection">
+<h3>Producing a graphical representation of the generated values for visual inspection<a class="headerlink" href="#producing-a-graphical-representation-of-the-generated-values-for-visual-inspection" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">demo_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">demo_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fixed_point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;bo&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_23_0.png" src="_images/case_study3_23_0.png" />
+</div>
+</div>
+<p>Upon observing the plot, it becomes evident that the points closest to the coordinates <code class="docutils literal notranslate"><span class="pre">(2.5,2)</span></code> are <code class="docutils literal notranslate"><span class="pre">(2,2)</span></code> and <code class="docutils literal notranslate"><span class="pre">(3,2)</span></code>. These specific points correspond to the fourth and seventh columns in the <code class="docutils literal notranslate"><span class="pre">demo_points</span></code> array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">knn_classify</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">demo_points</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Invoking the <code class="docutils literal notranslate"><span class="pre">knn_classify</span></code> function with the aim of identifying the three closest points to the <code class="docutils literal notranslate"><span class="pre">fixed_point</span></code> yield the indices <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">7,</span> <span class="pre">3]</span></code>.</p>
+<p>The indices <code class="docutils literal notranslate"><span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">7</span></code> correspond to the points <code class="docutils literal notranslate"><span class="pre">(2,2)</span></code> and <code class="docutils literal notranslate"><span class="pre">(3,2)</span></code> in the array, respectively. The newly included index <code class="docutils literal notranslate"><span class="pre">3</span></code> corresponds to the point <code class="docutils literal notranslate"><span class="pre">(2,1)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Indices: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distances</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nearest points: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">demo_points</span><span class="p">[</span><span class="n">distances</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indices: [4 7 3]
+
+Nearest points: 
+[[2 2]
+ [3 2]
+ [2 1]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Upon successfully identifying the nearest points for our designated <code class="docutils literal notranslate"><span class="pre">fixed_point</span></code>, the subsequent task involves making predictions based on these points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">knn_predict</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">input_points</span><span class="p">,</span><span class="n">outcomes</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    The function takes in a fixed point that needs to be classified, along with other</span>
+<span class="sd">    input points to predict the category of the fixed point.</span>
+<span class="sd">    </span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        fixed_point (tuple) - Representing the fixed point as (x,y)</span>
+<span class="sd">        </span>
+<span class="sd">        input_points (np.ndarray) - A 2-dimensional numpy array representing </span>
+<span class="sd">            the input points with shape (n,2), where n is the number of points</span>
+<span class="sd">        </span>
+<span class="sd">        outcomes (np.ndarray) - A vector containing the class (category) to which</span>
+<span class="sd">            the input points belong</span>
+<span class="sd">        </span>
+<span class="sd">        k (int) - Representing the number of neighbors to be considered.</span>
+<span class="sd">            Default value is 5.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Predicted class for fixed_point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># finding the indices of the nearest points</span>
+    <span class="c1"># using the function `knn_classify()`</span>
+    <span class="n">near_ind</span> <span class="o">=</span> <span class="n">knn_classify</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">input_points</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">majority_vote</span><span class="p">(</span><span class="n">outcomes</span><span class="p">[</span><span class="n">near_ind</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h3>
+<p>A new point with x-coordinate <code class="docutils literal notranslate"><span class="pre">2.2</span></code> and y-coordinate <code class="docutils literal notranslate"><span class="pre">2.7</span></code> is given as an input to <code class="docutils literal notranslate"><span class="pre">knn_predict</span></code> function.</p>
+<p>There are two distinct classes: <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">1</span></code></p>
+<p>The function predicts the point <code class="docutils literal notranslate"><span class="pre">(2.2,</span> <span class="pre">2.7)</span></code> to belong to <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outcome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fixed_point</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.2</span><span class="p">,</span><span class="mf">2.7</span><span class="p">)</span>
+
+<span class="n">knn_predict</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">,</span><span class="n">demo_points</span><span class="p">,</span><span class="n">outcome</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">demo_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">demo_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;ro&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fixed_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fixed_point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;bo&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_32_0.png" src="_images/case_study3_32_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="generating-synthetic-data">
+<h2>Generating Synthetic Data<a class="headerlink" href="#generating-synthetic-data" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>A function will be created to produce two distinct endpoint data, with the initial endpoints originating from <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">0</span></code>, and the subsequent endpoints originating from <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">1</span></code>.</p>
+<p>Predictors will be generated from two bivariate normal distributions. The first distribution will generate observations attributed to <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">0</span></code>, while the second distribution will generate observations attributed to <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">1</span></code>.</p>
+<p>While generating observations from <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">0</span></code>, a mean of 0 and standard deviation of 1 are given as arguments. This procedure is used to generate a matrix with 5 rows and 2 columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ss</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.06948328, -0.86392108],
+       [-0.72973888, -1.43149421],
+       [-0.0925142 , -1.38692498],
+       [-0.63198487,  0.44071621],
+       [ 0.08017696,  1.71131749]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>While generating observations from <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">1</span></code>, the mean is simply changed to 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ss</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.0725673 ,  0.21035099],
+       [ 0.84669646,  0.92317506],
+       [ 1.30226997,  1.52077415],
+       [-0.18620658, -0.60748232],
+       [ 1.07049822,  1.05285019]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The process of generating synthetic data is facilitated by the implementation of <code class="docutils literal notranslate"><span class="pre">generate_data</span></code> function.</p>
+<p>This function generates synthetic data points from two bivariate normal distributions and assigns class labels to them. The parameter <code class="docutils literal notranslate"><span class="pre">n</span></code> specifies the number of data points to create for each class. The resulting tuple contains the generated data points and their corresponding class labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate two sets of points from bivariate normal distributions</span>
+<span class="sd">    along with their corresponding class labels.</span>
+<span class="sd">    </span>
+<span class="sd">    Input:</span>
+<span class="sd">        n (int) - Number of data points to create, Default: 50</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple containing the generated points and their associated</span>
+<span class="sd">        class labels.</span>
+<span class="sd">        </span>
+<span class="sd">        - points (np.ndarray) : 2-dimensional numpy array representing </span>
+<span class="sd">        the generated data points</span>
+
+<span class="sd">        - outcomes (np.ndarray) : 1-dimensional numpy array containing </span>
+<span class="sd">        class labels for the points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># data belonging to class 0</span>
+    <span class="n">category1</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># data belonging to class 1</span>
+    <span class="n">category2</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">category1</span><span class="p">,</span><span class="n">category2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">outcomes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_points</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># variable for splitting the synthetic data into respective class</span>
+<span class="n">split_point</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># the first half of the data contains values for class 0</span>
+<span class="c1"># column 1 contains the x values, column 2 contains the y values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_points</span><span class="p">[:</span><span class="n">split_point</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_points</span><span class="p">[:</span><span class="n">split_point</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;ro&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Class 0&quot;</span><span class="p">);</span>
+
+<span class="c1"># the second half of the data contains values for class 1</span>
+<span class="c1"># column 1 contains the x values, column 2 contains the y values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_points</span><span class="p">[</span><span class="n">split_point</span><span class="p">:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_points</span><span class="p">[</span><span class="n">split_point</span><span class="p">:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Class 1&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_41_0.png" src="_images/case_study3_41_0.png" />
+</div>
+</div>
+</section>
+<section id="prediction-grid">
+<h2>Prediction Grid<a class="headerlink" href="#prediction-grid" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The purpose of the prediction grid is to analuze a specified region within the predictor space and determine the predicted class for each poiny in the grid using the <code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_prediction_grid</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span><span class="n">outcomes</span><span class="p">,</span><span class="n">limits</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classifies each point on the prediction grid.</span>
+<span class="sd">    </span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        predictors (np.ndarray) - 2D array containing the points to be predicted</span>
+<span class="sd">        </span>
+<span class="sd">        outcomes (np.ndarray) - Vector containing the class labels</span>
+<span class="sd">        </span>
+<span class="sd">        limits (tuple) - Contains the dimensions of the prediction grid</span>
+<span class="sd">        </span>
+<span class="sd">        h (float) - Step size</span>
+<span class="sd">        </span>
+<span class="sd">        k (int) - Number of points to be considered while making prediction</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple (new_x, new_y, prediction_grid)</span>
+<span class="sd">        </span>
+<span class="sd">        new_x (np.ndarray) - Contains x-values for grid points</span>
+<span class="sd">        </span>
+<span class="sd">        new_y (np.ndarray) - Contains y-values for grid points</span>
+<span class="sd">        </span>
+<span class="sd">        prediction_grid (np.ndarray) - Contains class labels for predictors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span><span class="n">y_min</span><span class="p">,</span><span class="n">y_max</span><span class="p">)</span> <span class="o">=</span> <span class="n">limits</span>
+    
+    <span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span><span class="n">y_max</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+    
+    <span class="n">new_x</span> <span class="p">,</span> <span class="n">new_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span><span class="n">y_vals</span><span class="p">)</span>
+    
+    <span class="n">prediction_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">new_x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+    
+    <span class="c1"># looping over x-values and y-values</span>
+    <span class="c1"># Using the knn_predict() function to predict class label</span>
+    <span class="c1"># Predicted class labels are stored in prediction_grid variable</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_vals</span><span class="p">):</span>
+        
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y_vals</span><span class="p">):</span>
+            
+            <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
+            <span class="n">prediction_grid</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">knn_predict</span><span class="p">(</span><span class="n">point</span><span class="p">,</span><span class="n">predictors</span><span class="p">,</span><span class="n">outcomes</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span><span class="n">new_y</span><span class="p">,</span><span class="n">prediction_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-prediction-grid">
+<h2>Plotting Prediction Grid<a class="headerlink" href="#plotting-prediction-grid" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_prediction_grid</span></code> function takes in the coordinates <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code> of the prediction grid and the associated <code class="docutils literal notranslate"><span class="pre">prediction_grid</span></code> containing class labels. It uses the <code class="docutils literal notranslate"><span class="pre">ListedColormap</span></code> from <code class="docutils literal notranslate"><span class="pre">matplotlib.colors</span></code> to define colormaps for background and observations.</p>
+<p>The function creates a scatterplot of predictor points with color-coded outcomes and overlays the background prediction grid using the defined colormaps. The resulting plot visualizes the KNN predictions for each point on the grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_prediction_grid</span> <span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">prediction_grid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot KNN predictions for every point on the grid.&quot;&quot;&quot;</span>
+    
+    <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+    
+    <span class="n">background_colormap</span> <span class="o">=</span> <span class="n">ListedColormap</span> <span class="p">([</span><span class="s2">&quot;hotpink&quot;</span><span class="p">,</span><span class="s2">&quot;lightskyblue&quot;</span><span class="p">,</span> <span class="s2">&quot;yellowgreen&quot;</span><span class="p">])</span>
+    <span class="n">observation_colormap</span> <span class="o">=</span> <span class="n">ListedColormap</span> <span class="p">([</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;green&quot;</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">prediction_grid</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">background_colormap</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">predictors</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">predictors</span> <span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">observation_colormap</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Variable 1&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Variable 2&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(());</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yy</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Experimenting with various values ok <code class="docutils literal notranslate"><span class="pre">k</span></code> leads to varying outcomes.</p>
+<p>For large values of <code class="docutils literal notranslate"><span class="pre">k</span></code>, the demarcation line between distinct colors, referred to as the <code class="docutils literal notranslate"><span class="pre">decision</span> <span class="pre">boundary</span></code>, exhibits greater smoothness compared to instances where smaller <code class="docutils literal notranslate"><span class="pre">k</span></code> values are employed. In essence, the parameter <code class="docutils literal notranslate"><span class="pre">k</span></code> influences the level of smoothness in the model’s fit to the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictors</span><span class="p">,</span> <span class="n">outcomes</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">prediction_grid</span><span class="p">)</span> <span class="o">=</span> <span class="n">make_prediction_grid</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span><span class="n">outcomes</span><span class="p">,</span><span class="n">limits</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_prediction_grid</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">prediction_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_49_0.png" src="_images/case_study3_49_0.png" />
+</div>
+</div>
+</section>
+<section id="scikitlearn">
+<h2>SciKitLearn<a class="headerlink" href="#scikitlearn" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The next objective is to compare the performance of the homemade <code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code> and the classifier provided by <code class="docutils literal notranslate"><span class="pre">SciKitLearn</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SciKitLearn</span></code> is an open-source Python library dedicated to machine learning tasks.</p>
+<p>The SciKitLearn classifier involves a dataset of 150 iris flowers, evenly distributed among three species, each containing 50 flowers. The covariates for each flower include sepal length, sepal width, petal length, and petal width.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(150, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The iris dataset consists of 150 rows and 4 columns, with each column representing a covariate.</p>
+<p>In this particular instance, we focus on the first two covariates for analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictors</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">iris_outcomes</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code block below creates a scatter plot by plotting points with different colors based on their classes in the iris dataset. The x-coordinate values are taken from the first column of <code class="docutils literal notranslate"><span class="pre">predictors</span></code> array, and the y-coordinate values are taken from the second column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;ro&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;class 0&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;class 1&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">2</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">predictors</span><span class="p">[</span><span class="n">iris_outcomes</span><span class="o">==</span><span class="mi">2</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;go&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;class 2&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_56_0.png" src="_images/case_study3_56_0.png" />
+</div>
+</div>
+<p>A prediction grid is generated for the iris dataset using the <code class="docutils literal notranslate"><span class="pre">make_prediction_grid</span></code> function. Then, the <code class="docutils literal notranslate"><span class="pre">plot_prediction_grid</span></code> function is used to visualize the predictions made by <code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code> on this grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#k = 5</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">new_grid</span><span class="p">)</span> <span class="o">=</span> <span class="n">make_prediction_grid</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span><span class="n">outcomes</span><span class="p">,</span><span class="n">limits</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plot_prediction_grid</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">new_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_58_0.png" src="_images/case_study3_58_0.png" />
+</div>
+</div>
+<p>Let’s test the performance of <code class="docutils literal notranslate"><span class="pre">knn_classify</span></code> against the classifier provided by SciKitLearn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After importing the classifier, the parameter for the number of neighbors is set to 5.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.fit</span></code> method is then applied to train the model, utilizing the <code class="docutils literal notranslate"><span class="pre">predictors</span></code> and <code class="docutils literal notranslate"><span class="pre">iris_outcomes</span></code> as input data.</p>
+<p>Subsequently, the predictions are acquired by employing the <code class="docutils literal notranslate"><span class="pre">.predict</span></code> method and are stored in the variable named <code class="docutils literal notranslate"><span class="pre">sk_predictions</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="n">iris_outcomes</span><span class="p">)</span>
+<span class="n">sk_predictions</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">predictors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">knn_predict</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">predictors</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictors</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To perform a comparison between predictions, it is necessary to assess the degree of agreement between <code class="docutils literal notranslate"><span class="pre">sk_predictions</span></code> and <code class="docutils literal notranslate"><span class="pre">my_predictions</span></code>.</p>
+<p>This comparison yields a boolean array, the mean of which is computed, treating <code class="docutils literal notranslate"><span class="pre">True</span></code> as 1 and <code class="docutils literal notranslate"><span class="pre">False</span></code> as 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Classifier Acc: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sk_predictions</span> <span class="o">==</span> <span class="n">my_predictions</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classifier Acc: 97.33333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<p>Furthermore, it is possible to examine the frequency of agree between predictions generated by both the <code class="docutils literal notranslate"><span class="pre">knn_classifer</span></code> and the <code class="docutils literal notranslate"><span class="pre">SciKit</span> <span class="pre">classifer</span></code>, in comparison with the observed outcomes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SciKit Acc: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sk_predictions</span> <span class="o">==</span> <span class="n">outcomes</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;knn_classifier Acc: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_predictions</span> <span class="o">==</span> <span class="n">outcomes</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SciKit Acc: 83.33333333333334
+knn_classifier Acc: 84.66666666666667
+</pre></div>
+</div>
+</div>
+</div>
+<p>The observed outcomes of the data show that the predictions made by the <code class="docutils literal notranslate"><span class="pre">SciKit</span> <span class="pre">classifier</span></code> exhibits an agreement rate of 83%. In contrast, the predictions of the <code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code> align with the observed outcomes approximately 85% of the time.</p>
+</section>
+<section id="classification-of-wines">
+<h2>Classification of Wines<a class="headerlink" href="#classification-of-wines" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>This case study consists of analysis of a dataset comprising various wines categorized as either <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> or <code class="docutils literal notranslate"><span class="pre">low_quality</span></code>. The application of k-Nearest Neighbors classification aims to ascertain whether supplementary information about the wine facilitates accurate predictions regarding its classification as <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> or <code class="docutils literal notranslate"><span class="pre">low_quality</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">majority_vote_fast</span></code> takes a sequence of votes as input and calculates the mode of the sequence, which represents the most common value. The calculated mode value is returned as the result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">distance</span></code> computes the Euclidean distance between two points, <code class="docutils literal notranslate"><span class="pre">p1</span></code> and <code class="docutils literal notranslate"><span class="pre">p2</span></code>, represented as arrays.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">find_nearest_neighbors</span></code> given a point <code class="docutils literal notranslate"><span class="pre">p</span></code>, an array of points <code class="docutils literal notranslate"><span class="pre">points</span></code> and an optional value <code class="docutils literal notranslate"><span class="pre">k</span></code>, the function computes the distances between the point <code class="docutils literal notranslate"><span class="pre">p</span></code> and all other points in <code class="docutils literal notranslate"><span class="pre">points</span></code> array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">knn_predict</span></code> predicts the class label for a new point <code class="docutils literal notranslate"><span class="pre">p</span></code> using k-Nearest Neighbors classification.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">majority_vote_fast</span><span class="p">(</span><span class="n">votes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculate the mode of a sequence of votes.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        votes (np.ndarray) - A sequence of votes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mode: The mode value for the sequence of votes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mode</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">mstats</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">votes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mode</span>
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Calculate the Euclidean distance between two points.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        p1 (np.ndarray) - The coordinates of the first point</span>
+<span class="sd">        p2 (np.ndarray) - The coordinates of the second point</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        distance (float) - The Euclidean distance between p1 and p2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">find_nearest_neighbors</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the indices of the nearest k neighbors to a </span>
+<span class="sd">    given point.</span>
+
+<span class="sd">    Inputs: </span>
+<span class="sd">        p (np.ndarray) - The coordinates of the reference point</span>
+
+<span class="sd">        points (np.ndarray) - 2-dimensional array representing </span>
+<span class="sd">        the coordinates of all points</span>
+
+<span class="sd">        k (int) - The number of neigbors to find. Default is 5</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        indices (np.ndarray) - An array of indices corresponding to the </span>
+<span class="sd">        k nearest neighbors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">)):</span>
+        <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ind</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">knn_predict</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Predict the class label for a given point using k-Nearest Neighbors.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        p (np.ndarray) - Coordinates of the point to predict</span>
+
+<span class="sd">        points (np.ndarray) - 2-dimensional array representing coordinates</span>
+<span class="sd">        of all points</span>
+
+<span class="sd">        outcomes (np.ndarray) - An array of class labels corresponding to</span>
+<span class="sd">        each point</span>
+
+<span class="sd">        k (int) - Number of neighbors to consider. Default value is 5.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        predicted_label - The predicted class label for the given</span>
+<span class="sd">        point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">find_nearest_neighbors</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">majority_vote_fast</span><span class="p">(</span><span class="n">outcomes</span><span class="p">[</span><span class="n">ind</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">pd.read_csv</span></code> function to read the dataset as pandas dataframe.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+
+<span class="n">file_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s1">&#39;wine.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_loc</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 1</th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>quality</th>
+      <th>color</th>
+      <th>high_quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+      <td>red</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>7.8</td>
+      <td>0.88</td>
+      <td>0.00</td>
+      <td>2.6</td>
+      <td>0.098</td>
+      <td>25.0</td>
+      <td>67.0</td>
+      <td>0.9968</td>
+      <td>3.20</td>
+      <td>0.68</td>
+      <td>9.8</td>
+      <td>5</td>
+      <td>red</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>7.8</td>
+      <td>0.76</td>
+      <td>0.04</td>
+      <td>2.3</td>
+      <td>0.092</td>
+      <td>15.0</td>
+      <td>54.0</td>
+      <td>0.9970</td>
+      <td>3.26</td>
+      <td>0.65</td>
+      <td>9.8</td>
+      <td>5</td>
+      <td>red</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>11.2</td>
+      <td>0.28</td>
+      <td>0.56</td>
+      <td>1.9</td>
+      <td>0.075</td>
+      <td>17.0</td>
+      <td>60.0</td>
+      <td>0.9980</td>
+      <td>3.16</td>
+      <td>0.58</td>
+      <td>9.8</td>
+      <td>6</td>
+      <td>red</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+      <td>red</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Creating a new column named <code class="docutils literal notranslate"><span class="pre">is_red</span></code> in the dataframe, based on the values in the <code class="docutils literal notranslate"><span class="pre">color</span></code> column.</p>
+<ul>
+<li><p>Setting the value to <code class="docutils literal notranslate"><span class="pre">1</span></code> if <code class="docutils literal notranslate"><span class="pre">color</span></code> is <code class="docutils literal notranslate"><span class="pre">red</span></code></p></li>
+<li><p>Setting the value to <code class="docutils literal notranslate"><span class="pre">0</span></code> if <code class="docutils literal notranslate"><span class="pre">color</span></code> is <code class="docutils literal notranslate"><span class="pre">white</span></code></p></li>
+</ul>
+</li>
+<li><p>Dropping the columns <code class="docutils literal notranslate"><span class="pre">color</span></code>, <code class="docutils literal notranslate"><span class="pre">quality</span></code> and <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> from the dataframe.</p></li>
+<li><p>Storing the resulting dataframe containing all numeric data in a new pandas dataframe named <code class="docutils literal notranslate"><span class="pre">numeric_data</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_red</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]):</span>
+
+    <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;red&#39;</span><span class="p">:</span>
+
+        <span class="n">is_red</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A NumPy array called <code class="docutils literal notranslate"><span class="pre">is_red</span></code> is initialized, containing all zeros and having length equivalent to the number of rows in the dataset.</p>
+<p>Looping over each row in <code class="docutils literal notranslate"><span class="pre">color</span></code> column of dataset, the value of the <code class="docutils literal notranslate"><span class="pre">ind</span></code> element in <code class="docutils literal notranslate"><span class="pre">is_red</span></code> is changed to <code class="docutils literal notranslate"><span class="pre">1</span></code> is the conditional is fulfilled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_red</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 1., ..., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Unnamed: 1&#39;</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;quality&#39;</span><span class="p">,</span><span class="s1">&#39;high_quality&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data1</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">is_red</span><span class="p">)],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">numeric_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;is_red&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>is_red</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.8</td>
+      <td>0.88</td>
+      <td>0.00</td>
+      <td>2.6</td>
+      <td>0.098</td>
+      <td>25.0</td>
+      <td>67.0</td>
+      <td>0.9968</td>
+      <td>3.20</td>
+      <td>0.68</td>
+      <td>9.8</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.8</td>
+      <td>0.76</td>
+      <td>0.04</td>
+      <td>2.3</td>
+      <td>0.092</td>
+      <td>15.0</td>
+      <td>54.0</td>
+      <td>0.9970</td>
+      <td>3.26</td>
+      <td>0.65</td>
+      <td>9.8</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.2</td>
+      <td>0.28</td>
+      <td>0.56</td>
+      <td>1.9</td>
+      <td>0.075</td>
+      <td>17.0</td>
+      <td>60.0</td>
+      <td>0.9980</td>
+      <td>3.16</td>
+      <td>0.58</td>
+      <td>9.8</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7.4</td>
+      <td>0.70</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.9978</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Counting the number of red wines in the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">[</span><span class="n">numeric_data</span><span class="p">[</span><span class="s1">&#39;is_red&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1599
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Scale the Data: It involves subtracting the mean of each variable (column) from its values and then dividing by the standard deviation.</p>
+<ul>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">scale</span></code> function from <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code> on <code class="docutils literal notranslate"><span class="pre">numeric_data</span></code></p></li>
+<li><p>The original variables names are preserved by passing the parameter <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">=</span> <span class="pre">numeric_data.columns</span></code></p></li>
+</ul>
+</li>
+<li><p>Extract Principal Components: It is a dimensionality reduction technique that captures the most significant patterns of variation in data.</p>
+<ul>
+<li><p>Importing <code class="docutils literal notranslate"><span class="pre">PCA()</span></code> from <code class="docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></p></li>
+<li><p>Creating an instance of <code class="docutils literal notranslate"><span class="pre">PCA()</span></code> class and storing it in variable <code class="docutils literal notranslate"><span class="pre">pca</span></code></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">fit_transform()</span></code> method on scaled data to extract the first two principal components</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># scaling the data</span>
+<span class="kn">import</span> <span class="nn">sklearn.preprocessing</span>
+
+<span class="n">column_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">numeric_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">scaled_data</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">)</span>
+<span class="n">numeric_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">column_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>is_red</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.142473</td>
+      <td>2.188833</td>
+      <td>-2.192833</td>
+      <td>-0.744778</td>
+      <td>0.569958</td>
+      <td>-1.100140</td>
+      <td>-1.446359</td>
+      <td>1.034993</td>
+      <td>1.813090</td>
+      <td>0.193097</td>
+      <td>-0.915464</td>
+      <td>1.75019</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.451036</td>
+      <td>3.282235</td>
+      <td>-2.192833</td>
+      <td>-0.597640</td>
+      <td>1.197975</td>
+      <td>-0.311320</td>
+      <td>-0.862469</td>
+      <td>0.701486</td>
+      <td>-0.115073</td>
+      <td>0.999579</td>
+      <td>-0.580068</td>
+      <td>1.75019</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.451036</td>
+      <td>2.553300</td>
+      <td>-1.917553</td>
+      <td>-0.660699</td>
+      <td>1.026697</td>
+      <td>-0.874763</td>
+      <td>-1.092486</td>
+      <td>0.768188</td>
+      <td>0.258120</td>
+      <td>0.797958</td>
+      <td>-0.580068</td>
+      <td>1.75019</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.073817</td>
+      <td>-0.362438</td>
+      <td>1.661085</td>
+      <td>-0.744778</td>
+      <td>0.541412</td>
+      <td>-0.762074</td>
+      <td>-0.986324</td>
+      <td>1.101694</td>
+      <td>-0.363868</td>
+      <td>0.327510</td>
+      <td>-0.580068</td>
+      <td>1.75019</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.142473</td>
+      <td>2.188833</td>
+      <td>-2.192833</td>
+      <td>-0.744778</td>
+      <td>0.569958</td>
+      <td>-1.100140</td>
+      <td>-1.446359</td>
+      <td>1.034993</td>
+      <td>1.813090</td>
+      <td>0.193097</td>
+      <td>-0.915464</td>
+      <td>1.75019</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extracting PCA</span>
+<span class="kn">import</span> <span class="nn">sklearn.decomposition</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">principal_components</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">principal_components</span><span class="p">[:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.73606125, -0.14116701],
+       [ 3.68227354,  0.56082363],
+       [ 3.66368602,  0.32778184],
+       [ 2.47936351,  1.82578374],
+       [ 3.73606125, -0.14116701]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4">
+<h3>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The goal of this task is to examine how well the high and low-quality wines are separated when represented in this reduced-dimensional space.</p>
+<ul class="simple">
+<li><p>Accessing the first two principal components and storing them in seperate variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">plt.scatter</span></code> function from <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> to create the scatter plot</p></li>
+<li><p>High quality wines are plotted using <code class="docutils literal notranslate"><span class="pre">red</span></code>, Low quality wines are plotted using <code class="docutils literal notranslate"><span class="pre">blue</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_pdf</span> <span class="kn">import</span> <span class="n">PdfPages</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation_colormap</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Principal Components of Wine&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">observation_colormap</span><span class="p">,</span> <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Principal Component 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Principal Component 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study3_94_0.png" src="_images/case_study3_94_0.png" />
+</div>
+</div>
+</section>
+<section id="task-5">
+<h3>Task 5<a class="headerlink" href="#task-5" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The goal of this task is to develop a function to determine the accuracy between two lists of the same size. The function will be used to assess how well the predictions align with the actual outcomes.</p>
+<ul class="simple">
+<li><p>Defining a function named <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> that takes two arguments: <code class="docutils literal notranslate"><span class="pre">predictions</span></code> and <code class="docutils literal notranslate"><span class="pre">outcomes</span></code>, calculating the accuracy as the ratio of the count of equal elements to the total number of elements.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculating the accuracy between predicted and actual</span>
+<span class="sd">    outcomes.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        predictions (list): A list of predicted outcomes</span>
+<span class="sd">        outcomes (list): A list of actual outcomes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Percentage of elements that are equal </span>
+<span class="sd">        between the two lists</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">check_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">val1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">predictions</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">val1</span> <span class="o">==</span> <span class="n">outcomes</span><span class="p">[</span><span class="n">ind</span><span class="p">]:</span>
+
+            <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">percent_same</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">check_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">percent_same</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-6">
+<h3>Task 6<a class="headerlink" href="#task-6" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Utilizing the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> function to calculate the accuracy of predicting low quality for all wines</p></li>
+</ul>
+<p>First, an array of zeros is created with the same length as the <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> column in the dataset. This array represents the predicted outcomes.</p>
+<p>This array of zeros is passed along with <code class="docutils literal notranslate"><span class="pre">data['high_quality']</span></code> to the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">])),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36.69385870401724
+</pre></div>
+</div>
+</div>
+</div>
+<p>The calculated accuracy of 36.69% is the percentage of wines for which the simple prediction rule matches the actual outcomes in the dataset.</p>
+</section>
+<section id="task-7">
+<h3>Task 7<a class="headerlink" href="#task-7" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>In this task, the k-Nearest Neighbors (kNN) classifier from the <code class="docutils literal notranslate"><span class="pre">scikitlearn</span></code> library will be implemented to make predictions about the wine quality of our dataset.</p>
+<ul class="simple">
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">knn_predict(numeric_data)</span></code> to predict whether each wine in the dataset is of high or low quality. These predictions are stored in <code class="docutils literal notranslate"><span class="pre">library_predictions</span></code></p></li>
+<li><p>Calculating the accuracy of predictions</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsClassifier()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsClassifier</label><div class="sk-toggleable__content"><pre>KNeighborsClassifier()</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">library_predictions</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">)</span>
+<span class="n">value_test</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">library_predictions</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">value_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.14652916730799
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-8">
+<h3>Task 8<a class="headerlink" href="#task-8" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Setting the random number generator using <code class="docutils literal notranslate"><span class="pre">random.seed(123)</span></code> for consistent results.</p></li>
+<li><p>Selecting 10 rows from the data using <code class="docutils literal notranslate"><span class="pre">random.sample(range(n_rows),</span> <span class="pre">10)</span></code> method. This selection of random rows is stored in <code class="docutils literal notranslate"><span class="pre">selection</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">n_rows</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_rows</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selection</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[428, 2192, 714, 6299, 3336, 2183, 882, 312, 3105, 4392]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-9">
+<h3>Task 9<a class="headerlink" href="#task-9" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>For each predictor <code class="docutils literal notranslate"><span class="pre">p</span></code> in <code class="docutils literal notranslate"><span class="pre">predictors[selection]</span></code>, using the <code class="docutils literal notranslate"><span class="pre">knn_predict</span></code> function to predict the qualityt of each wine in the prediction set. These predictions are stored as an array in <code class="docutils literal notranslate"><span class="pre">my_predictions</span></code></p></li>
+<li><p>Utilizing the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> function to compare the results obtained from <code class="docutils literal notranslate"><span class="pre">my_predictions</span></code> and the selected rows from the <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> variable in <code class="docutils literal notranslate"><span class="pre">data</span></code> dataframe</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">)</span>
+<span class="n">training_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">predictors</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">]</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;high_quality&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">knn_predict</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">predictors</span><span class="p">[</span><span class="n">training_indices</span><span class="p">,:],</span> <span class="n">outcomes</span><span class="p">[</span><span class="n">training_indices</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictors</span><span class="p">[</span><span class="n">selection</span><span class="p">]])</span>
+
+<span class="n">percentage</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">my_predictions</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;high_quality&#39;</span><span class="p">][</span><span class="n">selection</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">percentage</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The classifier identified the five nearest neighbors from the training dataset to generate each prediction. The predictions were stored in <code class="docutils literal notranslate"><span class="pre">my_predictions</span></code> using a list comprehension. The accuracy of these predictions was compared against the actual outcomes.</p>
+<p>The accuracy was calculated using the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> function, which measures the proportion of similar elements between the <code class="docutils literal notranslate"><span class="pre">my_predictions</span></code> array and the corresponding subset of dataset’s <code class="docutils literal notranslate"><span class="pre">high_quality</span></code> variable. The resultant accuracy percentage was determined to be 70%.</p>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="case_study2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linguistic Analysis of Books: A Study of Language Variability</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="case_study4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analysis of Scotch Whisky Production and Flavor Profiles</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

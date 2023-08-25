@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Exploring DNA Sequencing and Analysis &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linguistic Analysis of Books: A Study of Language Variability" href="case_study2.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study2.html">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study3.html">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study4.html">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study5.html">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study6.html">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#central-dogma-of-molecular-biology">
+   Central Dogma of Molecular Biology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exploring DNA Sequencing and Analysis</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#central-dogma-of-molecular-biology">
+   Central Dogma of Molecular Biology
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="exploring-dna-sequencing-and-analysis">
+<h1>Exploring DNA Sequencing and Analysis<a class="headerlink" href="#exploring-dna-sequencing-and-analysis" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>The preservation, retrieval, and interpretation of genetic instructions are fundamental for the existence and functionality of living cells. These instructions play a crucial role in the formation and upkeep of living organisms. It is well-established that genetic data is housed within the deoxyribonucleic acid (DNA) present in all living organisms.</p>
+<p>DNA is a discrete, linear code ubiquitously present in most of the cells within an organism, consisting of a string of characters drawn from a set of four options.</p>
+<p>These characters are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>A - Adenine
+C - Cytosine
+G - Guanine
+T - Thymine
+</pre></div>
+</div>
+<p>They stand for the first letters with the four nucleotides used to construct DNA.</p>
+<p>Each unique three character sequence of nucleotides, sometimes called a nucleotide triplet, corresponds to one amino acid. The sequence of amino acids is unique for each type of protein and all proteins are built from the same set of just 20 amino acids for all living things</p>
+<p>Protein molecules dominate the behaviour of the cell serving as structural supports, chemical catalysts, molecular motors.</p>
+<section id="central-dogma-of-molecular-biology">
+<h2>Central Dogma of Molecular Biology<a class="headerlink" href="#central-dogma-of-molecular-biology" title="Permalink to this heading">#</a></h2>
+<p>DNA serves as a master template for the production of all cellular proteins and other molecules, and it is responsible for controlling the cell’s growth and reproduction.</p>
+<p>The genetic code embedded in the DNA sequence is read in groups of three <code class="docutils literal notranslate"><span class="pre">nucleotides</span></code>, or <code class="docutils literal notranslate"><span class="pre">codons</span></code>, which code for specific amino acids. These amino acids are then linked in a particular order to form a protein molecule.</p>
+<p>Errors or mutations in the DNA sequence can significantly affect the organism, leading to genetic diseases, developmental disorders, or even cancer. However, some modifications can also provide a selective advantage and contribute to evolution by providing new traits that help an organism adapt to changing environmental conditions.</p>
+</section>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p><strong>Task 1: Downloading DNA Strand as a Text File</strong></p>
+<ul>
+<li><p><strong>Description</strong>: Download the DNA strand from a publicly available web-based repository of DNA sequences.</p></li>
+<li><p><strong>Subtasks</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Identify the appropriate repository for downloading the DNA strand.
+  Locate the DNA sequence of interest.
+  Download the DNA sequence in the form of a text file.
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Task 2: DNA Translation</strong></p>
+<ul>
+<li><p><strong>Description</strong>: Write code to translate the DNA sequence to a sequence of amino acids using the genetic code.</p></li>
+<li><p><strong>Subtasks</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Understand the genetic code and the process of DNA translation.
+  Write a code that converts the DNA sequence to its corresponding amino acid sequence.
+  Ensure the code works correctly for various DNA sequences.
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Task 3: Checking the Solution</strong></p>
+<ul>
+<li><p><strong>Description</strong>: Download the amino acid sequence and check whether it matches with the expected sequence.</p></li>
+<li><p><strong>Subtasks</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Identify a publicly available web-based repository for downloading amino acid sequences.
+  Locate the amino acid sequence corresponding to the downloaded DNA sequence.
+  Download the amino acid sequence.
+  Compare the translated amino acid sequence with the downloaded one to confirm the correctness of the code.
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Two files are downloaded from the National Centre for Biotechnology Information (NCBI), including a DNA strand and its corresponding protein sequence of amino acids translated from the DNA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+
+<span class="n">dna_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s1">&#39;dna_seq1.txt&#39;</span><span class="p">)</span>
+<span class="n">protein_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s1">&#39;protein_seq1.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Subsequently, the program proceeds to read the files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dna_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dna_file_path</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+<span class="n">dna_seq</span> <span class="o">=</span> <span class="n">dna_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dna_seq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;GGTCAGAAAAAGCCCTCTCCATGTCTACTCACGATACATCCCTGAAAACCACTGAGGAAGTGGCTTTTCA\nGATCATCTTGCTTTGCCAGTTTGGGGTTGGGACTTTTGCCAATGTATTTCTCTTTGTCTATAATTTCTCT\nCCAATCTCGACTGGTTCTAAACAGAGGCCCAGACAAGTGATTTTAAGACACATGGCTGTGGCCAATGCCT\nTAACTCTCTTCCTCACTATATTTCCAAACAACATGATGACTTTTGCTCCAATTATTCCTCAAACTGACCT\nCAAATGTAAATTAGAATTCTTCACTCGCCTCGTGGCAAGAAGCACAAACTTGTGTTCAACTTGTGTTCTG\nAGTATCCATCAGTTTGTCACACTTGTTCCTGTTAATTCAGGTAAAGGAATACTCAGAGCAAGTGTCACAA\nACATGGCAAGTTATTCTTGTTACAGTTGTTGGTTCTTCAGTGTCTTAAATAACATCTACATTCCAATTAA\nGGTCACTGGTCCACAGTTAACAGACAATAACAATAACTCTAAAAGCAAGTTGTTCTGTTCCACTTCTGAT\nTTCAGTGTAGGCATTGTCTTCTTGAGGTTTGCCCATGATGCCACATTCATGAGCATCATGGTCTGGACCA\nGTGTCTCCATGGTACTTCTCCTCCATAGACATTGTCAGAGAATGCAGTACATATTCACTCTCAATCAGGA\nCCCCAGGGGCCAAGCAGAGACCACAGCAACCCATACTATCCTGATGCTGGTAGTCACATTTGTTGGCTTT\nTATCTTCTAAGTCTTATTTGTATCATCTTTTACACCTATTTTATATATTCTCATCATTCCCTGAGGCATT\nGCAATGACATTTTGGTTTCGGGTTTCCCTACAATTTCTCCTTTACTGTTGACCTTCAGAGACCCTAAGGG\nTCCTTGTTCTGTGTTCTTCAACTGTTGAAAGCCAGAGTCACTAAAAATGCCAAACACAGAAGACAGCTTT\nGCTAATACCATTAAATACTTTATTCCATAAATATGTTTTTAAAAGCTTGTATGAACAAGGTATGGTGCTC\nACTGCTATACTTATAAAAGAGTAAGGTTATAATCACTTGTTGATATGAAAAGATTTCTGGTTGGAATCTG\nATTGAAACAGTGAGTTATTCACCACCCTCCATTCTCT&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The file under consideration contains the <code class="docutils literal notranslate"><span class="pre">\n</span></code> character, as a result of copying and pasting text from a web browser to a text editor.
+This character effects the way the string gets printed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dna_seq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GGTCAGAAAAAGCCCTCTCCATGTCTACTCACGATACATCCCTGAAAACCACTGAGGAAGTGGCTTTTCA
+GATCATCTTGCTTTGCCAGTTTGGGGTTGGGACTTTTGCCAATGTATTTCTCTTTGTCTATAATTTCTCT
+CCAATCTCGACTGGTTCTAAACAGAGGCCCAGACAAGTGATTTTAAGACACATGGCTGTGGCCAATGCCT
+TAACTCTCTTCCTCACTATATTTCCAAACAACATGATGACTTTTGCTCCAATTATTCCTCAAACTGACCT
+CAAATGTAAATTAGAATTCTTCACTCGCCTCGTGGCAAGAAGCACAAACTTGTGTTCAACTTGTGTTCTG
+AGTATCCATCAGTTTGTCACACTTGTTCCTGTTAATTCAGGTAAAGGAATACTCAGAGCAAGTGTCACAA
+ACATGGCAAGTTATTCTTGTTACAGTTGTTGGTTCTTCAGTGTCTTAAATAACATCTACATTCCAATTAA
+GGTCACTGGTCCACAGTTAACAGACAATAACAATAACTCTAAAAGCAAGTTGTTCTGTTCCACTTCTGAT
+TTCAGTGTAGGCATTGTCTTCTTGAGGTTTGCCCATGATGCCACATTCATGAGCATCATGGTCTGGACCA
+GTGTCTCCATGGTACTTCTCCTCCATAGACATTGTCAGAGAATGCAGTACATATTCACTCTCAATCAGGA
+CCCCAGGGGCCAAGCAGAGACCACAGCAACCCATACTATCCTGATGCTGGTAGTCACATTTGTTGGCTTT
+TATCTTCTAAGTCTTATTTGTATCATCTTTTACACCTATTTTATATATTCTCATCATTCCCTGAGGCATT
+GCAATGACATTTTGGTTTCGGGTTTCCCTACAATTTCTCCTTTACTGTTGACCTTCAGAGACCCTAAGGG
+TCCTTGTTCTGTGTTCTTCAACTGTTGAAAGCCAGAGTCACTAAAAATGCCAAACACAGAAGACAGCTTT
+GCTAATACCATTAAATACTTTATTCCATAAATATGTTTTTAAAAGCTTGTATGAACAAGGTATGGTGCTC
+ACTGCTATACTTATAAAAGAGTAAGGTTATAATCACTTGTTGATATGAAAAGATTTCTGGTTGGAATCTG
+ATTGAAACAGTGAGTTATTCACCACCCTCCATTCTCT
+</pre></div>
+</div>
+</div>
+</div>
+<p>To replace the newline character, the <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> method can be used with two arguments. The first argument is the substring to be replaced and the second argument is the substring to replace the first argument.</p>
+<p>The method replaces every occurrence of the first argument with the second argument. Since strings are immutable, the replace method returns a new string which must be assigned to a new variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dna_seq</span> <span class="o">=</span> <span class="n">dna_seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">dna_seq</span> <span class="o">=</span> <span class="n">dna_seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dna_seq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GGTCAGAAAAAGCCCTCTCCATGTCTACTCACGATACATCCCTGAAAACCACTGAGGAAGTGGCTTTTCAGATCATCTTGCTTTGCCAGTTTGGGGTTGGGACTTTTGCCAATGTATTTCTCTTTGTCTATAATTTCTCTCCAATCTCGACTGGTTCTAAACAGAGGCCCAGACAAGTGATTTTAAGACACATGGCTGTGGCCAATGCCTTAACTCTCTTCCTCACTATATTTCCAAACAACATGATGACTTTTGCTCCAATTATTCCTCAAACTGACCTCAAATGTAAATTAGAATTCTTCACTCGCCTCGTGGCAAGAAGCACAAACTTGTGTTCAACTTGTGTTCTGAGTATCCATCAGTTTGTCACACTTGTTCCTGTTAATTCAGGTAAAGGAATACTCAGAGCAAGTGTCACAAACATGGCAAGTTATTCTTGTTACAGTTGTTGGTTCTTCAGTGTCTTAAATAACATCTACATTCCAATTAAGGTCACTGGTCCACAGTTAACAGACAATAACAATAACTCTAAAAGCAAGTTGTTCTGTTCCACTTCTGATTTCAGTGTAGGCATTGTCTTCTTGAGGTTTGCCCATGATGCCACATTCATGAGCATCATGGTCTGGACCAGTGTCTCCATGGTACTTCTCCTCCATAGACATTGTCAGAGAATGCAGTACATATTCACTCTCAATCAGGACCCCAGGGGCCAAGCAGAGACCACAGCAACCCATACTATCCTGATGCTGGTAGTCACATTTGTTGGCTTTTATCTTCTAAGTCTTATTTGTATCATCTTTTACACCTATTTTATATATTCTCATCATTCCCTGAGGCATTGCAATGACATTTTGGTTTCGGGTTTCCCTACAATTTCTCCTTTACTGTTGACCTTCAGAGACCCTAAGGGTCCTTGTTCTGTGTTCTTCAACTGTTGAAAGCCAGAGTCACTAAAAATGCCAAACACAGAAGACAGCTTTGCTAATACCATTAAATACTTTATTCCATAAATATGTTTTTAAAAGCTTGTATGAACAAGGTATGGTGCTCACTGCTATACTTATAAAAGAGTAAGGTTATAATCACTTGTTGATATGAAAAGATTTCTGGTTGGAATCTGATTGAAACAGTGAGTTATTCACCACCCTCCATTCTCT
+</pre></div>
+</div>
+</div>
+</div>
+<p>The process of translating the code into its protein sequence involves a table lookup operation.</p>
+<p>In this case study, a dictionary object is utilized to aid in the translation process. The keys of the dictionary are strings, each consisting of three letters selected from a four-letter alphabet, while the value of each key is a string consisting of a single character, representing the corresponding amino acid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+    
+    <span class="s1">&#39;ATA&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATC&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATT&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATG&#39;</span><span class="p">:</span><span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ACA&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACC&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACG&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACT&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AAC&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAT&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAA&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;AAG&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AGC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;AGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTC&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTT&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCA&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCG&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCT&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CAC&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAT&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAA&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;CAG&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGC&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGT&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GTA&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTC&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTG&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTT&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GCA&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCC&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCG&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCT&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GAC&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAT&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAA&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;GAG&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GGA&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGC&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGG&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGT&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TCA&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCG&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TTC&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTT&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;TTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TAC&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAT&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAA&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;TAG&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TGC&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGT&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGA&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;TGG&#39;</span><span class="p">:</span><span class="s1">&#39;W&#39;</span>
+    
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To verify whether the length of the DNA sequence is divisible by 3, the code must utilize the <code class="docutils literal notranslate"><span class="pre">modulus</span></code> operator with the value 3.</p>
+<p>In the event that the length is not divisible by 3, the code should discard the last one or two nucleotides, since they will not correspond to a complete codon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dna_seq</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code snippet below iterates through the DNA sequence <code class="docutils literal notranslate"><span class="pre">dna_seq</span></code> starting from index 20 and icrements the index by 3 in each step, until reaching index 937 (inclusive).</p>
+<p>For each set of three consecutive nucleotides in the DNA sequence, it looks up the corresponding amino acid using the <code class="docutils literal notranslate"><span class="pre">table</span></code> dictionary. If the amino acid is not a stop codon (represented by <code class="docutils literal notranslate"><span class="pre">_</span></code>), the amino acid is appended to the variable <code class="docutils literal notranslate"><span class="pre">amino_string</span></code>.</p>
+<p>By the end of the loop, the <code class="docutils literal notranslate"><span class="pre">amino_string</span></code> will contain the amino acid sequences translated from the DNA sequences, excluding any stop codons.</p>
+<p><strong>Note</strong>
+The code assumes the existence of the <code class="docutils literal notranslate"><span class="pre">table</span></code> dictionary, which maps the codons to their corresponding amino acids. Without the definition of the dictionary, the code will raise a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amino_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">938</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    
+    <span class="n">codon</span> <span class="o">=</span> <span class="n">dna_seq</span><span class="p">[</span><span class="n">ind</span><span class="p">:</span><span class="n">ind</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">amino</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">codon</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">amino</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span><span class="p">:</span>
+        <span class="n">amino_string</span> <span class="o">=</span> <span class="n">amino_string</span> <span class="o">+</span> <span class="n">amino</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amino_string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;MSTHDTSLKTTEEVAFQIILLCQFGVGTFANVFLFVYNFSPISTGSKQRPRQVILRHMAVANALTLFLTIFPNNMMTFAPIIPQTDLKCKLEFFTRLVARSTNLCSTCVLSIHQFVTLVPVNSGKGILRASVTNMASYSCYSCWFFSVLNNIYIPIKVTGPQLTDNNNNSKSKLFCSTSDFSVGIVFLRFAHDATFMSIMVWTSVSMVLLLHRHCQRMQYIFTLNQDPRGQAETTATHTILMLVVTFVGFYLLSLICIIFYTYFIYSHHSLRHCNDILVSGFPTISPLLLTFRDPKGPCSVFFNC&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code reads in the protein sequence from the file that contains the translated amino acid sequence, removes any newline chracters <code class="docutils literal notranslate"><span class="pre">\n</span></code> from the sequence and prints the cleaned protein sequence.</p>
+<p>The last line of code checks whether the variable <code class="docutils literal notranslate"><span class="pre">amino_string</span></code> is equal to the cleaned protein sequence <code class="docutils literal notranslate"><span class="pre">protein_seq</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protein_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">protein_file_path</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">protein_seq</span> <span class="o">=</span> <span class="n">protein_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protein_seq</span> <span class="o">=</span> <span class="n">protein_seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">protein_seq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSTHDTSLKTTEEVAFQIILLCQFGVGTFANVFLFVYNFSPISTGSKQRPRQVILRHMAVANALTLFLTIFPNNMMTFAPIIPQTDLKCKLEFFTRLVARSTNLCSTCVLSIHQFVTLVPVNSGKGILRASVTNMASYSCYSCWFFSVLNNIYIPIKVTGPQLTDNNNNSKSKLFCSTSDFSVGIVFLRFAHDATFMSIMVWTSVSMVLLLHRHCQRMQYIFTLNQDPRGQAETTATHTILMLVVTFVGFYLLSLICIIFYTYFIYSHHSLRHCNDILVSGFPTISPLLLTFRDPKGPCSVFFNC
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amino_string</span> <span class="o">==</span> <span class="n">protein_seq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The function <code class="docutils literal notranslate"><span class="pre">read_sequence</span></code> reads a text file and removes newline and carriage return characters from the string. It preprocesses the input file to prepare it for subsequent analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_sequence</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads a file and preprocess its content to remove newline and</span>
+<span class="sd">    carriage return characters.</span>
+
+<span class="sd">    Input</span>
+<span class="sd">        filename (str) - the name of the file</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">        out_string (str) - modified output string with newline and</span>
+<span class="sd">        carriage return characters removed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">string_seq</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        
+        <span class="n">string_seq</span> <span class="o">=</span> <span class="n">string_seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">string_seq</span> <span class="o">=</span> <span class="n">string_seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># close the file</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">string_seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">lookup_table</span></code> function takes a string of codons as input and returns the corresponding amino acid. It performs a table lookup to map each possible codon to the respective amino acid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lookup_table</span><span class="p">(</span><span class="n">input_codon</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Translate a given DNA codon into the corresponding amino acid.</span>
+
+<span class="sd">    Input</span>
+<span class="sd">        input_codon (str) - dna codon</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">        amino (str) - translated amino-acid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+    
+    <span class="s1">&#39;ATA&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATC&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATT&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATG&#39;</span><span class="p">:</span><span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ACA&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACC&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACG&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACT&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AAC&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAT&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAA&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;AAG&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AGC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;AGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTC&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTT&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCA&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCG&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCT&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CAC&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAT&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAA&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;CAG&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGC&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGT&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GTA&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTC&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTG&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTT&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GCA&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCC&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCG&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCT&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GAC&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAT&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAA&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;GAG&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GGA&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGC&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGG&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGT&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TCA&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCG&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TTC&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTT&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;TTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TAC&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAT&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAA&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;TAG&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TGC&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGT&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGA&#39;</span><span class="p">:</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;TGG&#39;</span><span class="p">:</span><span class="s1">&#39;W&#39;</span>
+    
+    <span class="p">}</span>
+        
+    <span class="n">amino</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">input_codon</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">amino</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">translate</span></code> function takes a string of DNA nucleotides as input and returns the corresponding amino acid sequence. The process involves dividing the DNA sequence into non-overlapping groups of three nucleotides (codons), which are then translated into amino acids using the <code class="docutils literal notranslate"><span class="pre">lookup_table</span></code> function.</p>
+<p>In this context, the NCBI website offers the start codon index and stop codon index for a specific DNA sequence under the name <strong>CDS</strong>. Notably, the indexing for these sequences begins at 1.</p>
+<p>Therefore, the start codon index needs to be reduced by 1 to align with the Python indexing that begins at 0.</p>
+<p><img alt="dna_cds.png" src="_images/dna_cds.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Translate a specific DNA sequence from the given file into its</span>
+<span class="sd">    corresponding protein sequence.</span>
+
+<span class="sd">    Input</span>
+<span class="sd">        filename (str) - name of file to be translated</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">        amino_sequence (str) - translated protein sequence for the given file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">dna_seq</span> <span class="o">=</span> <span class="n">read_sequence</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter starting position of codon: &quot;</span><span class="p">))</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter stopping position of codon: &quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+    
+    <span class="n">translate_codon</span> <span class="o">=</span> <span class="n">dna_seq</span><span class="p">[</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+    
+    <span class="n">amino_sequence</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    
+    <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">translate_codon</span><span class="p">),</span><span class="mi">3</span><span class="p">):</span>
+        
+        <span class="n">codon</span> <span class="o">=</span> <span class="n">translate_codon</span><span class="p">[</span><span class="n">ind</span><span class="p">:</span><span class="n">ind</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">amino</span> <span class="o">=</span> <span class="n">lookup_table</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">amino</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span><span class="p">:</span>
+            <span class="n">amino_sequence</span> <span class="o">+=</span> <span class="n">amino</span>
+        
+    <span class="k">return</span> <span class="n">amino_sequence</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To validate the functionality of the <code class="docutils literal notranslate"><span class="pre">translate</span></code> function, the returned value from the function is compared with the actual value of the protein sequence.
+Before comparison, the protein sequence undergoes modification as a result of being passed through the <code class="docutils literal notranslate"><span class="pre">read_sequence</span></code> function to ensure uniform preprocessing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">translate</span><span class="p">(</span><span class="n">dna_file_path</span><span class="p">)</span> <span class="o">==</span> <span class="n">read_sequence</span><span class="p">(</span><span class="n">protein_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="n">dna_file_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSTHDTSLKTTEEVAFQIILLCQFGVGTFANVFLFVYNFSPISTGSKQRPRQVILRHMAVANALTLFLTIFPNNMMTFAPIIPQTDLKCKLEFFTRLVARSTNLCSTCVLSIHQFVTLVPVNSGKGILRASVTNMASYSCYSCWFFSVLNNIYIPIKVTGPQLTDNNNNSKSKLFCSTSDFSVGIVFLRFAHDATFMSIMVWTSVSMVLLLHRHCQRMQYIFTLNQDPRGQAETTATHTILMLVVTFVGFYLLSLICIIFYTYFIYSHHSLRHCNDILVSGFPTISPLLLTFRDPKGPCSVFFNC
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">read_sequence</span><span class="p">(</span><span class="n">protein_file_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSTHDTSLKTTEEVAFQIILLCQFGVGTFANVFLFVYNFSPISTGSKQRPRQVILRHMAVANALTLFLTIFPNNMMTFAPIIPQTDLKCKLEFFTRLVARSTNLCSTCVLSIHQFVTLVPVNSGKGILRASVTNMASYSCYSCWFFSVLNNIYIPIKVTGPQLTDNNNNSKSKLFCSTSDFSVGIVFLRFAHDATFMSIMVWTSVSMVLLLHRHCQRMQYIFTLNQDPRGQAETTATHTILMLVVTFVGFYLLSLICIIFYTYFIYSHHSLRHCNDILVSGFPTISPLLLTFRDPKGPCSVFFNC
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>This case study presented a comprehensive approach to translating a DNA sequence into it’s corresponding protein sequence using Python.</p>
+<p>Three key functions were developed:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">read_sequence</span></code> function effectively preprocessed the input file, removing newline and carriage return characters to ensure accuracte and consistent data handling.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">lookup_table</span></code> function utilized a genetic code lookup table (dictionary) to map DNA codons to their respective amino acids, enabling effective translation.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">translate</span></code> function successfully converted the specified DNA codon range into a protein sequence by utilizing the two previous functions.</p></li>
+</ul>
+<p>Through this case study, I gained valuable insights into the translation of genetic information, aligning the NCBI start codon index with Python’s indexing, and ensuring the accurate protein sequence generation.</p>
+<p>The implementation of these functions offers a practical solution for DNA-to-Protein Translation, provding a valuable tool for exploring genetic information and its impact on living organisms.</p>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="case_study2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linguistic Analysis of Books: A Study of Language Variability</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1984 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Linguistic Analysis of Books: A Study of Language Variability &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Predictive Insights through Classification Analysis" href="case_study3.html" />
+    <link rel="prev" title="Exploring DNA Sequencing and Analysis" href="case_study1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study1.html">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study3.html">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study4.html">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study5.html">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study6.html">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study2.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-books">
+   Working with books
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-word-frequency-statistics">
+   Computing Word Frequency Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-multiple-files">
+   Reading Multiple Files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#helper-function">
+     Helper Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#book-stats-table">
+   Book Stats Table
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-book-statistics">
+   Plotting Book Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#investigating-a-midsummer-night-s-dream">
+   Investigating ‘A Midsummer Night’s Dream’
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Helper Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linguistic Analysis of Books: A Study of Language Variability</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-with-books">
+   Working with books
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-word-frequency-statistics">
+   Computing Word Frequency Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-multiple-files">
+   Reading Multiple Files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#helper-function">
+     Helper Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#book-stats-table">
+   Book Stats Table
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-book-statistics">
+   Plotting Book Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#investigating-a-midsummer-night-s-dream">
+   Investigating ‘A Midsummer Night’s Dream’
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-5">
+     Task 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Helper Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="linguistic-analysis-of-books-a-study-of-language-variability">
+<h1>Linguistic Analysis of Books: A Study of Language Variability<a class="headerlink" href="#linguistic-analysis-of-books-a-study-of-language-variability" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>Patterns within written text are not the same across all authors or languages. This allows linguists to study the language of origin.</p>
+<p>This study aims to explore the attributes of individual books within a collection encompassing diverse authors and languages. Specifically, the focus is on analyzing book lengths, quantifying unique word counts and investigating potential clustering patterns based on either languages or authorship.</p>
+<ul class="simple">
+<li><p>The collection for this study consists of four languages: <code class="docutils literal notranslate"><span class="pre">English</span></code>, <code class="docutils literal notranslate"><span class="pre">French</span></code>, <code class="docutils literal notranslate"><span class="pre">German</span></code> and <code class="docutils literal notranslate"><span class="pre">Portuguese</span></code>.</p></li>
+<li><p>For each langauge, we have from one to four authors each, <code class="docutils literal notranslate"><span class="pre">13</span></code> authors in total.</p></li>
+<li><p>For each author, we have from one to sixteen book, <code class="docutils literal notranslate"><span class="pre">102</span></code> books in total.</p></li>
+</ul>
+<p>Some authors have appeared in several language categories because their books are available as translations in several languages.</p>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p><strong>Task 1 - Writing the Function</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: A function that takes string of text as input and counts the number of times each unique word appears.</p></li>
+</ul>
+<p><strong>Task 2 - Word Frequency Distribution Analysis</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Process the text data from various translations to determine the frequency of occurrence for each individual word.</p></li>
+</ul>
+<p><strong>Task 3 - Summary Statistics</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Computing the summary statistical measures, including mean word lengths for different translation.</p></li>
+</ul>
+<p><strong>Task 4 - Data Visualization</strong></p>
+<ul class="simple">
+<li><p><strong>Description</strong>: Generating visually informative representations to convey distribution of word frequencies.</p></li>
+</ul>
+<p>The best way to keep track of these words will be to associate each word with a counter. This can be done by using dictionaries. The keys will be words of type <code class="docutils literal notranslate"><span class="pre">string</span></code> containing the input text, and the values are <code class="docutils literal notranslate"><span class="pre">int</span></code> that indicate how many times each word appears in the text.</p>
+<p>Initially, a test string named <code class="docutils literal notranslate"><span class="pre">text</span></code> is generated to evaluate the function’s functionality during its development.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;This is my test text. We are keeping this text short to keep things manageable.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+<span class="n">word_list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;This&#39;,
+ &#39;is&#39;,
+ &#39;my&#39;,
+ &#39;test&#39;,
+ &#39;text.&#39;,
+ &#39;We&#39;,
+ &#39;are&#39;,
+ &#39;keeping&#39;,
+ &#39;this&#39;,
+ &#39;text&#39;,
+ &#39;short&#39;,
+ &#39;to&#39;,
+ &#39;keep&#39;,
+ &#39;things&#39;,
+ &#39;manageable.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>When counting the number of unique words in a string, it is important to consider the following factors:</p>
+<ul class="simple">
+<li><p>The presence of punctuation, such as full stops, as part of the word may result in an inflated word count. <strong>For instance</strong>, a word occuring in the middle of a sentence is counted seperately when it reappears at the end of a sentence, followed by a full stop.</p></li>
+<li><p>Words at the beginning of sentences are capitalized, leading to the double counting of some words. As a result, words with both capitalized and lowercase initial letters are perceived as distinct entities in the counting process.</p></li>
+</ul>
+<p>To address the issue of punctuation marks, a strategy can be implemented where specific punctuation marks to be excluded are specified. A loop is applied to the string, replacing each occurrence of a punctuation mark with an empty string. This approach ensures the exclusion of punctuations from the word counting process, allowing for accurate results.</p>
+<p>Additionally, convering the entire string to lowercase can be done using the <code class="docutils literal notranslate"><span class="pre">.lower()</span></code> method.</p>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The function takes in a string containing punctuation marks and returns the</span>
+<span class="sd">    modified string without any punctuations.</span>
+<span class="sd">    </span>
+<span class="sd">    Input</span>
+<span class="sd">        input_string (str) - string containing punctuations</span>
+<span class="sd">    </span>
+<span class="sd">    Return:</span>
+<span class="sd">        clean_string - string with punctuations replaced by empty string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">check_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span><span class="s2">&quot;!&quot;</span><span class="p">,</span><span class="s2">&quot;?&quot;</span><span class="p">]</span>
+    <span class="n">clean_string</span> <span class="o">=</span> <span class="n">input_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">check_list</span><span class="p">:</span>
+        
+        <span class="n">clean_string</span> <span class="o">=</span> <span class="n">clean_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">clean_string</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clean_string</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>this is my test text we are keeping this text short to keep things manageable
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">count_words</span></code> function takes an input string and processes it to create a dictionary representing the word occurrences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">the_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Count the number of times each word occurs in input string. </span>
+<span class="sd">    Returns a dictionary where keys are unique words and values are word counts.</span>
+<span class="sd">    </span>
+<span class="sd">    Inputs:</span>
+<span class="sd">        the_string (str): Input string</span>
+<span class="sd">        </span>
+<span class="sd">    Return:</span>
+<span class="sd">        word_count (dict): Dictionary of word count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">word_count</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="n">working_string</span> <span class="o">=</span> <span class="n">clean_string</span><span class="p">(</span><span class="n">the_string</span><span class="p">)</span>
+    <span class="n">word_list</span> <span class="o">=</span> <span class="n">working_string</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">:</span>
+        
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_count</span><span class="p">:</span>
+            
+            <span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+    <span class="k">return</span> <span class="n">word_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the function successfully defined, it is now time to perform testing on the test string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input: This is my test text. We are keeping this text short to keep things manageable.
+
+{&#39;this&#39;: 2, &#39;is&#39;: 1, &#39;my&#39;: 1, &#39;test&#39;: 1, &#39;text&#39;: 2, &#39;we&#39;: 1, &#39;are&#39;: 1, &#39;keeping&#39;: 1, &#39;short&#39;: 1, &#39;to&#39;: 1, &#39;keep&#39;: 1, &#39;things&#39;: 1, &#39;manageable&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Counting the frequency of objects is such a common operation that Python provides a <code class="docutils literal notranslate"><span class="pre">counter</span></code> tool, which has to be imported from the collection moddule.</p>
+<p>The object returned by counter behaves much like a dictionary, although its a subclass of the Python dictionary object.</p>
+<p>The task of counting object frequencies is a frequent operation in Python, and to facilitate this, Python offers a <code class="docutils literal notranslate"><span class="pre">Counter</span></code> tool available in the <code class="docutils literal notranslate"><span class="pre">collections</span></code> module, which needs to be imported for usage.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Counter</span></code> object returned by this tool closely resembles a dictionary in behavior, despite being a subclass of the Python dictionary object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_fast</span><span class="p">(</span><span class="n">the_string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">    Count the occurrences of each word in the input string </span>
+<span class="sd">    using the &#39;Counter&#39; tool.</span>
+
+<span class="sd">    Input</span>
+<span class="sd">        the_string (str): The input string to be processed </span>
+<span class="sd">        for word counting</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        word_count (Counter): A &#39;Counter&#39; object containing </span>
+<span class="sd">        unique words and their respective counts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">working_string</span> <span class="o">=</span> <span class="n">clean_string</span><span class="p">(</span><span class="n">the_string</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">word_list</span> <span class="o">=</span> <span class="n">working_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    
+    <span class="n">word_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">word_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">count_words_fast</span></code> returns a <code class="docutils literal notranslate"><span class="pre">Counter</span></code> object.</p>
+<p>To verify whether the objects returned by <code class="docutils literal notranslate"><span class="pre">count_words</span></code> and <code class="docutils literal notranslate"><span class="pre">count_words_fast</span></code> are distinct or identical, a comparison is performed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_words_fast</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="n">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The two different implementations of the same function return identical objects.</p>
+</section>
+<section id="working-with-books">
+<h2>Working with books<a class="headerlink" href="#working-with-books" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">read_book</span></code> function takes a <code class="docutils literal notranslate"><span class="pre">path_title</span></code> as input, which represents the path location of the book to be read. It uses the <code class="docutils literal notranslate"><span class="pre">open</span></code> function with the specified path to access and read the content of the book from the file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_book</span><span class="p">(</span><span class="n">path_title</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The function reads a book from the path location and returns </span>
+<span class="sd">    it as a string.</span>
+<span class="sd">    </span>
+<span class="sd">    Input</span>
+<span class="sd">        path_title - path for a book</span>
+<span class="sd">    </span>
+<span class="sd">    Return</span>
+<span class="sd">        book - returns the book as a string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_title</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">current_file</span><span class="p">:</span>
+        
+        <span class="n">text</span> <span class="o">=</span> <span class="n">current_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">book</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s2">&quot;./books/&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s1">&#39;English/shakespeare/Hamlet.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Upon examining the value returned by <code class="docutils literal notranslate"><span class="pre">len</span></code>, it becomes evident that the <code class="docutils literal notranslate"><span class="pre">read_book</span></code> function has read in 150838 for the English version of Hamlet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet</span> <span class="o">=</span> <span class="n">read_book</span><span class="p">(</span><span class="n">hamlet_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of characters: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hamlet</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of characters: 150838
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the famous quote <code class="docutils literal notranslate"><span class="pre">To</span> <span class="pre">be</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">to</span> <span class="pre">be</span></code> can be found in the Hamlet file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_quote</span> <span class="o">=</span> <span class="s2">&quot;To be or not to be&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.find</span></code> method helps in identifying the index position of a substring within a given string. If the substring is present in the string, the method returns the first index of occurrence. Otherwise, it returns -1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># line 1</span>
+<span class="n">start_ind</span> <span class="o">=</span> <span class="n">hamlet</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">hamlet_quote</span><span class="p">)</span>
+
+<span class="c1"># line 2</span>
+<span class="n">hamlet</span><span class="p">[</span><span class="n">start_ind</span> <span class="p">:</span> <span class="n">start_ind</span> <span class="o">+</span> <span class="mi">50</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;To be or not to be that is the QuestionWhether tis&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Line 1</strong>
+First, the <code class="docutils literal notranslate"><span class="pre">.find</span></code> method is used to search for the first occurrence of <code class="docutils literal notranslate"><span class="pre">hamlet_quote</span></code> substring within <code class="docutils literal notranslate"><span class="pre">hamlet</span></code>. The index position of the first character of the substring (if found) is stored in the variable <code class="docutils literal notranslate"><span class="pre">start_ind</span></code>.</p>
+<p><strong>Line 2</strong>
+Next, the substring is extracted from <code class="docutils literal notranslate"><span class="pre">hamlet</span></code> using string indexing. The start index is given by <code class="docutils literal notranslate"><span class="pre">start_ind</span></code> and the stop index extends up to the next 50 characters.</p>
+</section>
+<section id="computing-word-frequency-statistics">
+<h2>Computing Word Frequency Statistics<a class="headerlink" href="#computing-word-frequency-statistics" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The objective of <code class="docutils literal notranslate"><span class="pre">word_stats</span></code> function is to determine the total count of unique words present in the book and obtain the frequencies of each word.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">word_stats</span><span class="p">(</span><span class="n">book_title</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function takes in a book title as it&#39;s input and returns the </span>
+<span class="sd">    number of unique word and frequencies of each word.</span>
+<span class="sd">    </span>
+<span class="sd">    Input</span>
+<span class="sd">        book_title (str) - Name of the book</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">        A tuple object is returned</span>
+<span class="sd">        </span>
+<span class="sd">        num_unique (int) - Number of unique words</span>
+<span class="sd">        counts (int) - Frequency of each unique word</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">word_count</span> <span class="o">=</span> <span class="n">count_words</span><span class="p">(</span><span class="n">book_title</span><span class="p">)</span>
+    
+    <span class="n">num_unique</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_count</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">word_count</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">num_unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_stats</span> <span class="o">=</span> <span class="n">word_stats</span><span class="p">(</span><span class="n">hamlet</span><span class="p">)</span>
+
+<span class="n">hamlet_unique</span> <span class="o">=</span> <span class="n">hamlet_stats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">hamlet_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">hamlet_stats</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hamlet (English) - Unique Words: </span><span class="si">{}</span><span class="s2"> | Total Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hamlet_unique</span><span class="p">,</span><span class="n">hamlet_total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hamlet (English) - Unique Words: 6775 | Total Words: 26701
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">word_stats</span></code> can be used to make a comparison between Shakespeare’s Hamlet in English and it’s German translation. This comparison will involve analyzing the unique word counts and word frequencies in both versions of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_german_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s2">&quot;German/shakespeare/Hamlet.txt&quot;</span><span class="p">)</span>
+
+<span class="n">hamlet_german</span> <span class="o">=</span> <span class="n">read_book</span><span class="p">(</span><span class="n">hamlet_german_path</span><span class="p">)</span>
+
+<span class="n">german_hamlet_stats</span> <span class="o">=</span> <span class="n">word_stats</span><span class="p">(</span><span class="n">hamlet_german</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">german_hamlet_unique</span> <span class="o">=</span> <span class="n">german_hamlet_stats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">german_hamlet_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">german_hamlet_stats</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hamlet (English) - Unique Words: </span><span class="si">{}</span><span class="s2"> | Total Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hamlet_unique</span><span class="p">,</span><span class="n">hamlet_total</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hamlet (German) - Unique Words: </span><span class="si">{}</span><span class="s2"> | Total Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">german_hamlet_unique</span><span class="p">,</span><span class="n">german_hamlet_total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hamlet (English) - Unique Words: 6775 | Total Words: 26701
+Hamlet (German) - Unique Words: 9469 | Total Words: 30689
+</pre></div>
+</div>
+</div>
+</div>
+<p>English version of Hamlet contains <code class="docutils literal notranslate"><span class="pre">6775</span></code> unique words out of a total of <code class="docutils literal notranslate"><span class="pre">26701</span></code> words. On the other hand, the German translation of Hamlet consits of <code class="docutils literal notranslate"><span class="pre">9469</span></code> unique words among a total of <code class="docutils literal notranslate"><span class="pre">30689</span></code> words.</p>
+<p>This difference may be attributed to the inherent linguistic differences between the two languages and the nuances introduced during the translation process.</p>
+</section>
+<section id="reading-multiple-files">
+<h2>Reading Multiple Files<a class="headerlink" href="#reading-multiple-files" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The next step is to systematically read and process each book stored within distinct subdirectories located within our designated book folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;./books/&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The directory for books, which is stored in <code class="docutils literal notranslate"><span class="pre">relative_path</span></code> contains the four languages: English, German, French and Portuguese.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;.DS_Store&#39;, &#39;German&#39;, &#39;English&#39;, &#39;Portuguese&#39;, &#39;French&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="helper-function">
+<h3>Helper Function<a class="headerlink" href="#helper-function" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">listdir_nohidden</span></code> function lists all non-hidden files present within a specified directory.</p>
+<p>The function takes <code class="docutils literal notranslate"><span class="pre">path</span></code> as input, representing the directory to be scanned. It then iterates through the files in the directory using <code class="docutils literal notranslate"><span class="pre">os.listdir</span></code>. For each file, the function checks if it starts with a dot (indicating a hidden file).
+If the file is not hidden, it is appended to the list of files <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">listdir_nohidden</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;   </span>
+<span class="sd">    List all non-hidden files in the specified directory.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        path (str): The path of the directory to be scanned for</span>
+<span class="sd">        non-hidden files</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        file_list (list): A list of non-hidden files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">file_list</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+            <span class="n">file_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="n">file_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using &#39;listdir_nohidden&#39; to print all the languages</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Languages: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)))</span>
+
+<span class="c1"># Using &#39;listdir_nohidden&#39; to print all the French authors</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;French Authors: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_path</span> <span class="o">+</span> <span class="s2">&quot;/French&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Languages: [&#39;German&#39;, &#39;English&#39;, &#39;Portuguese&#39;, &#39;French&#39;]
+French Authors: [&#39;de Maupassant&#39;, &#39;diderot&#39;, &#39;chevalier&#39;, &#39;shakespeare&#39;, &#39;sand&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first loop iterates over the different languages.</p>
+<p>The first loop iterates over the different languages.</p>
+<p>The second loop is going through the author directory, which is created by concatenating strings of book directory path <code class="docutils literal notranslate"><span class="pre">relative_path</span></code> with current <code class="docutils literal notranslate"><span class="pre">language</span></code>.</p>
+<p>The innermost loop is used to loop over different book titles. The <code class="docutils literal notranslate"><span class="pre">title</span></code> variable that iterates through the book title directory is obtained by concatenating <code class="docutils literal notranslate"><span class="pre">relative_path</span></code> with currenth <code class="docutils literal notranslate"><span class="pre">language</span></code> and current <code class="docutils literal notranslate"><span class="pre">author</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># looping over languages</span>
+<span class="k">for</span> <span class="n">language</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+    
+    <span class="c1"># looping over authors</span>
+    <span class="k">for</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span><span class="p">):</span>
+        
+        <span class="c1"># looping over book titles</span>
+        <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">author</span><span class="p">):</span>
+            
+            <span class="n">book_path</span> <span class="o">=</span> <span class="n">relative_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">author</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">title</span>
+            <span class="n">book</span> <span class="o">=</span> <span class="n">read_book</span><span class="p">(</span><span class="n">book_path</span><span class="p">)</span>
+            <span class="n">unique_words</span><span class="p">,</span> <span class="n">total_words</span> <span class="o">=</span> <span class="n">word_stats</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+            
+            <span class="c1">#print(&quot;Title: {} | Unique Words: {}&quot;.format(title[:-4],unique_words))</span>
+            <span class="c1">#print(&quot;Title: {} | Author: {}&quot;.format(title[:-4],author))</span>
+            <span class="c1">#print()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="book-stats-table">
+<h2>Book Stats Table<a class="headerlink" href="#book-stats-table" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Let’s create a table for the books that will have the following columns:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* Language
+* Author
+* Title
+* Length
+* Unique
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Author&#39;</span><span class="p">,</span> <span class="s1">&#39;Title&#39;</span><span class="p">,</span> <span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Unique&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">book_stats</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span> <span class="n">relative_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">    Generate a pandas DataFrame containing statistics for books</span>
+<span class="sd">    in different languages and authors.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        column_list (list): A list containing the column names for</span>
+<span class="sd">         the DataFrame (table)</span>
+<span class="sd">         relative_dir (str): The book directory</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        table (pd.DataFrame) - DataFrame containing book statistics</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">column_list</span><span class="p">)</span>
+
+    <span class="n">row_num</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">language</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_dir</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span><span class="p">):</span>
+
+            <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">listdir_nohidden</span><span class="p">(</span><span class="n">relative_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">author</span><span class="p">):</span>
+
+                <span class="n">book_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">language</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">author</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
+                <span class="n">book</span> <span class="o">=</span> <span class="n">read_book</span><span class="p">(</span><span class="n">book_path</span><span class="p">)</span>
+
+                <span class="n">unique_words</span><span class="p">,</span> <span class="n">total_words</span> <span class="o">=</span> <span class="n">word_stats</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row_num</span><span class="p">]</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">title</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">language</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">total_words</span><span class="p">),</span> <span class="n">unique_words</span>
+                <span class="n">row_num</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">table</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">book_stats</span><span class="p">(</span><span class="n">table_columns</span><span class="p">,</span><span class="n">relative_path</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(102, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attribute of DataFrame object returns the number of rows contained in the dataframe and the number of columns.</p>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">stats</span></code> dataframe contains 102 rows and 5 columns.</p>
+<p>Looking at the first five and the last five entries of the <code class="docutils literal notranslate"><span class="pre">stats</span></code> dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Language</th>
+      <th>Length</th>
+      <th>Unique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Schiller</td>
+      <td>Wallensteins Lager</td>
+      <td>German</td>
+      <td>13302</td>
+      <td>4240</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Schiller</td>
+      <td>die braut von messina</td>
+      <td>German</td>
+      <td>22349</td>
+      <td>6344</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Schiller</td>
+      <td>Der Parasit, oder die Kunst, sein GlÅck zu ma...</td>
+      <td>German</td>
+      <td>18515</td>
+      <td>5918</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Schiller</td>
+      <td>Die Verschwîrung des Fiesco zu Genua</td>
+      <td>German</td>
+      <td>28042</td>
+      <td>9995</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Schiller</td>
+      <td>Kabale und Liebe</td>
+      <td>German</td>
+      <td>28433</td>
+      <td>9607</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Language</th>
+      <th>Length</th>
+      <th>Unique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>98</th>
+      <td>Sand</td>
+      <td>La Marquise</td>
+      <td>French</td>
+      <td>14529</td>
+      <td>4755</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Sand</td>
+      <td>L' Orco</td>
+      <td>French</td>
+      <td>8558</td>
+      <td>3134</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>Sand</td>
+      <td>Mattea</td>
+      <td>French</td>
+      <td>20902</td>
+      <td>6390</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>Sand</td>
+      <td>Metella</td>
+      <td>French</td>
+      <td>19411</td>
+      <td>5645</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>Sand</td>
+      <td>Oeuvres illustrÇes de George Sand</td>
+      <td>French</td>
+      <td>22545</td>
+      <td>7441</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="plotting-book-statistics">
+<h2>Plotting Book Statistics<a class="headerlink" href="#plotting-book-statistics" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The process of extracting data from specific columns of a dataframe is achieved using the column names as identifiers. By referencing the desired column names, we can retrieve the data contained in those specific columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rows of the <code class="docutils literal notranslate"><span class="pre">stats</span></code> dataframe are filtered to extract statistics for <code class="docutils literal notranslate"><span class="pre">Hamlet</span></code>. The extracted data is stored in the dataframe <code class="docutils literal notranslate"><span class="pre">hamlet_stats</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_stats</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Hamlet&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamlet_stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Language</th>
+      <th>Length</th>
+      <th>Unique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>34</th>
+      <td>Shakespeare</td>
+      <td>Hamlet</td>
+      <td>German</td>
+      <td>30689</td>
+      <td>9469</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Shakespeare</td>
+      <td>Hamlet</td>
+      <td>English</td>
+      <td>26701</td>
+      <td>6775</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>Shakespeare</td>
+      <td>Hamlet</td>
+      <td>Portuguese</td>
+      <td>29860</td>
+      <td>9491</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The book statistics stored in <code class="docutils literal notranslate"><span class="pre">stats</span></code> is used to create a plot where the length of the books are plotted along the horizontal axis and the number of unique words are plotted along the vertical axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Length&#39;</span><span class="p">],</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Unique&#39;</span><span class="p">],</span><span class="s2">&quot;bo&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Book Stats&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Unique Words&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study2_69_0.png" src="_images/case_study2_69_0.png" />
+</div>
+</div>
+<p>The generated plot provides a visualization into the distribution of unique words among all the books, spanning from just under 5000 unique words to nearly 40000 unique words.</p>
+<p>The books are categorized based on their languages, and the plot is rendered using the <code class="docutils literal notranslate"><span class="pre">loglog</span></code> method. This particular method modifies the scaling of both the horizontal and vertical axes, enabling a logarithmicscale representation of the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># plotting English books</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Language&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;English&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">],</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Unique&quot;</span><span class="p">],</span><span class="s2">&quot;o&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;crimson&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;English&quot;</span><span class="p">);</span>
+
+<span class="c1"># plotting French books</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;French&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">],</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Unique&quot;</span><span class="p">],</span><span class="s2">&quot;o&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;forestgreen&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;French&quot;</span><span class="p">);</span>
+
+<span class="c1"># plotting Portuguese books</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Portuguese&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">],</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Unique&quot;</span><span class="p">],</span><span class="s2">&quot;o&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Portuguese&quot;</span><span class="p">);</span>
+
+<span class="c1"># plotting German books</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;German&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">],</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;Unique&quot;</span><span class="p">],</span><span class="s2">&quot;o&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blueviolet&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;German&quot;</span><span class="p">);</span>
+
+<span class="c1"># tidying up the plot by giving titles,</span>
+<span class="c1"># axis labels and legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Book Statistics&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Book Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Unique Words&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">]);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study2_71_0.png" src="_images/case_study2_71_0.png" />
+</div>
+</div>
+<p>Upon categorizing the book statistics by language and plotting the data, a more insightful perspective regarding book length and unique word count is obtained. Notably, a Portuguese book stands out with 40000 unique words, while a German book displays a relatively small count of 1724 unique words.</p>
+<p>The plot effectively illustrates that Portuguese books in this dataset tend to exhibit a higher number of unique words when compared to other languages.</p>
+</section>
+<section id="investigating-a-midsummer-night-s-dream">
+<h2>Investigating ‘A Midsummer Night’s Dream’<a class="headerlink" href="#investigating-a-midsummer-night-s-dream" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The primary objective is to analyze and visualize the distribution of word frequencies of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">Midsummer</span> <span class="pre">Night's</span> <span class="pre">Dream</span></code> for these five translations: English, French, German, Dutch and Finnish.</p>
+<p>Specifically, the aim is to accomplish these following tasks:</p>
+<ul class="simple">
+<li><p><strong>Data Collection</strong>: Gather the text data for various translations of the play “A Midsummer Night’s Dream”.</p></li>
+<li><p><strong>Word Frequency Distribution</strong>: Process the text data to identify the frequency of each word in the different translations.</p></li>
+<li><p><strong>Summary Statistics</strong> - Create summary statistics, such as mean, median, and standard deviation, to gain insights into the characteristics of the text for each translation.</p></li>
+<li><p><strong>Data Visualization</strong> - Create visual representations to visually depict the word frequency distribution and summary statistics for each translation.</p></li>
+</ul>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The data from a CSV file will be imported into a pandas dataframe using the <code class="docutils literal notranslate"><span class="pre">pd.read_csv</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">index_col</span></code> argument will be utilized to set the first column in the CSV file as the index for the dataframe. This will ensure appropriate indexing for efficient data access and manipulation during subsequent analysis and visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">,</span><span class="s1">&#39;midsummer.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summer_nights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_loc</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The dataframe is structured with two columns: <code class="docutils literal notranslate"><span class="pre">Language</span></code>, denoting the langauage of translation, and <code class="docutils literal notranslate"><span class="pre">Text</span></code>, signifying the corresponding book content.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summer_nights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Language</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>French</td>
+      <td>ACTE PREMIERSCÈNE ILa scène représente un appa...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>German</td>
+      <td>﻿The Project Gutenberg EBook of Ein Sommernach...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Finnish</td>
+      <td>ENSIMMÄINEN NÄYTÖS.Ensimmäinen kohtaus.    Ate...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Dutch</td>
+      <td>EERSTE TOONEEL.Athene. Een Zaal in het paleis ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>English</td>
+      <td>A Midsommer Nights DreameActus primusEnter The...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Computing the word frequency dictionary for the given <code class="docutils literal notranslate"><span class="pre">text</span></code> using the <code class="docutils literal notranslate"><span class="pre">count_words_fast</span></code> function. The resulting dictionary is stored as <code class="docutils literal notranslate"><span class="pre">counted_text</span></code>.</p></li>
+<li><p>Creating a pandas dataframe named <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+<li><p>Utilizing the <code class="docutils literal notranslate"><span class="pre">counted_text</span></code> dictionary to define two columns in the <code class="docutils literal notranslate"><span class="pre">data</span></code> dataframe:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">word</span></code>: containing each unique word present in the <code class="docutils literal notranslate"><span class="pre">text</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: representing the frequency of occurrence of each word</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_fast</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Cleans the input text by replacing punctuations with empty string.</span>
+<span class="sd">    The function also counts the occurrence of each word in the input text.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        text (str): The input text</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        Counter: A Counter object containing word frequencies</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">skips</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;!&quot;</span><span class="p">,</span><span class="s2">&quot;?&quot;</span><span class="p">,</span><span class="s2">&quot;(&quot;</span><span class="p">,</span><span class="s2">&quot;)&quot;</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">skips</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        
+    <span class="n">word_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">word_counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Word&quot;</span><span class="p">,</span><span class="s2">&quot;Count&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the time being, we are looking at the word count statistics only for French translation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">language</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">summer_nights</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">counted_text</span> <span class="o">=</span> <span class="n">count_words_fast</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">counted_text</span><span class="p">:</span>
+
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">ele</span><span class="p">,</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span>
+    <span class="n">val</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Introducing a new column named <code class="docutils literal notranslate"><span class="pre">Length</span></code> into the <code class="docutils literal notranslate"><span class="pre">data</span></code> dataframe. This column represents the length of each word listed in the <code class="docutils literal notranslate"><span class="pre">word</span></code> column.</p></li>
+<li><p>Adding another column named <code class="docutils literal notranslate"><span class="pre">Frequency</span></code>. The values in this column will be determined as follows:</p>
+<ul>
+<li><p>If the <code class="docutils literal notranslate"><span class="pre">count</span></code> for a word is greater than 10, label: <code class="docutils literal notranslate"><span class="pre">frequent</span></code></p></li>
+<li><p>If the <code class="docutils literal notranslate"><span class="pre">count</span></code> for a word is between 1 and 10 (exclusive), label: <code class="docutils literal notranslate"><span class="pre">infrequent</span></code></p></li>
+<li><p>If the <code class="docutils literal notranslate"><span class="pre">count</span></code> for a word is exactly 1, label: <code class="docutils literal notranslate"><span class="pre">unique</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding the new columns to data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">,</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span><span class="s1">&#39;Length&#39;</span><span class="p">,</span><span class="s1">&#39;Frequency&#39;</span><span class="p">])</span>
+<span class="c1"># resetting the row index</span>
+<span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># looping through all the words</span>
+<span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">counted_text</span><span class="p">:</span>
+    
+    <span class="c1"># condition 1</span>
+    <span class="k">if</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">ele</span><span class="p">,</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">],</span><span class="nb">len</span><span class="p">(</span><span class="n">ele</span><span class="p">),</span><span class="s2">&quot;frequent&quot;</span>
+        
+    <span class="c1"># condition 2</span>
+    <span class="k">elif</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">ele</span><span class="p">,</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">ele</span><span class="p">),</span> <span class="s2">&quot;infrequent&quot;</span>
+    
+    <span class="c1"># condition 3</span>
+    <span class="k">elif</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">ele</span><span class="p">,</span> <span class="n">counted_text</span><span class="p">[</span><span class="n">ele</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">ele</span><span class="p">),</span> <span class="s2">&quot;unique&quot;</span>
+        
+    <span class="n">val</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Frequency&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unique&quot;</span><span class="p">])</span>
+<span class="n">frequent_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;frequent&quot;</span><span class="p">])</span>
+<span class="n">infrequent_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;infrequent&quot;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Word Stats for French Translation&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequent Words: </span><span class="si">{}</span><span class="s2"> | Infrequent Words: </span><span class="si">{}</span><span class="s2"> | Unique Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frequent_len</span><span class="p">,</span> <span class="n">infrequent_len</span><span class="p">,</span> <span class="n">unique_len</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Word Stats for French Translation
+Frequent Words: 187 | Infrequent Words: 1183 | Unique Words: 4387
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4">
+<h3>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Creating a pandas dataframe named <code class="docutils literal notranslate"><span class="pre">sub_data</span></code> for calculating the following word statistics:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mean_word_length</span></code>: indicating the mean word length for each value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_words</span></code>: representing the total number of words in each frequency category</p></li>
+</ul>
+<p>The dataframe will also contain these columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">frequency</span></code>: containing a list of string descriptions for word frequency</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">language</span></code>: representing the language of the text</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">,</span><span class="s2">&quot;Frequency&quot;</span><span class="p">,</span><span class="s2">&quot;Mean Word Length&quot;</span><span class="p">,</span><span class="s2">&quot;Num Words&quot;</span><span class="p">])</span>
+<span class="n">frequency_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;frequent&quot;</span><span class="p">,</span><span class="s2">&quot;infrequent&quot;</span><span class="p">,</span><span class="s2">&quot;unique&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#calculating the mean word length for each frequency</span>
+<span class="n">the_length</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">mean_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># looping over all three categories of word frequencies</span>
+<span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequency_list</span><span class="p">:</span>
+    
+    <span class="c1"># extracting the data for each word frequencies</span>
+    <span class="n">temporary_df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Frequency&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">freq</span><span class="p">]</span>
+    
+    <span class="c1"># iterating through each word belonging</span>
+    <span class="c1"># to a particular frequency</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temporary_df</span><span class="p">)):</span>
+        
+        <span class="c1"># calculating the sum of word lengths</span>
+        <span class="c1"># and storing them in &#39;the_length&#39;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">temporary_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;Length&quot;</span><span class="p">]</span>
+        <span class="n">the_length</span> <span class="o">+=</span> <span class="n">val</span>
+        
+    <span class="c1"># calculating mean word length by dividing</span>
+    <span class="c1"># &#39;the_length&#39; by number of entries</span>
+    <span class="n">mean_dict</span><span class="p">[</span><span class="n">freq</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">the_length</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">temporary_df</span><span class="p">))</span>
+    <span class="n">the_length</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">freq_type</span> <span class="ow">in</span> <span class="n">frequency_list</span><span class="p">:</span>
+    
+    <span class="n">sub_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row_count</span><span class="p">]</span> <span class="o">=</span> <span class="n">language</span><span class="p">,</span> <span class="n">freq_type</span><span class="p">,</span> <span class="n">mean_dict</span><span class="p">[</span><span class="n">freq_type</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Frequency&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">freq_type</span><span class="p">])</span>
+    <span class="n">row_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">sub_data</span><span class="p">)</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Language   Frequency  Mean Word Length  Num Words
+0   French    frequent          4.053476        187
+1   French  infrequent          6.224852       1183
+2   French      unique          9.719170       4387
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-5">
+<h3>Task 5<a class="headerlink" href="#task-5" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Creating a pandas dataframe <code class="docutils literal notranslate"><span class="pre">grouped_data</span></code> to work with different translation of A Midsummer Night’s Dream.</p>
+<ul class="simple">
+<li><p>Iterating through the rows of <code class="docutils literal notranslate"><span class="pre">summer_nights</span></code>, the following task will be performed:</p>
+<ul>
+<li><p>Extracting the <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> values from the <code class="docutils literal notranslate"><span class="pre">i-th</span></code> row of <code class="docutils literal notranslate"><span class="pre">hamlets</span></code> using the <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> method, storing them in variables</p></li>
+<li><p>Invoking the <code class="docutils literal notranslate"><span class="pre">summarize_text</span></code> function with the <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> variables, storing them in <code class="docutils literal notranslate"><span class="pre">sub_data</span></code></p></li>
+<li><p>Appending the <code class="docutils literal notranslate"><span class="pre">sub_data</span></code> dataframe to <code class="docutils literal notranslate"><span class="pre">grouped_data</span></code> using <code class="docutils literal notranslate"><span class="pre">.append</span></code> function, ensuring the data is consolidated row-wise</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id1">
+<h3>Helper Function<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">summarize_text</span></code> function takes the <code class="docutils literal notranslate"><span class="pre">language</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> as input and computes the word frequency and characteristics of the provided text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize_text</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;   </span>
+<span class="sd">    Summarizes the word frequency and characteristics of the given text.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        language (str): The language of the text</span>
+<span class="sd">        text (str): The input text</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: A dataframe containing the word frequency</span>
+<span class="sd">        and characteristics summary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">counted_text</span> <span class="o">=</span> <span class="n">count_words_fast</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Word&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">counted_text</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span><span class="s2">&quot;Count&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">counted_text</span><span class="o">.</span><span class="n">values</span><span class="p">())})</span>
+    
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;frequent&quot;</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Count&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;infrequent&quot;</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Count&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;unique&quot;</span>
+    
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+    
+    <span class="n">subset_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                                <span class="s2">&quot;Language&quot;</span><span class="p">:</span> <span class="n">language</span><span class="p">,</span> 
+                                <span class="s2">&quot;Frequency&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;frequent&quot;</span><span class="p">,</span><span class="s2">&quot;infrequent&quot;</span><span class="p">,</span><span class="s2">&quot;unique&quot;</span><span class="p">],</span> 
+                                <span class="s2">&quot;Mean Word Length&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;frequency&quot;</span><span class="p">)[</span><span class="s2">&quot;Length&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                                <span class="s2">&quot;Num Words&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;frequency&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+                               <span class="p">})</span>
+    
+    <span class="k">return</span> <span class="n">subset_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">summer_nights</span><span class="p">)):</span>
+    
+    <span class="n">language</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">summer_nights</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+    <span class="n">sub_data</span> <span class="o">=</span> <span class="n">summarize_text</span><span class="p">(</span><span class="n">language</span><span class="p">,</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>French
+German
+Finnish
+Dutch
+English
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/yr/xs9chqf96k95nh97118j_s7m0000gn/T/ipykernel_20864/2341973199.py:6: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  grouped_data = grouped_data.append(sub_data);
+/var/folders/yr/xs9chqf96k95nh97118j_s7m0000gn/T/ipykernel_20864/2341973199.py:6: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  grouped_data = grouped_data.append(sub_data);
+/var/folders/yr/xs9chqf96k95nh97118j_s7m0000gn/T/ipykernel_20864/2341973199.py:6: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  grouped_data = grouped_data.append(sub_data);
+/var/folders/yr/xs9chqf96k95nh97118j_s7m0000gn/T/ipykernel_20864/2341973199.py:6: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  grouped_data = grouped_data.append(sub_data);
+/var/folders/yr/xs9chqf96k95nh97118j_s7m0000gn/T/ipykernel_20864/2341973199.py:6: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  grouped_data = grouped_data.append(sub_data);
+</pre></div>
+</div>
+</div>
+</div>
+<p>Filtering the dataframe to display only the rows corresponding to the Finnish translation of A Midsummer Night’s Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grouped_data</span><span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Finnish&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Language   Frequency  Mean Word Length  Num Words
+frequency                                                   
+frequent    Finnish    frequent          4.261364         88
+infrequent  Finnish  infrequent          5.994904        785
+unique      Finnish      unique          9.941060       4547
+</pre></div>
+</div>
+</div>
+</div>
+<p>Filtering the dataframe to display the rows representing words that occur frequently in different translations.</p>
+<p>Among the languages, <code class="docutils literal notranslate"><span class="pre">Finnish</span></code> exhibits a comparatively lower frequency of frequent words (88), while the other languages show relatively higher frequencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">grouped_data</span><span class="p">[</span><span class="s2">&quot;Frequency&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;frequent&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Language Frequency  Mean Word Length  Num Words
+frequency                                                
+frequent    French  frequent          4.053476        187
+frequent    German  frequent          3.872222        180
+frequent   Finnish  frequent          4.261364         88
+frequent     Dutch  frequent          3.754286        175
+frequent   English  frequent          3.882682        179
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-6">
+<h3>Task 6<a class="headerlink" href="#task-6" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Plotting the word statistics for each translations on a single plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Dutch&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;English&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;German&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;Finnish&quot;</span><span class="p">:</span> <span class="s2">&quot;magenta&quot;</span><span class="p">,</span> <span class="s2">&quot;French&quot;</span><span class="p">:</span> <span class="s2">&quot;cyan&quot;</span><span class="p">}</span>
+<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;frequent&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;infrequent&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;unique&quot;</span><span class="p">:</span> <span class="s2">&quot;^&quot;</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Mean Word Length&quot;</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Num Words&quot;</span><span class="p">],</span><span class="n">marker</span> <span class="o">=</span> <span class="n">markers</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Frequency&quot;</span><span class="p">]],</span> 
+             <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Language&quot;</span><span class="p">]],</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+    
+<span class="n">color_legend</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">marker_legend</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+    
+    <span class="n">color_legend</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span>
+                                 <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">color</span><span class="p">],</span>
+                                 <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+                                 <span class="n">markersize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                 <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span><span class="p">))</span>
+    
+<span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">markers</span><span class="p">:</span>
+    
+    <span class="n">marker_legend</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span>
+                                  <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                                  <span class="n">marker</span> <span class="o">=</span> <span class="n">markers</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span>
+                                  <span class="n">label</span> <span class="o">=</span> <span class="n">marker</span><span class="p">,</span> 
+                                  <span class="n">markersize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> 
+                                  <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span><span class="p">))</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mean Word Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Words&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study2_103_0.png" src="_images/case_study2_103_0.png" />
+</div>
+</div>
+<p>In the analysis comparing various translations of <strong>A Midsummer Night’s Dream</strong>, notable distinctions emerge among the different languages.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">German</span></code> translation stands out with the highest count of <code class="docutils literal notranslate"><span class="pre">unique</span></code> words, signifying it’s linguistic richness. The <code class="docutils literal notranslate"><span class="pre">English</span></code> version displays distinct differences, both in terms of the count of unique words and word lengths, setting it apart from the remaining languages.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">infrequent</span></code> words, the translations in <code class="docutils literal notranslate"><span class="pre">Dutch</span></code> and <code class="docutils literal notranslate"><span class="pre">French</span></code> exhibit similarities in usage patterns. The <code class="docutils literal notranslate"><span class="pre">English</span></code> version diverges by demonstrating shorter word lengths. In contrast, <code class="docutils literal notranslate"><span class="pre">Finnish</span></code> translation demonstrates the lowest occurrence of infrequent words among all languages.</p></li>
+<li><p>Regarding <code class="docutils literal notranslate"><span class="pre">frequent</span></code> words, an intriguing convergence emerges across all five languages. <code class="docutils literal notranslate"><span class="pre">German</span></code> and <code class="docutils literal notranslate"><span class="pre">English</span></code> share a significant overlap. Additionally, the <code class="docutils literal notranslate"><span class="pre">Dutch</span></code> version distinguishes itself slightly by showcasing shortest word lengths, while <code class="docutils literal notranslate"><span class="pre">Finnish</span></code> translations exhibit longest word lengths.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="case_study1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Exploring DNA Sequencing and Analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="case_study3.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Predictive Insights through Classification Analysis</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

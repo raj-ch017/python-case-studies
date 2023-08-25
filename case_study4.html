@@ -1,0 +1,2093 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analysis of Scotch Whisky Production and Flavor Profiles &#8212; Python Case Studies</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analyzing Bird Migration Patterns with GPS Data" href="case_study5.html" />
+    <link rel="prev" title="Predictive Insights through Classification Analysis" href="case_study3.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Case Studies</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study1.html">
+   Exploring DNA Sequencing and Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study2.html">
+   Linguistic Analysis of Books: A Study of Language Variability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study3.html">
+   Predictive Insights through Classification Analysis
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analysis of Scotch Whisky Production and Flavor Profiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study5.html">
+   Analyzing Bird Migration Patterns with GPS Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_study6.html">
+   Deep Dive into Network Analysis and Social Relationships
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/raj-ch017/python-case-studies/master?urlpath=tree/docs/case_study4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/raj-ch017/python-case-studies/tree/main/issues/new?title=Issue%20on%20page%20%2Fcase_study4.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/case_study4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-whisky-data">
+   Loading Whisky Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-correlations">
+   Exploring Correlations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clustering-whisky-by-flavor-profile">
+   Clustering Whisky by Flavor profile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-correlation-matrices">
+   Comparing Correlation Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bokeh-plot-for-whisky-classification">
+   Bokeh Plot for Whisky Classification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analysis of Scotch Whisky Production and Flavor Profiles</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-description">
+   Task Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-whisky-data">
+   Loading Whisky Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-correlations">
+   Exploring Correlations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clustering-whisky-by-flavor-profile">
+   Clustering Whisky by Flavor profile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-correlation-matrices">
+   Comparing Correlation Matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bokeh-plot-for-whisky-classification">
+   Bokeh Plot for Whisky Classification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-1">
+     Task 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-2">
+     Task 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-3">
+     Task 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-4">
+     Task 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-6">
+     Task 6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-7">
+     Task 7
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="analysis-of-scotch-whisky-production-and-flavor-profiles">
+<h1>Analysis of Scotch Whisky Production and Flavor Profiles<a class="headerlink" href="#analysis-of-scotch-whisky-production-and-flavor-profiles" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>Scotch Whisky is renowned for its intricate flavors and diverse sensory experiences. This uniqueness is further emphasized by the various regions of Scotland in which these spirits are crafted, each region contributing its distinct flavor profiles.</p>
+<p>The aim of this case study is to classify Scotch whiskies based on their intricate flavor characterisitcs. The central focus lies in the meticulous categorization of these iconic beverages to gain insights into their distinctive taste attributes.</p>
+<p>The dataset consists of taste ratings of a single malt Scotch whisky derived from nearly every active whisky distillery in Scotland. It is a repository of evaluations for 86 malt whiskies, each being appraised on a scale from 0 to 4 across 12 different taste categories. These taste categories provide comprehensive insights into the character of the whiskies, encompassing aspects such as sweetness, smokiness, medicinal attributes, spiciness and more.</p>
+<section id="task-description">
+<h2>Task Description<a class="headerlink" href="#task-description" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p><strong>Task 1 - Finding Correlations</strong></p>
+<ul class="simple">
+<li><p>Description:</p>
+<ul>
+<li><p>Finding correlations among 86 Scotch Whiskies, aiming to determine patterns and connections between different flavor characteristics</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Task 2 - Clustering</strong></p>
+<ul class="simple">
+<li><p>Description:</p>
+<ul>
+<li><p>Finding correlation matrix using <code class="docutils literal notranslate"><span class="pre">Pearson</span> <span class="pre">Correlation</span></code> among different flavor attributes</p></li>
+<li><p>Employing <code class="docutils literal notranslate"><span class="pre">Spectral</span> <span class="pre">Coclustering</span></code> to find approximate solution to clustering</p></li>
+<li><p>Identifying six distinct cluster blocks</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Task 3 - Bokeh Plot</strong></p>
+<ul class="simple">
+<li><p>Description:</p>
+<ul>
+<li><p>Using Bokeh to create an interactive plot of geographical map of distilleries</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-whisky-data">
+<h2>Loading Whisky Data<a class="headerlink" href="#loading-whisky-data" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The first task involves loading and examining the data. This requires the utilization of two data files: <code class="docutils literal notranslate"><span class="pre">whiskies.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">regions.txt</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">regions.txt</span></code> file contains the regions from which each whisky originates. The <code class="docutils literal notranslate"><span class="pre">whiskies.txt</span></code> file contains all details about the whiskies.</p>
+<ul class="simple">
+<li><p>Extracting whisky-related information from <code class="docutils literal notranslate"><span class="pre">whiskies.txt</span></code> and storing it in a dataframe</p></li>
+<li><p>Reading in the <code class="docutils literal notranslate"><span class="pre">regions.txt</span></code> file and adding it as a column to the whisky dataframe</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_path</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s1">&#39;whiskies.txt&#39;</span><span class="p">)</span>
+<span class="n">region_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="s1">&#39;regions.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">whisky_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">region_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowID</th>
+      <th>Distillery</th>
+      <th>Body</th>
+      <th>Sweetness</th>
+      <th>Smoky</th>
+      <th>Medicinal</th>
+      <th>Tobacco</th>
+      <th>Honey</th>
+      <th>Spicy</th>
+      <th>Winey</th>
+      <th>Nutty</th>
+      <th>Malty</th>
+      <th>Fruity</th>
+      <th>Floral</th>
+      <th>Postcode</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Region</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Aberfeldy</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>\tPH15 2EB</td>
+      <td>286580</td>
+      <td>749680</td>
+      <td>Highlands</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Aberlour</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2</td>
+      <td>\tAB38 9PJ</td>
+      <td>326340</td>
+      <td>842570</td>
+      <td>Speyside</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>AnCnoc</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>\tAB5 5LI</td>
+      <td>352960</td>
+      <td>839320</td>
+      <td>Highlands</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Ardbeg</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>\tPA42 7EB</td>
+      <td>141560</td>
+      <td>646220</td>
+      <td>Islay</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Ardmore</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>\tAB54 4NH</td>
+      <td>355350</td>
+      <td>829140</td>
+      <td>Highlands</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">iloc</span></code> method can be used to index a dataframe based on integer positions. The method provides a means to access specific rows and columns within the dataset, utilizing integer-based referencing.</p>
+<p>Indexing is defined by two parameters: the <code class="docutils literal notranslate"><span class="pre">start_index</span></code> and the <code class="docutils literal notranslate"><span class="pre">end_index</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">start_index</span></code> denotes the initial position from which the indexing operation commences, inclusively, and the end index signifies the position where the operation concludes, exclusively.</p>
+<p>Taking a look at the first 10 rows of the whisky dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowID</th>
+      <th>Distillery</th>
+      <th>Body</th>
+      <th>Sweetness</th>
+      <th>Smoky</th>
+      <th>Medicinal</th>
+      <th>Tobacco</th>
+      <th>Honey</th>
+      <th>Spicy</th>
+      <th>Winey</th>
+      <th>Nutty</th>
+      <th>Malty</th>
+      <th>Fruity</th>
+      <th>Floral</th>
+      <th>Postcode</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Region</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Aberfeldy</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>\tPH15 2EB</td>
+      <td>286580</td>
+      <td>749680</td>
+      <td>Highlands</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Aberlour</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2</td>
+      <td>\tAB38 9PJ</td>
+      <td>326340</td>
+      <td>842570</td>
+      <td>Speyside</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>AnCnoc</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>\tAB5 5LI</td>
+      <td>352960</td>
+      <td>839320</td>
+      <td>Highlands</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Ardbeg</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>\tPA42 7EB</td>
+      <td>141560</td>
+      <td>646220</td>
+      <td>Islay</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Ardmore</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>\tAB54 4NH</td>
+      <td>355350</td>
+      <td>829140</td>
+      <td>Highlands</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>ArranIsleOf</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>KA27 8HJ</td>
+      <td>194050</td>
+      <td>649950</td>
+      <td>Islands</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Auchentoshan</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>G81 4SJ</td>
+      <td>247670</td>
+      <td>672610</td>
+      <td>Lowlands</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Auchroisk</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>\tAB55 3XS</td>
+      <td>340754</td>
+      <td>848623</td>
+      <td>Speyside</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Aultmore</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>\tAB55 3QY</td>
+      <td>340754</td>
+      <td>848623</td>
+      <td>Speyside</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Balblair</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>\tIV19 1LB</td>
+      <td>270820</td>
+      <td>885770</td>
+      <td>Highlands</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">iloc</span></code> method can also be applied in examining the columns within a dataframe.</p>
+<p>In the dataset, a subset of the columns contain the data for flavor attributes of whisky. Utilizing the <code class="docutils literal notranslate"><span class="pre">.columns</span></code> attribute on a dataframe object yields the column names associated with that particular dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;RowID&#39;, &#39;Distillery&#39;, &#39;Body&#39;, &#39;Sweetness&#39;, &#39;Smoky&#39;, &#39;Medicinal&#39;,
+       &#39;Tobacco&#39;, &#39;Honey&#39;, &#39;Spicy&#39;, &#39;Winey&#39;, &#39;Nutty&#39;, &#39;Malty&#39;, &#39;Fruity&#39;,
+       &#39;Floral&#39;, &#39;Postcode&#39;, &#39; Latitude&#39;, &#39; Longitude&#39;, &#39;Region&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Starting from index 2 for the first flavor attribute <code class="docutils literal notranslate"><span class="pre">Body</span></code> and including index 14 for <code class="docutils literal notranslate"><span class="pre">Floral</span></code> gives the column index locations for the flavors.</p>
+<p>Next, the flavor attributes for the first ten whiskies in the dataframe are examined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Body</th>
+      <th>Sweetness</th>
+      <th>Smoky</th>
+      <th>Medicinal</th>
+      <th>Tobacco</th>
+      <th>Honey</th>
+      <th>Spicy</th>
+      <th>Winey</th>
+      <th>Nutty</th>
+      <th>Malty</th>
+      <th>Fruity</th>
+      <th>Floral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="exploring-correlations">
+<h2>Exploring Correlations<a class="headerlink" href="#exploring-correlations" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The next step is to examine the correlation among various flavor attributes.</p>
+<p>To accomplish this, the <code class="docutils literal notranslate"><span class="pre">corr</span></code> method is used to calculate correlations across the columns of our whisky dataframe. The method, by default, employs the <code class="docutils literal notranslate"><span class="pre">Pearson</span> <span class="pre">Correlation</span></code> technique, which looks for linear correlations within the data.</p>
+<p>In the scenario where attributes have been measured for two variables, the Pearson Correlation coefficient tends to approach 1 as the data points in the scatterplot converge towards a straight upward line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flavors</span> <span class="o">=</span> <span class="n">whisky_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The flavor attributes for the whiskies are stored within the dataframe named <code class="docutils literal notranslate"><span class="pre">flavors</span></code>.</p>
+<p>To compute the pairwise correlation of columns, the <code class="docutils literal notranslate"><span class="pre">corr</span></code> method is employed and the resulting output is stored in the dataframe named <code class="docutils literal notranslate"><span class="pre">corr_flavors</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_flavors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">flavors</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">corr_flavors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               Body  Sweetness     Smoky  Medicinal   Tobacco     Honey  \
+Body       1.000000  -0.136518  0.524032   0.354050  0.168718  0.082031   
+Sweetness -0.136518   1.000000 -0.405897  -0.392017 -0.147871  0.132558   
+Smoky      0.524032  -0.405897  1.000000   0.686071  0.365501 -0.195318   
+Medicinal  0.354050  -0.392017  0.686071   1.000000  0.425106 -0.396629   
+Tobacco    0.168718  -0.147871  0.365501   0.425106  1.000000 -0.275490   
+Honey      0.082031   0.132558 -0.195318  -0.396629 -0.275490  1.000000   
+Spicy      0.188500  -0.054200  0.231745   0.044903  0.054068  0.139563   
+Winey      0.408576   0.115727 -0.028190  -0.202651  0.009097  0.362021   
+Nutty      0.126323  -0.032493 -0.023132  -0.113671 -0.117717  0.188492   
+Malty     -0.116859  -0.001516 -0.192875  -0.258959 -0.059347  0.310184   
+Fruity    -0.013205   0.019820 -0.312970  -0.330975 -0.235145  0.108822   
+Floral    -0.461203   0.144987 -0.431663  -0.511323 -0.212375  0.183029   
+
+              Spicy     Winey     Nutty     Malty    Fruity    Floral  
+Body       0.188500  0.408576  0.126323 -0.116859 -0.013205 -0.461203  
+Sweetness -0.054200  0.115727 -0.032493 -0.001516  0.019820  0.144987  
+Smoky      0.231745 -0.028190 -0.023132 -0.192875 -0.312970 -0.431663  
+Medicinal  0.044903 -0.202651 -0.113671 -0.258959 -0.330975 -0.511323  
+Tobacco    0.054068  0.009097 -0.117717 -0.059347 -0.235145 -0.212375  
+Honey      0.139563  0.362021  0.188492  0.310184  0.108822  0.183029  
+Spicy      1.000000  0.092704 -0.042856  0.036303  0.144714  0.034663  
+Winey      0.092704  1.000000  0.198467  0.112368  0.090694 -0.126932  
+Nutty     -0.042856  0.198467  1.000000  0.066157  0.071765  0.018302  
+Malty      0.036303  0.112368  0.066157  1.000000  0.207288  0.106309  
+Fruity     0.144714  0.090694  0.071765  0.207288  1.000000  0.262336  
+Floral     0.034663 -0.126932  0.018302  0.106309  0.262336  1.000000  
+</pre></div>
+</div>
+</div>
+</div>
+<p>The correlation matrix is visually represented using the <code class="docutils literal notranslate"><span class="pre">pcolor</span></code> function to plot its contents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">corr_flavors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study4_20_0.png" src="_images/case_study4_20_0.png" />
+</div>
+</div>
+<p>Continuing our analysis, the next step involves examining the correlations among different whiskies based on their flavor attributes. This can be accomplished by transposing the dataset.</p>
+<p>Doing this helps in uncovering how the flavor profiles of whiskies from various distilleries correlate with each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_whisky</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">flavors</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">corr_whisky</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study4_22_0.png" src="_images/case_study4_22_0.png" />
+</div>
+</div>
+</section>
+<section id="clustering-whisky-by-flavor-profile">
+<h2>Clustering Whisky by Flavor profile<a class="headerlink" href="#clustering-whisky-by-flavor-profile" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Employing the <code class="docutils literal notranslate"><span class="pre">spectral</span> <span class="pre">co-clustering</span></code> technique available in the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> machine learning module, the aim is to discover an approximate solution to the given problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">SpectralCoclustering</span> <span class="k">as</span> <span class="n">SpectralCC</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The provided adjacency matrix showcases a relationship where rows correspond to variable 1 and columns correspond to variable 2. Each element within the matrix represents the frequency with which variable 1 is associated with variable 2.</p>
+<p>By manipulating this matrix and considering eigenvalues and eigenvectors, an approximate solution to the clustering problem can be found.</p>
+<p>The term <code class="docutils literal notranslate"><span class="pre">spectral</span></code> is tied to the use of eigenvalues and eigenvectors. This co-clustering technique addresses the clustering of both rows and columns simultaneously, regardless of their individual meanings.</p>
+<p>Employing this method helps in identifying the clusters of whiskies within the correlation matrix of flavor attributes. This approach essentially restructures the order of rows and columns in the correlation matrix, enabling clear identification of blocks representing groups of whiskies.</p>
+<p>Given that the dataset encompasses whiskies from six distinct regions, the clustering algorithm is applied to detect six distinct blocks within the matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">SpectralCC</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corr_whisky</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SpectralCoclustering(n_clusters=6, random_state=0)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">SpectralCoclustering</label><div class="sk-toggleable__content"><pre>SpectralCoclustering(n_clusters=6, random_state=0)</pre></div></div></div></div></div></div></div>
+</div>
+<p>After constructing the model object, the model is trained using the data extracted from the <code class="docutils literal notranslate"><span class="pre">corr_whisky</span></code> correlation matrix.</p>
+<p>The resulting output is an array that possesses dimensions equal to the number of row clusters, which is 6 in this context, multiplied by the number of rows in the data matrix.</p>
+<p>This amounts to 86 enries, representing individual whiskies. Each entry within this array is marked either as <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">rows_</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6, 86)
+</pre></div>
+</div>
+</div>
+</div>
+<p>By summing the columns of this array, the totla number of observatoins associated with each cluster can be determined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">rows_</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([19,  5, 24, 18, 14,  6])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting output provides information about the distribution of whiskies across various clusters. Observing the row labels with the array reveals that they are represented by numbers ranging from 0 to 5, corresponding to the six specified clusters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">row_labels_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 2, 4, 5, 2, 0, 3, 2, 4, 3, 2, 0, 2, 0, 4, 4, 3, 2, 0, 1, 3, 5,
+       3, 5, 3, 3, 2, 2, 3, 2, 3, 4, 0, 0, 0, 4, 2, 3, 0, 1, 0, 3, 2, 2,
+       2, 3, 4, 0, 0, 3, 3, 2, 2, 2, 0, 1, 2, 5, 5, 0, 3, 4, 2, 4, 3, 2,
+       1, 2, 1, 0, 2, 4, 0, 4, 2, 4, 3, 5, 4, 3, 0, 4, 0, 0, 2, 0],
+      dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-correlation-matrices">
+<h2>Comparing Correlation Matrices<a class="headerlink" href="#comparing-correlation-matrices" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The process to visualize the cluster involves three tasks:</p>
+<ul class="simple">
+<li><p>Extracting the group labels from the model and add them as a new column to the whisky table</p></li>
+<li><p>Rearrange the rows of the table in ascending order based on the group labels</p></li>
+<li><p>Resetting the index of the dataframe to ensure proper alignment of data</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># task 1: adding cluster group labels to whisky data</span>
+<span class="n">whisky_df</span><span class="p">[</span><span class="s1">&#39;Group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">row_labels_</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">whisky_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># task 2: sorting the whiskies according to increasing order of group lables</span>
+<span class="n">whisky_df</span> <span class="o">=</span> <span class="n">whisky_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">row_labels_</span><span class="p">)]</span>
+
+<span class="c1"># task 3: resetting the index of whisky dataframe</span>
+<span class="n">whisky_df</span> <span class="o">=</span> <span class="n">whisky_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RowID</th>
+      <th>Distillery</th>
+      <th>Body</th>
+      <th>Sweetness</th>
+      <th>Smoky</th>
+      <th>Medicinal</th>
+      <th>Tobacco</th>
+      <th>Honey</th>
+      <th>Spicy</th>
+      <th>Winey</th>
+      <th>Nutty</th>
+      <th>Malty</th>
+      <th>Fruity</th>
+      <th>Floral</th>
+      <th>Postcode</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Region</th>
+      <th>Group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>86</td>
+      <td>Tullibardine</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>PH4 1QG</td>
+      <td>289690</td>
+      <td>708850</td>
+      <td>Highlands</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>34</td>
+      <td>GlenElgin</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>IV30 3SL</td>
+      <td>322640</td>
+      <td>861040</td>
+      <td>Speyside</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>GlenDeveronMacduff</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>AB4 3JT</td>
+      <td>372120</td>
+      <td>860400</td>
+      <td>Speyside</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>41</td>
+      <td>GlenSpey</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>AB38 7AU</td>
+      <td>327760</td>
+      <td>849140</td>
+      <td>Speyside</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>48</td>
+      <td>Glenkinchie</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>EH34 5ET</td>
+      <td>344380</td>
+      <td>666690</td>
+      <td>Lowlands</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Given the reshuffling of rows and columns in the whsiky dataframe, it is recommended to recalculate the correlation matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_whisky</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">whisky_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_whisky_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">correlation_whisky</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">corr_whisky</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">correlation_whisky</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Rearranged&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;tight&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/case_study4_39_0.png" src="_images/case_study4_39_0.png" />
+</div>
+</div>
+<p>Here is the plot.</p>
+<p>To the left, the initial correlation matrix is showcased, detailing the correlation computed among 86 whiskies based on their flavor profiles.</p>
+<p>To the right, a corresponding correlation matrix is shown, but with its rows and columns reorganized.</p>
+<p>By applying the spectral co-clustering technique, six distinct clusters of whiskies were identified. Following the diagonal line from the bottom-left corner to the top-right corner on the right matrix, the six clusters of whiskies become visually evident.</p>
+<p>It is resonable to anticipate that whiskies within the same cluster share similarities in their flavor profiles.</p>
+</section>
+<section id="bokeh-plot-for-whisky-classification">
+<h2>Bokeh Plot for Whisky Classification<a class="headerlink" href="#bokeh-plot-for-whisky-classification" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p>The aim of this case study is to plot the correlations among distillery flavor profiles and generating an interactive geographical map of distilleries.</p>
+<p>The code employs <code class="docutils literal notranslate"><span class="pre">Bokeh</span></code>, a powerful visualization library to create interactive visualizations that enchance the understanding of the intricate relationships between distilleries, their flavor attributes and their geographic locations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">SpectralCoclustering</span> <span class="k">as</span> <span class="n">CC</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_whisky</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span><span class="s2">&quot;grouped_whisky.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The CSV file containing the whisky data is stored into a dataframe named <code class="docutils literal notranslate"><span class="pre">whisky</span></code>.</p>
+<p>The correlation among the flavor attributes are calculated after extracting the columns that correspond to the attributes and transposing them. The correlation values are stored as numpy array in <code class="docutils literal notranslate"><span class="pre">correlations</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whisky</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">grouped_whisky</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># cleaning up the whisky dataframe</span>
+<span class="n">whisky</span> <span class="o">=</span> <span class="n">whisky</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">whisky</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">whisky</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whisky</span><span class="p">))]</span>
+
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">whisky</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+
+<span class="c1"># setting integer-based row and column index</span>
+<span class="n">correlations</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlations</span><span class="p">))]</span>
+<span class="n">correlations</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlations</span><span class="p">))]</span>
+
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Providing an introductory demonstration of an interactive grid plot using <code class="docutils literal notranslate"><span class="pre">Bokeh</span></code>.</p>
+<ul class="simple">
+<li><p>Writing the code to plot an example Bokeh plot</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, a tool is imported to enable the display of text when the </span>
+<span class="c1"># cursor is positioned over a plot element. Additionally, a</span>
+<span class="c1"># data structure is imported to store plot specifications for utilizing</span>
+<span class="c1"># in Bokeh visualizations</span>
+  
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">HoverTool</span><span class="p">,</span> <span class="n">ColumnDataSource</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Importing ‘product’ function from ‘itertools’ module. The function is used to create a list containing all possible combinations of elements from ‘plot_values’ list to form a grid-like structure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting a simple 5x5 grid of squares, alternating between two colors</span>
+<span class="n">plot_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">plot_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#0173b2&#39;</span><span class="p">,</span> <span class="s1">&#39;#de8f05&#39;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">plot_values</span><span class="p">,</span> <span class="n">plot_values</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The first value is the x coordinate, and the second value is the y coordinate.</span>
+<span class="c1"># The coordinate values are stored in seperate lists</span>
+
+<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">grid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5)
+(1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making a list of colors, alternating between red and blue.</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">plot_colors</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">2</span>] for i in range(len(grid))]
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;, &#39;#de8f05&#39;, &#39;#0173b2&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lastly, the alpha value for each point is calculated to</span>
+<span class="c1"># indicate its transparency level, with 0 denoting full transparency</span>
+
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
+
+<span class="c1"># Bokeh stores each of these values in a special dataframe, called</span>
+<span class="c1"># ColumnDataSource. The values for coordinates, colors, and</span>
+<span class="c1"># alpha values are stored in it.</span>
+
+<span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">xs</span><span class="p">,</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">ys</span><span class="p">,</span>
+        <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">colors</span><span class="p">,</span>
+        <span class="s2">&quot;alphas&quot;</span><span class="p">:</span> <span class="n">alphas</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fig.rect()</span></code> function is used to draw a rectangular figure on the plot, with the position and size of each rectangle being determined the by <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates from <code class="docutils literal notranslate"><span class="pre">grid</span></code>.</p>
+<p>The color of each rectangle is set based on the <code class="docutils literal notranslate"><span class="pre">colors</span></code> list and the transparency from <code class="docutils literal notranslate"><span class="pre">alphas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">show</span>
+
+<span class="c1"># Setting the name of the output file</span>
+<span class="n">output_file</span><span class="p">(</span><span class="s2">&quot;Basic_Example.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Basic Example&quot;</span><span class="p">)</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="s2">&quot;hover&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;colors&quot;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="s2">&quot;alphas&quot;</span><span class="p">)</span>
+<span class="n">hover</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HoverTool</span><span class="p">))</span>
+<span class="n">hover</span><span class="o">.</span><span class="n">tooltips</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Value&quot;</span><span class="p">:</span> <span class="s2">&quot;@x, @y&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<span class="c1"># Displaying the plot in the output file</span>
+<span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="example_bokeh_plot.png" src="_images/example_bokeh_plot.png" /></p>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>Generating the names and colors required for plotting the correlation matrix of whisky flavors.</p>
+<ul class="simple">
+<li><p>Constructing a dictionary named <code class="docutils literal notranslate"><span class="pre">region_colors</span></code> where the keys are the <code class="docutils literal notranslate"><span class="pre">regions</span></code> and the values are the corresponding <code class="docutils literal notranslate"><span class="pre">cluster_colors</span></code></p></li>
+<li><p>Displaying the content of <code class="docutils literal notranslate"><span class="pre">region_colors</span></code> dictionary by printing it</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#0173b2&#39;</span><span class="p">,</span> <span class="s1">&#39;#de8f05&#39;</span><span class="p">,</span> <span class="s1">&#39;#029e73&#39;</span><span class="p">,</span> <span class="s1">&#39;#d55e00&#39;</span><span class="p">,</span> <span class="s1">&#39;#cc78bc&#39;</span><span class="p">,</span> <span class="s1">&#39;#ca9161&#39;</span><span class="p">]</span>
+<span class="n">regions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Speyside&quot;</span><span class="p">,</span> <span class="s2">&quot;Highlands&quot;</span><span class="p">,</span> <span class="s2">&quot;Lowlands&quot;</span><span class="p">,</span> <span class="s2">&quot;Islands&quot;</span><span class="p">,</span> <span class="s2">&quot;Campbelltown&quot;</span><span class="p">,</span> <span class="s2">&quot;Islay&quot;</span><span class="p">]</span>
+
+<span class="n">region_colors</span> <span class="o">=</span> <span class="p">{</span><span class="n">regions</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">cluster_colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">))}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region_colors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Speyside&#39;: &#39;#0173b2&#39;,
+ &#39;Highlands&#39;: &#39;#de8f05&#39;,
+ &#39;Lowlands&#39;: &#39;#029e73&#39;,
+ &#39;Islands&#39;: &#39;#d55e00&#39;,
+ &#39;Campbelltown&#39;: &#39;#cc78bc&#39;,
+ &#39;Islay&#39;: &#39;#ca9161&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3">
+<h3>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The objective of this task is to create a list called <code class="docutils literal notranslate"><span class="pre">correlation_colors</span></code>, where the values correspond to colors for plotting distillery pairs based on their flavor correlations.</p>
+<ul class="simple">
+<li><p>Establishing <code class="docutils literal notranslate"><span class="pre">correlation_colors</span></code> for each distillery pair. When the correlation is below <code class="docutils literal notranslate"><span class="pre">0.7</span></code>, the color <code class="docutils literal notranslate"><span class="pre">white</span></code> is assigned</p></li>
+<li><p>For distillery pairs with correlations surpassing <code class="docutils literal notranslate"><span class="pre">0.7</span></code>, if they share same whisky group, then the associated color from <code class="docutils literal notranslate"><span class="pre">cluster_colors</span></code> is used. Otherwise, <code class="docutils literal notranslate"><span class="pre">lightgray</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">correlation_colors</span></code> for the particular distillery pair.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distilleries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">whisky</span><span class="o">.</span><span class="n">Distillery</span><span class="p">)</span>
+<span class="n">correlation_colors</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distilleries</span><span class="p">)):</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distilleries</span><span class="p">)):</span>
+
+        <span class="c1"># for correlation less than 0.7</span>
+        <span class="k">if</span> <span class="n">correlations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="p">:</span>
+            
+            <span class="c1"># &#39;white&#39; is the color appended</span>
+            <span class="n">correlation_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># if groups are identical                                         </span>
+            <span class="k">if</span> <span class="n">correlations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">:</span>                  
+                <span class="c1"># the mutual group color is appended</span>
+                <span class="n">correlation_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cluster_colors</span><span class="p">[</span><span class="n">whisky</span><span class="o">.</span><span class="n">Group</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise, &#39;lightgray&#39; is appended                                      </span>
+                <span class="n">correlation_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">correlation_colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7396
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4">
+<h3>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Assigning the list <code class="docutils literal notranslate"><span class="pre">correlation_colors</span></code> which contains string color values for each pair of distilleries, to the <code class="docutils literal notranslate"><span class="pre">color</span></code> attribute within <code class="docutils literal notranslate"><span class="pre">ColumnDataSource</span></code></p></li>
+<li><p>Defining <code class="docutils literal notranslate"><span class="pre">correlations</span></code> attribute within the <code class="docutils literal notranslate"><span class="pre">source</span></code> using the array containing the correlation of whisky flavors. To convert <code class="docutils literal notranslate"><span class="pre">correlations</span></code> from a numpy array to a list, the <code class="docutils literal notranslate"><span class="pre">flatten</span></code> method is employed</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">distilleries</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">distilleries</span><span class="p">)),</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">distilleries</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">distilleries</span><span class="p">),</span>
+        <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">correlation_colors</span><span class="p">,</span>
+        <span class="s2">&quot;correlations&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">correlations</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">output_file</span><span class="p">(</span><span class="s2">&quot;Whisky Correlations.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Whisky Correlations&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Whisky Correlations&quot;</span><span class="p">,</span>
+    <span class="n">x_axis_location</span><span class="o">=</span><span class="s2">&quot;above&quot;</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">distilleries</span><span class="p">)),</span> <span class="n">y_range</span><span class="o">=</span><span class="n">distilleries</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;hover,box_zoom,reset&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">axis_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">major_tick_line_color</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">major_label_text_font_size</span> <span class="o">=</span> <span class="s2">&quot;4pt&quot;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">major_label_orientation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mf">.9</span><span class="p">,</span> <span class="mf">.9</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="s1">&#39;correlations&#39;</span><span class="p">)</span>
+<span class="n">hover</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HoverTool</span><span class="p">))</span>
+<span class="n">hover</span><span class="o">.</span><span class="n">tooltips</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Whiskies&quot;</span><span class="p">:</span> <span class="s2">&quot;@x, @y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Correlation&quot;</span><span class="p">:</span> <span class="s2">&quot;@correlations&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="whisky_correlation_plot.png" src="_images/whisky_correlation_plot.png" /></p>
+</section>
+<section id="task-6">
+<h3>Task 6<a class="headerlink" href="#task-6" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p>The objective of this task is to define a function named <code class="docutils literal notranslate"><span class="pre">location_plot</span></code> that takes two inputs: a string <code class="docutils literal notranslate"><span class="pre">title</span></code> and a list of colors corresponding to each distillery. The function produces a Bokeh plot illustrating the geographic locations of each distillery based on their latitude and longitude.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">region</span></code> column in the dataframe <code class="docutils literal notranslate"><span class="pre">whisky</span></code> contains information about the regional group membership of each distillery. Create a list composed of the values from <code class="docutils literal notranslate"><span class="pre">region_colors</span></code> for each distillery and assigning this list to the variable <code class="docutils literal notranslate"><span class="pre">region_cols</span></code></p></li>
+<li><p>Implementing the <code class="docutils literal notranslate"><span class="pre">location_plot</span></code> function to generate a plot for each distillery</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">location_plot</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    The function creates an interactive scatter plot of whisky</span>
+<span class="sd">    distillery locations using Bokeh.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">        title (str): Title of the plot and the name of the output HTML file</span>
+<span class="sd">        colors (list): List of color values corresponding to each distillery</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        None</span>
+
+<span class="sd">        The function disaplys an interactive scatter plot and saves</span>
+<span class="sd">        an HTML file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Set up the output HTML file</span>
+    <span class="n">output_file</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">&quot;.html&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Creating ColumnDataSource object with </span>
+    <span class="c1"># location data and attributes</span>
+    <span class="n">location_source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">whisky</span><span class="p">[</span><span class="s2">&quot; Latitude&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">whisky</span><span class="p">[</span><span class="s2">&quot; Longitude&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">colors</span><span class="p">,</span>
+            <span class="s2">&quot;regions&quot;</span><span class="p">:</span> <span class="n">whisky</span><span class="o">.</span><span class="n">Region</span><span class="p">,</span>
+            <span class="s2">&quot;distilleries&quot;</span><span class="p">:</span> <span class="n">whisky</span><span class="o">.</span><span class="n">Distillery</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a figure with hover and save tools</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">,</span>
+        <span class="n">x_axis_location</span> <span class="o">=</span> <span class="s2">&quot;above&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="s2">&quot;hover, save&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">plot_width</span>  <span class="o">=</span> <span class="mi">400</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">plot_height</span> <span class="o">=</span> <span class="mi">500</span>
+
+    <span class="c1"># Create circles representing distillery locations</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">location_source</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;colors&#39;</span><span class="p">,</span> <span class="n">line_color</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">major_label_orientation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+
+    <span class="c1"># Setting up tooltips for hover tool</span>
+    <span class="n">hover</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span> <span class="o">=</span> <span class="n">HoverTool</span><span class="p">))</span>
+    <span class="n">hover</span><span class="o">.</span><span class="n">tooltips</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Distillery&quot;</span><span class="p">:</span> <span class="s2">&quot;@distilleries&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Location&quot;</span><span class="p">:</span> <span class="s2">&quot;(@x, @y)&quot;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Displaying the plot</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">whisky</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Campbelltown&#39;, &#39;Highlands&#39;, &#39;Islands&#39;, &#39;Islay&#39;, &#39;Lowlands&#39;, &#39;Speyside&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#color_array = np.repeat(list(region_colors.values()),len(whisky[&#39;Distillery&#39;]))</span>
+<span class="n">region_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">region_colors</span><span class="p">[</span><span class="n">region</span><span class="p">]</span> <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">whisky</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]]</span>
+<span class="n">location_plot</span><span class="p">(</span><span class="s2">&quot;Whisky Locations and Regions&quot;</span><span class="p">,</span> <span class="n">region_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="distillery_locations.png" src="_images/distillery_locations.png" /></p>
+<p>In this graph, we observe the distribution of whiskies across six distinct regions. Each region showcases a unique blend of flavors and characteristics that define its whiskies. Notably, the distribution of whiskies within the same region tends to follow a consistent pattern, highlighting the influence of regional factors on flavor profiles.</p>
+<p>The graph offers an intriguing perspective on how different whisky group types are distributed across various regions. While regions play a significant role in shaping whisky flavors, it’s fascinating to note that the distribution of group types can vary significantly across these regions. This variation suggests a rich diversity in flavor profiles that transcends geographical boundaries.</p>
+</section>
+<section id="task-7">
+<h3>Task 7<a class="headerlink" href="#task-7" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Creating the list <code class="docutils literal notranslate"><span class="pre">classification_cols</span></code> by associating each distillery’s <code class="docutils literal notranslate"><span class="pre">Group</span></code> membership with the respective color from the <code class="docutils literal notranslate"><span class="pre">cluster_colors</span></code> list</p></li>
+<li><p>Employing the <code class="docutils literal notranslate"><span class="pre">location_plot</span></code> functino to generate two interactive plots of distilleries: one using <code class="docutils literal notranslate"><span class="pre">region_cols</span></code> for color coding and the other using <code class="docutils literal notranslate"><span class="pre">classification_cols</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">region_colors</span><span class="p">[</span><span class="n">region</span><span class="p">]</span> <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">whisky</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]]</span>
+<span class="n">classification_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">cluster_colors</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">whisky</span><span class="p">[</span><span class="s1">&#39;Group&#39;</span><span class="p">]]</span>
+
+<span class="n">location_plot</span><span class="p">(</span><span class="s2">&quot;Whisky Locations and Groups&quot;</span><span class="p">,</span> <span class="n">classification_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="distillery_groups.png" src="_images/distillery_groups.png" /></p>
+<p>The interplay between regions and group types becomes even more apparent in this graph. As we examine the distribution of whiskies within the same regions across different group types, a consistent regional pattern emerges. At the same time, the varying proportions of group types across regions highlight the nuanced interactions between regional influences and whisky characteristics.</p>
+<p>The graph showcases the intricate relation between regions and group types, revealing the complexity and diversity of whisky production. While regions provide a foundation for flavor development, the distribution of group types underscores the artistry of crafting whiskies with distinct characteristics. This visual representation unveils a world of flavors that reflects the ingenuity of distilleries in different regions producing similar flavors.</p>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="case_study3.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Predictive Insights through Classification Analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="case_study5.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyzing Bird Migration Patterns with GPS Data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Rajdeep Chakraborty<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
