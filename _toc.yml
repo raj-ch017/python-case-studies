@@ -1,0 +1,13 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: case_study1
+- file: case_study2
+- file: case_study3
+- file: case_study4
+- file: case_study5
+- file: case_study6
+- file: bibliography
