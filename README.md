@@ -9,12 +9,9 @@ Welcome to the case study project repository for Python Case Studies! This repos
     Table of Contents
 </h2>
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- Introduction
+- Features
+- Usage
 
 <h2>
   <p align = "center">
